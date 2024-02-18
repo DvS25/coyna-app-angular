@@ -1,0 +1,50 @@
+.mat-mdc-slide-toggle {
+    --mdc-switch-disabled-selected-handle-color: #23a2f1;
+    --mdc-switch-disabled-unselected-handle-color: #23a2f1;
+    --mdc-switch-disabled-selected-track-color: #23a2f1;
+    --mdc-switch-disabled-unselected-track-color: #23a2f1;
+    --mdc-switch-unselected-focus-state-layer-color: #23a2f1;
+    --mdc-switch-unselected-pressed-state-layer-color: #23a2f1;
+    --mdc-switch-unselected-hover-state-layer-color: #23a2f1;
+    --mdc-switch-unselected-focus-track-color: #E0F4FF;
+    --mdc-switch-unselected-hover-track-color: #E0F4FF;
+    --mdc-switch-unselected-pressed-track-color: #E0F4FF;
+    --mdc-switch-unselected-track-color: #E0F4FF;
+    --mdc-switch-unselected-focus-handle-color: #497ea4;
+    --mdc-switch-unselected-hover-handle-color: #497ea4;
+    --mdc-switch-unselected-pressed-handle-color: #497ea4;
+    --mdc-switch-handle-surface-color: var(--mdc-theme-surface, #fff);
+    --mdc-switch-unselected-handle-color: #58A1CC;    
+}
+
+.mat-mdc-slide-toggle.mat-accent {
+    --mdc-switch-selected-focus-state-layer-color: #78c7e5;
+    --mdc-switch-selected-handle-color: #fff;
+    --mdc-switch-selected-hover-state-layer-color: #78c7e5;
+    --mdc-switch-selected-pressed-state-layer-color: #78c7e5;
+    --mdc-switch-selected-focus-handle-color: #fff;
+    --mdc-switch-selected-hover-handle-color: #fff;
+    --mdc-switch-selected-pressed-handle-color: #fff;
+    --mdc-switch-selected-focus-track-color: #58A1CC;
+    --mdc-switch-selected-hover-track-color: #58A1CC;
+    --mdc-switch-selected-pressed-track-color: #58A1CC;
+    --mdc-switch-selected-track-color: #58A1CC;
+}
+
+:host ::ng-deep .mat-mdc-slide-toggle .mdc-switch .mdc-switch__track {
+    height: 20px;
+    border-radius: 14px;
+}
+
+:host ::ng-deep .mdc-switch__icons {
+    display: none;
+}
+
+:host ::ng-deep .mat-mdc-slide-toggle .mdc-switch .mdc-switch__handle {
+    width: 16px;
+    height: 16px;
+}
+
+:host ::ng-deep .mdc-switch__handle {
+    left: 2px;
+}

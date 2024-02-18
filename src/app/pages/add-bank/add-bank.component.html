@@ -1,0 +1,189 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>.pagetitle select.form-control {
+    height: auto !important;
+}</style>
+<div class="innerdash pagetitle" *ngIf="showPage == true">
+    <div class="row">
+        <div class="col-md-12 nopad d-flex0 align-items-center">
+            <h1>Add Bank Name</h1>
+        </div>
+    </div>
+</div><!-- End Page Title -->
+
+<div class="banking-transaction-screen" *ngIf="showPage == true">
+    <!-- trial-balance Start -->
+   
+    <section class="section dashboard">
+       <div class="row trial-balance-sc">
+			<form class="mb-3 mt-4 commform row" [formGroup]="addBankForm">
+           <div class="innerform">
+             <div class="tablemaindiv mat-elevation-z8">
+                 <table class="maintable withborder commform" style="width:100%">  
+                   <thead>
+                       <tr>
+                           <th>Add Bank Account</th>
+                           <th></th>
+                       </tr>
+                   </thead>               
+                     <tbody>
+                        	<tr>
+								<td>Bank Name</td>
+                            <td>
+							<select name="bankName" class="form-control" formControlName="bankName">Bank Name
+							<option *ngFor="let bank of banks" [value]="bank">{{bank}}</option>
+							</select>
+								<span *ngIf="formSubmitted && f['bankName'].errors" >
+									<span *ngIf="f['bankName'].invalid" class="error-message">
+										<span style="font-size: 10px; color: red;" *ngIf="f['bankName'].errors.required">Bankname is required</span>
+									</span>
+								</span>
+							</td>
+                        </tr>
+
+                        <tr>
+                            <td>Account Number</td>
+                            <td>
+								<input type="text" class="form-control" placeholder="" formControlName="accountNumber"/>
+								<span *ngIf="formSubmitted && f['accountNumber'].errors" >
+									<span *ngIf="f['accountNumber'].invalid" class="error-message">
+										<span style="font-size: 10px; color: red;" *ngIf="f['accountNumber'].errors.required">AccountNumber is required</span>
+									</span>
+								</span>
+							</td>
+                        </tr>
+
+                        <tr>
+                            <td>Routing Number</td>
+                            <td>
+								<input type="text" class="form-control" placeholder="" formControlName="routingNumber"/>
+								<span *ngIf="formSubmitted && f['routingNumber'].errors" >
+									<span *ngIf="f['routingNumber'].invalid" class="error-message">
+										<span style="font-size: 10px; color: red;" *ngIf="f['routingNumber'].errors.required">RoutingNumber is required</span>
+									</span>
+								</span>
+							</td>
+                        </tr>
+
+                        <tr>
+                            <td>Company Name</td>
+                            <td>
+								<select class="form-control" formControlName="companyId" (change)="getStores($event.target)">
+									<option value="">Select company</option>
+									<option [value]="item.companyId" *ngFor="let item of companyList">{{item.name | titlecase}}</option>
+								</select>
+								<span *ngIf="formSubmitted && f['companyId'].errors" >
+									<span *ngIf="f['companyId'].invalid" class="error-message">
+										<span style="font-size: 10px; color: red;" *ngIf="f['companyId'].errors.required">Company is required</span>
+									</span>
+								</span>
+							</td>
+                        </tr>
+                        <tr>
+                            <td>Bank Address</td>
+                            <td>
+								<input type="text" class="form-control" placeholder="" formControlName="bankAddress"/>
+								<span *ngIf="formSubmitted && f['bankAddress'].errors" >
+									<span *ngIf="f['bankAddress'].invalid" class="error-message">
+										<span style="font-size: 10px; color: red;" *ngIf="f['bankAddress'].errors.required">BankAddress is required</span>
+									</span>
+								</span>
+							</td>
+                        </tr>
+
+                        <tr>
+                            <td>Country</td>
+                            <td>
+                                <select  class="form-control" formControlName="country" (change)="selectCountry($event.target)">
+									<option [value]="item.name" *ngFor="let item of this.countryList">{{item.name}}</option>
+								</select>
+								<span *ngIf="formSubmitted && f['bankName'].errors" >
+									<span *ngIf="f['bankName'].invalid" class="error-message">
+										<span style="font-size: 10px; color: red;" *ngIf="f['bankName'].errors.required">Bankname is required</span>
+									</span>
+								</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Province</td>
+                            <td>
+                                <select class="form-control" formControlName="province" (change)="selectState($event.target)">
+									<option value="{{item.name}}" *ngFor="let item of stateList"> {{item.name}}</option>
+								</select>
+								<span *ngIf="formSubmitted && f['province'].errors" >
+									<span *ngIf="f['province'].invalid" class="error-message">
+										<span style="font-size: 10px; color: red;" *ngIf="f['province'].errors.required">Province is required</span>
+									</span>
+								</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>City</td>
+                            <td>
+                                 <select tabindex="9" class="form-control" formControlName="city">
+									<option value="{{item}}" *ngFor="let item of cityList">{{item}}</option>
+								</select>
+								<span *ngIf="formSubmitted && f['city'].errors" >
+									<span *ngIf="f['city'].invalid" class="error-message">
+										<span style="font-size: 10px; color: red;" *ngIf="f['city'].errors.required">City is required</span>
+									</span>
+								</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Postal code</td>
+                            <td>
+								<input type="text" class="form-control" placeholder="" formControlName="postalCode"/>
+								<span *ngIf="formSubmitted && f['postalCode'].errors" >
+									<span *ngIf="f['postalCode'].invalid" class="error-message">
+										<span style="font-size: 10px; color: red;" *ngIf="f['postalCode'].errors.required">PostalCode is required</span>
+									</span>
+								</span>
+							</td>
+                        </tr>
+                        <tr>
+                            <td>Opening Balance</td>
+                            <td>
+								<input type="text" class="form-control" placeholder="" formControlName="openingBalance"
+								onkeypress="return event.charCode === 46 || event.charCode === 0 || event.charCode === 44 || (event.charCode >= 48 && event.charCode <= 57)"
+								/>
+								<span *ngIf="formSubmitted && f['openingBalance'].errors" >
+									<span *ngIf="f['openingBalance'].invalid" class="error-message">
+										<span style="font-size: 10px; color: red;" *ngIf="f['openingBalance'].errors.required">OpeningBalance is required</span>
+									</span>
+								</span>
+							</td>
+                        </tr>
+
+                         
+                     </tbody>
+                 </table>
+
+             </div>
+			 <div class="col-md-12 mt-3">
+             <button type="submit" class="btn btn-primary btnarraow btn-save" (click)="saveBank()"><i class="fa fa-save"></i>Save
+                </button>
+             </div>
+
+           </div>
+			</form>
+		 </div>
+    </section>
+   
+   <!-- banking-transaction End --> 
+   </div>
+
+<section class="section dashboard" *ngIf="showPage == false">
+	<div class="row" style="align-items: center;">
+		<div class="col-md-12" style="padding:10px;">
+			<h1>Add Bank Name</h1>
+		</div>
+	</div>
+	<div class="row" style="height: 500px;">
+		<div class="col-md-12">
+			<div class="alert alert-dismissable alert-danger">
+				<strong>Oops!</strong> You dont have access to see this page.
+			</div>
+		</div>
+	</div>
+</section>

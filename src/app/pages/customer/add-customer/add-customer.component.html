@@ -1,0 +1,223 @@
+<div>
+    <form [formGroup]="customerForm">
+        <mat-dialog-content>
+            <div>
+                <div class="row" style="margin-top: 16px">
+                    <div class="header-left-field">
+                        <img src="../../../../../assets/img/person.svg" alt="person"
+                            style="width: 25px; height: 25px" />
+                    </div>
+                    <div class="header-right-field">
+                        <p>Name and Contact</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="left-field">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Company Name</mat-label>
+                            <input matInput formControlName="companyName" required placeholder="Type Here" />
+                            <mat-error *ngIf="customerForm.invalid">Company Name is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="right-field">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email" required placeholder="Type Here" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"/>
+                            <mat-error *ngIf="customerForm.invalid">Email is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="left-field">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Phone Number</mat-label>
+                            <input matInput formControlName="phoneNumber" required placeholder="Type Here"
+                                type="number" />
+                            <mat-error *ngIf="customerForm.invalid">Phone Number is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="right-field">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Website</mat-label>
+                            <input matInput formControlName="website" required placeholder="Type Here" />
+                            <mat-error *ngIf="customerForm.invalid">Website is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="row">
+                    <div class="header-left-field">
+                        <img src="../../../../../assets/img/address.svg" alt="address"
+                            style="width: 25px; height: 25px" />
+                    </div>
+                    <div class="header-right-field">
+                        <p>Address</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="left-field">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Address</mat-label>
+                            <input matInput formControlName="address" required placeholder="Type Here" />
+                            <mat-error *ngIf="customerForm.invalid">Address is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="right-field">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Country</mat-label>
+                            <select matNativeControl required formControlName="country"
+                                (change)="getStates($event.target)">
+                                <option *ngFor="let country of countries" [value]="country.countryId">
+                                    {{country.name  | titlecase}}</option>
+                            </select>
+                            <mat-error *ngIf="customerForm.invalid">Country is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="left-field">
+                        <mat-form-field appearance="outline">
+                            <mat-label>State</mat-label>
+                            <select matNativeControl required formControlName="state"
+                                (change)="getCities($event.target)">
+                                <option *ngFor="let state of states" [value]="state.stateId">
+                                    {{state.name  | titlecase}}</option>
+                            </select>
+                            <mat-error *ngIf="customerForm.invalid">State is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="right-field">
+                        <mat-form-field appearance="outline">
+                            <mat-label>City</mat-label>
+                            <select matNativeControl required formControlName="city">
+                                <option *ngFor="let city of cities" [value]="city.cityId">
+                                    {{city.name  | titlecase}}</option>
+                            </select>
+                            <mat-error *ngIf="customerForm.invalid">City is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="left-field">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Zip Code</mat-label>
+                            <input matInput formControlName="zipCode" required placeholder="Type Here" type="number" />
+                            <mat-error *ngIf="customerForm.invalid">Zip Code is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="row">
+                    <div class="header-left-field">
+                        <img src="../../../../../assets/img/additional_info.svg" alt="additional_info"
+                            style="width: 25px; height: 25px" />
+                    </div>
+                    <div class="header-right-field">
+                        <p>Additional Info</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <p style="
+              font-size: 11px;
+              padding-bottom: 12px;
+              font-weight: 600;
+              color: #273259;
+            ">
+                        Payment
+                    </p>
+                    <div class="left-field">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Terms</mat-label>
+                            <select matNativeControl required formControlName="paymentTerm">
+                                <option *ngFor="let paymentTerm of paymentTerms" [value]="paymentTerm">
+                                    {{paymentTerm  | titlecase}}</option>
+                            </select>
+                            <mat-error *ngIf="customerForm.invalid">Terms is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="right-field"></div>
+                </div>
+                <div class="row">
+                    <p style="
+              font-size: 11px;
+              padding-bottom: 12px;
+              font-weight: 600;
+              color: #273259;
+            ">
+                        Opening balance
+                    </p>
+                    <div class="left-field">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Opening Balance</mat-label>
+                            <input matInput formControlName="openingBalance" required placeholder="Type Here"
+                                type="number" />
+                            <mat-error *ngIf="customerForm.invalid">Opening Balance is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="right-field">
+                        <mat-form-field appearance="outline">
+                            <mat-label>As Of</mat-label>
+                            <input matInput [matDatepicker]="picker" readonly formControlName="asOf">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="customerForm.invalid">Date is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="left-field">
+                        <span class="hidden-file">
+                            <input type="file" #fileInput ng2FileSelect [uploader]="uploader" multiple (onFileSelected)="onFileSelected($event)" />
+                          </span>
+                          <mat-form-field class="w-100" subscriptSizing="dynamic">
+                            <mat-label>Attachments</mat-label>
+                            <span class="hidden-file" *ngIf="uploader.queue.length > 0">          
+                             <input matInput  placeholder="Maximum size: 20MB"  multiple readonly="true">
+                         </span>
+                         <app-icon  matSuffix name="upload-link"  (click)="fileInput.click()" class="me-3 fs-4 align-middle"></app-icon>
+                            <span class="" *ngIf="uploader.queue.length == 0">          
+                             <input matInput  placeholder="Maximum size: 20MB"   multiple readonly="true">
+                         </span>
+                           <table style="border: none">
+                             <tbody>
+                                 <tr *ngFor="let item of uploader.queue;let index = index">
+                                     <td [width]="250" class="fs-14 border-0 text-center">{{item.file.name}} ({{ item?.file?.size/1024/1024 | number:'.2' }} MB)</td>
+                                     <td [width]="250" class="border-0" *ngIf="uploader.options.isHTML5">
+                                         <div class="">
+                                         <div class="progress">
+                                             <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }">{{uploader.progress}}%</div>
+                                         </div>
+                                     </div>
+                                     </td>
+                                     <td [width]="200" class="text-center border-0"><app-icon  matSuffix name="cloud-download"  class="me-3 fs-4 align-middle" (click)="DownloadDocument(item.documentId,item.file.name)"></app-icon>
+                                         <app-icon matSuffix name="close" class="me-3 fs-4 align-middle" (click)="DeleteDocument(item.documentId,item)"></app-icon>
+                                     </td>
+                                 </tr>
+                             </tbody>
+                           </table>
+                         </mat-form-field>
+                    </div>
+                    <div class="right-field"></div>
+                </div>
+            </div>
+        </mat-dialog-content>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <div>
+        <button mat-flat-button class="cancel" (click)="onCancelClick()">
+            <span>Cancel</span>
+        </button>
+    </div>
+    <div>
+        <button mat-flat-button class="save" (click)="addCustomer()" [class.save-enable]="this.customerForm.valid"
+            [disabled]="this.customerForm.invalid">
+            <span>Save</span>
+        </button>
+    </div>
+</div>

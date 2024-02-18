@@ -1,0 +1,146 @@
+
+  <form   [formGroup]="companySetupForm">
+  <div class="row">
+      <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-6">
+          <mat-form-field appearance="outline"  class="w-100 mb-30">
+              <mat-label>Start of fiscal year</mat-label>
+              <mat-select placeholder="Select" [(ngModel)]="CompanyData.fiscalYear" [ngModelOptions]="{standalone: true}"  formControlName="fiscalYear" required 
+              [ngClass]="{
+                'is-invalid': submitted && f['fiscalYear'].errors,
+                  'is-valid': submitted && !f['fiscalYear'].errors}">
+                <mat-option matInput   *ngFor="let obj of FiscalYearList" [value]="obj.name">
+                  {{obj.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="submitted && f['fiscalYear'].errors">Start of fiscal year is required</mat-error>                                             
+            </mat-form-field>
+      </div>
+      <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-6">
+          <mat-form-field appearance="outline"  class="w-100 mb-30">
+              <mat-label>Choose your accounting method</mat-label>
+              <mat-select placeholder="Select" [(ngModel)]="CompanyData.accountingMethod" [ngModelOptions]="{standalone: true}"  formControlName="accountingMethod" required   [ngClass]="{
+                'is-invalid': submitted && f['accountingMethod'].errors,
+                  'is-valid': submitted && !f['accountingMethod'].errors}">
+                <mat-option matInput   *ngFor="let obj of AccountingMethodList" [value]="obj.metadataId">
+                  {{obj.metadataId}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="submitted && f['accountingMethod'].errors">Accounting method is required</mat-error>                                             
+            </mat-form-field>  
+      </div>
+      <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-6">
+          <mat-form-field appearance="outline"  class="w-100 mb-30">
+              <mat-label>Business structure for tax purpose</mat-label>
+              <mat-select placeholder="Select" [(ngModel)]="CompanyData.taxStructureId" [ngModelOptions]="{standalone: true}" formControlName="taxStructureId" required   [ngClass]="{
+                'is-invalid': submitted && f['taxStructureId'].errors,
+                  'is-valid': submitted && !f['taxStructureId'].errors}">
+                <mat-option matInput   *ngFor="let obj of TaxStructureList" [value]="obj.metadataId">
+                  {{obj.metadataName}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="submitted && f['taxStructureId'].errors">Tax Structure is required</mat-error>                                             
+            </mat-form-field>  
+      </div>
+      <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-6">
+          <mat-form-field appearance="outline"  class="w-100 mb-30">
+              <mat-label>Company incorporation date</mat-label>
+              <input matInput [matDatepicker]="picker" [(ngModel)]="CompanyData.dateOfIncorporation"  placeholder="Select" formControlName="dateOfIncorporation"  [ngClass]="{
+                'is-invalid': submitted && f['dateOfIncorporation'].errors,
+                  'is-valid': submitted && !f['dateOfIncorporation'].errors}">
+              <mat-datepicker-toggle matIconSuffix [for]="picker">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="submitted && f['dateOfIncorporation'].errors">Date Of Incorporation is required</mat-error>                                             
+            </mat-form-field>  
+      </div>        
+      <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-6">
+          <mat-form-field appearance="outline"  class="w-100 mb-30">
+              <mat-label>Home currency</mat-label>
+              <mat-select placeholder="Select"  [(ngModel)]="CompanyData.currencyId" [ngModelOptions]="{standalone: true}" formControlName="currencyId"  required  [ngClass]="{
+                'is-invalid': submitted && f['currencyId'].errors,
+                  'is-valid': submitted && !f['currencyId'].errors}">
+                <mat-option matInput   *ngFor="let obj of CurrencyList" [value]="obj.metadataId">
+                  {{obj.metadataName}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="submitted && f['currencyId'].errors">Currency is required</mat-error>                                             
+            </mat-form-field>  
+      </div>
+      <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-6">
+          <mat-form-field appearance="outline"  class="w-100 mb-30">
+              <mat-label>Date Format</mat-label>
+              <mat-select placeholder="Select"  [(ngModel)]="CompanyData.dateFormat" [ngModelOptions]="{standalone: true}" formControlName="dateFormat" required  [ngClass]="{
+                'is-invalid': submitted && f['dateFormat'].errors,
+                  'is-valid': submitted && !f['dateFormat'].errors}">
+                <mat-option matInput   *ngFor="let obj of DateFormatList" [value]="obj.name">
+                  {{obj.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="submitted && f['dateFormat'].errors">Date Format is required</mat-error>                                             
+            </mat-form-field>  
+      </div>
+      <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-6">
+          <mat-form-field appearance="outline"  class="w-100 mb-30">
+              <mat-label>Number Format</mat-label>
+              <mat-select placeholder="Select" [(ngModel)]="CompanyData.numberFormat" [ngModelOptions]="{standalone: true}" formControlName="numberFormat" required  [ngClass]="{
+                'is-invalid': submitted && f['numberFormat'].errors,
+                  'is-valid': submitted && !f['numberFormat'].errors}">
+                <mat-option matInput   *ngFor="let obj of NumberFormatList" [value]="obj.name">
+                  {{obj.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="submitted && f['numberFormat'].errors">Number Format is required</mat-error>                                             
+            </mat-form-field>  
+      </div>
+  </div>
+
+  <div class="mb-30">
+    <div class="mb-4">              
+        <mat-slide-toggle  [(ngModel)]="CompanyData.enableCOA" [ngModelOptions]="{standalone: true}"  formControlName="enableCOA" labelPosition="before">Chart of Account Numbers</mat-slide-toggle>            
+    </div>
+    <div class="mb-4">              
+        <mat-slide-toggle  [(ngModel)]="CompanyData.enableDepartment" [ngModelOptions]="{standalone: true}"   formControlName="enableDepartment" labelPosition="before">Department</mat-slide-toggle>          
+    </div>
+    <div class="mb-4">              
+        <mat-slide-toggle  [(ngModel)]="CompanyData.companyType" [ngModelOptions]="{standalone: true}"  formControlName="companyType" labelPosition="before">Product & Service</mat-slide-toggle>          
+    </div>
+  </div>
+
+  <h2 class="text-title mb-30">Payment Terms</h2>
+
+  <div class="row">            
+      <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-6">
+          <mat-form-field appearance="outline"  class="w-100 mb-30">
+              <mat-label>Bill - (AP)</mat-label>
+              <mat-select placeholder="Select" [(ngModel)]="CompanyData.billPaymentTerms" [ngModelOptions]="{standalone: true}" formControlName="billPaymentTerms"   [ngClass]="{
+                'is-invalid': submitted && f['billPaymentTerms'].errors,
+                  'is-valid': submitted && !f['billPaymentTerms'].errors}">
+                <mat-option matInput   *ngFor="let obj of PaymentTermsList" [value]="obj.metadataId">
+                  {{obj.metadataId}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="submitted && f['billPaymentTerms'].errors">Bill Payment Terms Format is required</mat-error>                                             
+            </mat-form-field>  
+      </div>
+      
+      <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-6">
+          <mat-form-field appearance="outline"  class="w-100 mb-30">
+              <mat-label>Sale Invoice - (AR)</mat-label>
+              <mat-select placeholder="Select" [(ngModel)]="CompanyData.invoicePaymentTerms" [ngModelOptions]="{standalone: true}"  formControlName="invoicePaymentTerms"   [ngClass]="{
+                'is-invalid': submitted && f['invoicePaymentTerms'].errors,
+                  'is-valid': submitted && !f['invoicePaymentTerms'].errors}">
+                <mat-option matInput   *ngFor="let obj of PaymentTermsList" [value]="obj.metadataId">
+                  {{obj.metadataId}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="submitted && f['invoicePaymentTerms'].errors">Invoice Payment Terms Format is required</mat-error>                                             
+            </mat-form-field>  
+      </div>
+  </div>       
+  
+  <div class="text-end">
+      <button class="btn btn-primary btn-lg px-5" (click)="SaveCompanySetup()">Save</button>
+  </div>
+</form>
+    

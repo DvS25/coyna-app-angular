@@ -1,0 +1,237 @@
+<div class="row">
+ 
+   <div class="row">
+    <div class="col-lg-3 col-md-6 mb-30"> <div class="text-title fs-18 p-4 fw-bold">Category Details</div></div>
+    <div class="col-lg-9 col-md-6 mb-30">
+        <div class="d-flex flex-row align-items-center justify-content-end">
+             <div>
+                <button class="btn btn-primary btn-lg px-5 ml-5 me-2"><span>Pay Via Coyna</span></button>
+            <button class="btn btn-primary btn-lg px-5 ml-5 me-3"><span>Make Payment</span></button>
+             </div>
+            <div class="amount-container d-flex flex-row flex-nowrap align-items-center justify-content-between bg-primary-opa-10per rounded-10 px-4">
+                <span class="text-title-300">Balance Due</span>
+                <span class="fs-30 fw-bold text-primary-700">$31,746.20</span>
+            </div>
+            <!-- <span class="close-btn material-symbols-outlined text-title ms-4">close</span> -->
+        </div>
+    </div>
+   </div>
+    <div class="col-lg-6 col-md-6 mb-30 align align-self-center">
+        <mat-form-field class="w-100" subscriptSizing="dynamic">
+            <mat-label>Vendor</mat-label>
+            <mat-select placeholder="Choose a Vendor">
+                <mat-option value="All">Vendor 1</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-lg-6 col-md-6 mb-30">
+        <mat-form-field class="w-100" subscriptSizing="dynamic">
+            <mat-label>Email</mat-label>
+            <input matInput>
+        </mat-form-field>
+    </div>
+    <div class="col-lg-6 col-md-6 mb-30">
+        <mat-form-field class="w-100" subscriptSizing="dynamic">
+            <mat-label>Mailing Address</mat-label>
+            <input matInput>
+        </mat-form-field>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-30 align align-self-center">
+        <mat-form-field class="w-100" subscriptSizing="dynamic">
+            <mat-label>Terms</mat-label>
+            <mat-select placeholder="Choose a Terms">
+                <mat-option value="All">Terms</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-30">
+        <mat-form-field class="w-100" subscriptSizing="dynamic">
+            <mat-label>Mailing Address</mat-label>
+            <input matInput>
+        </mat-form-field>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-30 align align-self-center">
+        <mat-form-field class="w-100" subscriptSizing="dynamic">
+            <mat-label>Bill Date</mat-label>
+            <input matInput readonly [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker">
+                <app-icon name="calendar" matDatepickerToggleIcon></app-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-30 align align-self-center">
+        <mat-form-field class="w-100" subscriptSizing="dynamic">
+            <mat-label>Due Date</mat-label>
+            <input matInput readonly [matDatepicker]="picker1">
+            <mat-datepicker-toggle matIconSuffix [for]="picker1">
+                <app-icon name="calendar" matDatepickerToggleIcon></app-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>
+
+
+<div class="expense-category-tbl rounded-10 mb-30">
+    <!-- Title -->
+    <div class="text-title fs-18 p-4 fw-bold">Category Details</div>
+    <!-- // Title -->
+    <!-- Header -->
+    <div class="expense-category-tbl-row header d-flex flex-row flex-nowrap text-center text-linear bg-primary-light-50 fw-bold">
+        <div class="cell no flex-grow-0 flex-shrink-0">No</div>
+        <div class="cell accName">Account Name</div>
+        <div class="cell description flex-grow-1">Description</div>
+        <div class="cell amount flex-grow-1">Amount</div>
+        <div class="cell department">Department</div>
+        <div class="cell delete flex-grow-0 flex-shrink-0"></div>
+    </div>
+    <!-- //Header -->
+    <!-- Body -->
+    <div class="expense-category-tbl-row d-flex flex-row flex-nowrap" *ngFor="let categoryDetail of categoryDetailList;let index = index">
+        <div class="cell no flex-grow-0 flex-shrink-0">{{index + 1}}</div>
+        <div class="cell accName">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">
+                <mat-select [(ngModel)]="categoryDetailList[index].accountName">
+                    <mat-option matInput value="Commission">Account Name 1</mat-option>
+                    <mat-option matInput value="Hours">Account Name 2</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="cell description flex-grow-1">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">
+                <input matInput type="text" [(ngModel)]="categoryDetailList[index].description">
+            </mat-form-field>
+        </div>
+        <div class="cell amount flex-grow-1">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">
+                <input matInput type="text" class="text-center" [(ngModel)]="categoryDetailList[index].amount">
+            </mat-form-field>
+        </div>
+        <div class="cell department">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">
+                <mat-select [(ngModel)]="categoryDetailList[index].department">
+                    <mat-option matInput value="Commission">Department 1</mat-option>
+                    <mat-option matInput value="Hours">Department 2</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="cell delete flex-grow-0 flex-shrink-0">
+            <button class="btn-icon-tbl btn-light-danger"><app-icon name="trash"></app-icon></button>
+        </div>
+    </div>
+    <!-- // Body -->
+    <!-- Footer -->
+    <div class="action-footer expense-category-tbl-row d-flex flex-row flex-nowrap">
+        <div class="cell bg-accent-light text-black border-end-0 border-bottom-0" (click)="clearTblData()">Clear All</div>
+        <div class="cell bg-light text-black border-bottom-0" (click)="addTblData()">+Add Line</div>
+    </div>
+    <!-- // Footer -->
+</div>
+
+<div class="expense-item-tbl rounded-10 mb-5">
+    <!-- Title -->
+    <div class="text-title fs-18 p-4 fw-bold">Item classification</div>
+    <!-- // Title -->
+    <!-- Header -->
+    <div class="expense-item-tbl-row header d-flex flex-row flex-nowrap text-center text-linear bg-primary-light-50 fw-bold">
+        <div class="cell no flex-grow-0 flex-shrink-0">No</div>
+        <div class="cell proSer">Product/Service</div>
+        <div class="cell description flex-grow-1">Description</div>
+        <div class="cell qty flex-grow-1">Qty</div>
+        <div class="cell rate flex-grow-1">Rate</div>
+        <div class="cell amount flex-grow-1">Amount</div>
+        <div class="cell department">Department</div>
+        <div class="cell delete flex-grow-0 flex-shrink-0"></div>
+    </div>
+    <!-- //Header -->
+    <!-- Body -->
+    <div class="expense-item-tbl-row d-flex flex-row flex-nowrap" *ngFor="let categoryDetail of categoryDetailList;let index = index">
+        <div class="cell no flex-grow-0 flex-shrink-0">{{index + 1}}</div>
+        <div class="cell proSer">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">
+                <mat-select [(ngModel)]="categoryDetailList[index].accountName">
+                    <mat-option matInput value="Commission">Commission</mat-option>
+                    <mat-option matInput value="Hours">Hours</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="cell description flex-grow-1">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">
+                <input matInput type="text" [(ngModel)]="categoryDetailList[index].description">
+            </mat-form-field>
+        </div>
+        <div class="cell qty flex-grow-1">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">
+                <input matInput type="number" class="text-center" [(ngModel)]="categoryDetailList[index].amount">
+            </mat-form-field>
+        </div>
+        <div class="cell rate flex-grow-1">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">
+                <input matInput type="number" class="text-center" [(ngModel)]="categoryDetailList[index].amount">
+            </mat-form-field>
+        </div>
+        <div class="cell amount flex-grow-1">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">
+                <input matInput type="number" class="text-center" [(ngModel)]="categoryDetailList[index].amount">
+            </mat-form-field>
+        </div>
+        <div class="cell department">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">
+                <mat-select [(ngModel)]="categoryDetailList[index].department">
+                    <mat-option matInput value="Commission">Department 1</mat-option>
+                    <mat-option matInput value="Hours">Department 2</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="cell delete flex-grow-0 flex-shrink-0">
+            <button class="btn-icon-tbl btn-light-danger"><app-icon name="trash"></app-icon></button>
+        </div>
+    </div>
+    <!-- // Body -->
+    <!-- Footer -->
+    <div class="action-footer expense-item-tbl-row d-flex flex-row flex-nowrap">
+        <div class="cell bg-accent-light text-black border-end-0 border-bottom-0" (click)="clearTblData()">Clear All</div>
+        <div class="cell bg-light text-black border-bottom-0" (click)="addTblData()">+Add Line</div>
+    </div>
+    <!-- // Footer -->
+</div>
+
+<div class="row">
+    <div class="col-lg-6 col-md-6 mb-30 align align-self-center">
+        <mat-form-field class="w-100" subscriptSizing="dynamic">
+            <mat-label>Notes</mat-label>
+            <input matInput placeholder="Description">
+        </mat-form-field>
+    </div>
+    <div class="col-lg-6 col-md-6 mb-30">
+        <mat-form-field class="w-100" subscriptSizing="dynamic">
+            <mat-label>Attachments</mat-label>
+            <span class="hidden-file">          
+             <input matInput  placeholder="Maximum size: 20MB"  multiple readonly="true">
+         </span>
+            <app-icon matSuffix name="upload-link" class="me-3 fs-4 align-middle"></app-icon>
+            <span class="">          
+         </span>
+        </mat-form-field>
+
+
+    </div>
+
+</div>
+
+<!-- Spacing for fixed footer -->
+<div class="my-5"></div>
+<div class="journal-footer d-flex flex-row flex-nowrap align-items-center px-4 py-3 bg-primary-900">
+    <div class="flex-grow-1" *ngIf="expenceId != '0'">
+        <a href="javascript:void(0)" class="text-white text-decoration-none me-4 my-3 d-inline-block"><app-icon name="currency-exchange" class="me-3 fs-4 align-middle"></app-icon>Make Reccuring</a>        
+        <a href="javascript:void(0)" class="text-white text-decoration-none me-4 my-3 d-inline-block"><app-icon name="copy" class="me-3 fs-4 align-middle"></app-icon>Copy</a>
+        <a href="javascript:void(0)" class="text-white text-decoration-none me-4 my-3 d-inline-block"><app-icon name="trash" class="me-3 fs-4 align-middle"></app-icon>Delete</a>
+        <a href="javascript:void(0)" class="text-white text-decoration-none me-4 my-3 d-inline-block"><app-icon name="arrow-2" class="me-3 fs-4 align-middle"></app-icon>Journal Entry</a>
+        <a href="javascript:void(0)" class="text-white text-decoration-none me-4 my-3 d-inline-block"><app-icon name="printer" class="me-3 fs-4 align-middle"></app-icon>Print</a>
+        <a href="javascript:void(0)" class="text-white text-decoration-none me-4 my-3 d-inline-block"><app-icon name="scan-delete" class="me-3 fs-4 align-middle"></app-icon>Void</a>
+    </div>
+    <div class="flex-shrink-0 text-end" [ngClass]="{'flex-grow-1 d-flex flex-row justify-content-between': expenceId == '0'}">
+        <button class="btn btn-primary btn-lg px-5"><span class="">Save</span></button>
+    </div>
+</div>

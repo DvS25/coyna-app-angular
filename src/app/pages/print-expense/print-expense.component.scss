@@ -1,0 +1,10 @@
+@import '../../../assets/css/material/table.scss';
+@import '../../../assets/css/material/pagination.scss';
+@import '../../../assets/css/material/input.scss';
+@import '../../../assets/css/material/checkbox.scss';
+
+.print-expenses-tbl .description-col {
+    min-width: 175px;
+    max-width: 175px;
+    // width: 175px;
+}

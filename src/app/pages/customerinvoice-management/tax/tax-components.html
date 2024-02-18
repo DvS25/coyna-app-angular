@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Add Tax</h2>
+
+<mat-dialog-content [formGroup]="form" class="justify-content-between flex-row">
+
+	<mat-form-field class="m-2">
+		<input matInput
+		       placeholder="Enter Display Value"
+		       formControlName="value">
+	</mat-form-field>
+
+	<mat-form-field class="m-2">
+		<input matInput
+		       placeholder="Enter Type"
+		       formControlName="type">
+	</mat-form-field>
+
+	<mat-form-field class="m-2">
+		<input type="number" matInput
+		       placeholder="Enter Percentage"
+		       formControlName="percentage">
+	</mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="justify-content-end align-right">
+	<button class="mat-raised-button m-2" (click)="close()">Close</button>
+	<button class="mat-raised-button mat-primary m-2" [disabled]="form?.invalid" (click)="save()">Save</button>
+</mat-dialog-actions>

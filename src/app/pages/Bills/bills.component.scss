@@ -1,0 +1,69 @@
+@import '../../../assets/css/material/table.scss';
+@import '../../../assets/css/material/checkbox.scss';
+@import '../../../assets/css/material/tab.scss';
+@import '../../../assets/css/material/input.scss';
+
+
+:host ::ng-deep .mat-expansion-panel-body {
+    padding: 0;
+}
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+}
+
+// .mat-expansion-panel-header.mat-expanded, .mat-expansion-panel-header {
+//     height: 56px;
+// }
+
+.mat-expansion-panel-header.mat-expanded {    
+    border: 1px solid #58A1CC;
+    color: #58A1CC;
+    background: rgba(88, 161, 204, 0.1);
+}
+
+.mat-expansion-panel-header {
+    width: 150px;
+    margin-left: auto;
+    border: 1px solid #DDDDE1;
+    color: #DDDDE1;
+    border-radius: 10px;
+    padding: 0 20px;
+}
+
+.mat-expansion-panel-header.mat-expanded .mat-expansion-panel-header-description {
+    color: #58A1CC;
+}
+
+.btn-light-primary:hover{
+    color: #fff; 
+    transition: background-color 0.5s ease;
+    background: #2a7af2;
+}
+
+.btn-light-danger{
+    background: #ffeded; 
+    color: #ff4040;
+}
+
+.btn-light-primary{
+    background: #dceaff; 
+    color: #2a7af2;
+}
+
+.btn-light-danger:hover{
+    color: #fff;  
+    transition: background-color 0.5s ease;
+    background: #ff4040;
+}
+
+.btn-light-success{
+    background: #d0ffef; 
+    color: #37c997;
+}
+
+.btn-light-success:hover{
+    color: #fff; 
+    transition: background-color 0.5s ease;
+    background: #37c997;
+}

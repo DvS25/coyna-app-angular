@@ -1,0 +1,43 @@
+
+@import '../../../assets/css/material/input.scss';
+
+#rcorners1 {
+    border-radius: 23px;
+    background: #58A1CC;
+    padding: 20px;
+    // width: 200px;
+    height: 200px;
+    margin-top: 10px;
+  }
+
+.display{
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-top: 30px;
+} 
+
+.display2{
+    padding-left: 500px;
+    padding-right: 500px;
+    margin-top: 30px;
+    margin-bottom: 200px;
+}
+
+.display3{
+    padding-left: 400px;
+    padding-right: 400px;
+    margin-top: 30px;
+}
+
+.text-coyna{
+    font-family: inter;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.36px;
+    color: #7382A3;
+}
+
+:host ::ng-deep .mat-horizontal-stepper-header-container {
+    display: none !important;
+  }
+

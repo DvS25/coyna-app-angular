@@ -1,0 +1,174 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>.pagetitle select.form-control {
+    height: auto !important;
+}</style>
+<div class="innerdash pagetitle" *ngIf="showPage == true">
+
+    <div class="row">
+        <div class="col-md-12 nopad d-flex0 align-items-center">
+            <h1>Customer Associations</h1>
+        </div>
+    </div>
+    
+    <div class="row nomrgnbtn" [formGroup]="filterSearchForm">
+        <div class="col-md-2 nopad">
+            <select class="form-control" formControlName="companyId" (change)="getStores($event.target)">
+                <option value="">Select company</option>
+				<option [value]="item.companyId" *ngFor="let item of companyList">{{item.name | titlecase}}</option>
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <select class="form-control" formControlName="storeId">
+                <option value="">Select Store</option>
+				<option [value]="item.companyId" *ngFor="let item of storeList">{{item.name}}</option>
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <select class="form-control" formControlName="vendorId">
+                <option value="">Select Customer</option>
+				<option [value]="item.vendorId" *ngFor="let item of vendorLists">{{item.name}}</option>
+            </select>
+        </div>
+		
+		<div class="col-md-2">
+			<button type="submit" class="btn btn-primary btn-save" data-bs-toggle="modal" data-bs-target="#add-modal">+</button>
+        </div>
+		
+        <div class="col-md-2 d-flex0">
+            <button type="submit" class="btn btn-primary btn-save" (click)="filterSearch()">Search</button>
+        </div>
+        <div class="col-md-2 d-flex0">
+            <button type="submit" class="btn btn-primary btn-save" (click)="resetFilters()">Reset</button>
+        </div>
+    </div>
+	
+	<div class="modal fade" id="add-modal" tabindex="-1" [formGroup]="vendorAssociationForm">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Add Customer Associations</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<table class="maintable withborder commform" style="width:100%">  
+					<thead>
+						<tr>
+							<th>S.No</th>
+							<th>Company</th>
+							<th>Store</th>
+							<th>Customer</th>
+							<th>Action</th>
+						</tr>
+					</thead>               
+					<tbody formArrayName="va_rows">
+						<tr *ngFor="let va_row of va_rows.controls; let i = index" [formGroup]="va_rows.controls[i]">
+						  <td>{{ i+1 }}</td>
+						  <td>
+							<select class="form-control" formControlName="va_companyId" (keyup)="onVAValueChange($event, i,'va_companyId')" (change)="getStores($event.target)" >
+								<option value="">Select company</option>
+								<option [value]="item.companyId" *ngFor="let item of companyList">{{item.name | titlecase}}</option>
+							</select>
+						  </td>
+						  <td>
+							<select class="form-control" formControlName="va_storeId" (keyup)="onVAValueChange($event, i,'va_storeId')" >
+								<option value="">Select store</option>
+								<option [value]="item.companyId" *ngFor="let item of storeList">{{item.name}}</option>
+							</select>
+						  </td>
+						  <td>
+							<select class="form-control" formControlName="va_vendorId" (keyup)="onVAValueChange($event, i,'va_vendorId')" >
+								<option value="">Select customer</option>
+								<option [value]="item.vendorId" *ngFor="let item of vendorLists">{{item.name}}</option>
+							</select>
+						  </td>											 
+						  <td>
+							<button (click)="deleteVendorAssociationRow(i)" class="attachbtn">
+							  <!--<img src="assets/img/delete.png">--><i class="fa fa-trash"></i>
+							</button>
+						  </td>
+						</tr>
+					  </tbody>
+				  </table>
+				<br/>
+				<button type="button" (click)="addVendorAssociationRow()" class="btn btn-primary">Add new Row</button>
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeVAModal">Cancel</button>
+			<button type="button" class="btn btn-primary btn-save" (click)="saveVendorAssociationRow()"><i class="fa fa-save"></i>Save</button>
+			</div>
+		</div>
+		</div>
+	</div><!-- End AR  Modal-->
+
+<!-- 
+    <div class="row">
+        <div class="col-md-3 pt-15">
+            <select class="form-control">
+                <option>Select company</option>
+            </select>
+        </div>
+
+        <div class="col-md-3 pt-15">
+
+        </div>
+        <div class="col-md-3 pt-15">
+
+        </div>
+        <div class="col-md-3 pt-15">
+
+        </div>
+    </div> -->
+
+</div><!-- End Page Title -->
+<div class="generalLedger-screen" *ngIf="showPage == true">
+    <!-- trial-balance Start -->
+   
+    <section class="section dashboard">
+       <div class="row trial-balance-sc">
+           <div class="innerform">
+             <div class="tablemaindiv mat-elevation-z8">
+                 <table class="maintable withborder commform" style="width:100%">  
+                   <thead>
+                       <tr>
+                           <th>Company</th>
+                           <th>Store</th>
+                           <th>Vendor</th>
+                           <th>Action</th>
+                       </tr>
+                   </thead>               
+                     <tbody>
+                         <tr *ngFor="let item of pageLists">
+                             <td>{{companyNameMap[item.companyId]}}</td>
+                             <td>{{storeNameMap[item.storeId]}}</td>
+                             <td>{{item.vendorName}}</td>
+                             <td><button class="viewbtn" (click)="deleteVendorAssociation(item.companyVendorId)" class="attachbtn">
+                                <!--<img src="assets/img/delete.png">--><i class="fa fa-trash"></i>
+                              </button></td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+           </div>
+         </div>
+    </section>
+   
+   <!-- trial-balance End --> 
+   </div>
+
+<section class="section dashboard" *ngIf="showPage == false">
+	<div class="row" style="align-items: center;">
+		<div class="col-md-12" style="padding:5px;">
+			<h1>Vendor Associations</h1>
+		</div>
+	</div>
+	<div class="row" style="height: 500px;">
+		<div class="col-md-12">
+			<div class="alert alert-dismissable alert-danger">
+				<strong>Oops!</strong> You dont have access to see this page.
+			</div>
+		</div>
+	</div>
+</section>

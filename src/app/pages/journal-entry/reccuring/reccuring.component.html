@@ -1,0 +1,42 @@
+<h1 mat-dialog-title class="title">Recurrence</h1>
+<div>
+  <form [formGroup]="recurringForm">
+    <div mat-dialog-content>
+      <div class="row">
+        <div class="text-center w-80 mb-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Number of Rec</mat-label>
+            <input matInput formControlName="no_of_rec" required>
+            <mat-error *ngIf="recurringForm.invalid">Number of  Rec is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="text-center w-80 mb-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Date of Rec</mat-label>
+            <input matInput formControlName="date_of_rec" required>
+            <mat-error *ngIf="recurringForm.invalid">Date of  Rec is required</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <!-- <div>
+    <button mat-flat-button class="cancel">
+      <span>Cancel</span>
+    </button>
+  </div>
+  <div>
+    <button mat-flat-button class="save" [class.save-enable]="this.recurringForm.valid"
+      [disabled]="this.recurringForm.invalid">
+      <span>Save</span>
+    </button>
+  </div> -->
+  <div>
+    <button class="btn btn-primary btn-lg w-30 me-2" (click)="onCancelClick()"><span class="">Cancel</span></button>
+  </div>
+  <div>
+    <button class="btn btn-primary btn-lg w-30 me-2" [disabled]="this.recurringForm.invalid"><span class="">Save</span></button>
+  </div>
+</div>

@@ -1,0 +1,501 @@
+<div class="innerdash pagetitle">
+    <div class="row">
+        <div class="col-md-9">
+        <h1>Create Customer</h1>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-primary" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+        </div>
+    </div>
+</div><!-- End Page Title -->
+<section class="section dashboard">
+    <div class="row">
+        <div class="innerform">
+            <div class="col-md-9">
+                <form id="formCreatecompany" class="mb-3 commform" [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+                    <div class="steps row">
+                        <div class="innerfheader mt-2 mb-1 noborder">
+                            <h4><span>Step 01</span> - Customer Information</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Company Name</label>
+                                <select tabindex="1" class="form-control" formControlName="companyId" [ngClass]="{
+                                   'is-invalid': submitted && f['companyId'].errors,
+                                    'is-valid': submitted && !f['companyId'].errors}"
+                                        (change)="getStoreList($event.target)">
+
+
+                                    <option [value]="item.companyId"
+                                            *ngFor="let item of companyList">{{item.name | titlecase}}</option>
+                                </select>
+
+
+                                <span *ngIf="submitted && f['companyId'].errors" class="invalid-feedback">
+                                    <span *ngIf="f['companyId'].errors['required']"> Company Name  is required</span>
+                                </span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Customer Name</label>
+                                <input tabindex="2" type="text" class="form-control titleCase" placeholder=""
+                                       formControlName="customerName"  (keyup)="checkCompany($event.target)"
+                                       [ngClass]="{
+                                   'is-invalid': submitted && f['customerName'].errors}"/>
+                                <span *ngIf="submitted && f['customerName'].errors"
+                                      class="invalid-feedback">
+                                    <span *ngIf="f['customerName'].errors['required']">Customer Name is required</span>
+                                    <span *ngIf="f['customerName'].errors['pattern']">Customer Name can only be alphanumeric</span>
+                                </span>
+                                <span style="color: #dc3545" *ngIf="false">Customer name is already taken</span>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Store</label>
+                                <select tabindex="4" class="form-control" formControlName="store_id"
+                                        [ngClass]="{
+                                   'is-invalid': submitted && f['store_id'].errors}">
+
+                                    <option [value]="item.companyId"
+                                            *ngFor="let item of storeList"> {{item.name | titlecase}}</option>
+                                </select>
+
+                                <span *ngIf="submitted && f['store_id'].errors" class="invalid-feedback">
+                          <span *ngIf="f['store_id'].errors['required']">Store Name is required</span>
+                      </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="steps row">
+                        <div class="innerfheader mt-2 mb-1 noborder">
+                            <h4><span>Step 02</span> - Billing Address</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Address Line 1</label>
+                                <input tabindex="3" type="text" class="form-control titleCase"
+                                       placeholder=""
+                                       formControlName="address1_billing"
+                                       [ngClass]="{
+                                   'is-invalid': submitted && f['address1_billing'].errors,
+                                    'is-valid': submitted && !f['address1_billing'].errors}"/>
+                                <span *ngIf="submitted && f['address1_billing'].errors" class="invalid-feedback">
+                                <span *ngIf="f['address1_billing'].errors['required']">Address 1 is required</span>
+                                </span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Street</label>
+                                <input tabindex="3" type="text" class="form-control titleCase"
+                                       placeholder=""
+                                       formControlName="street_billing"
+                                       [ngClass]="{
+                                   'is-invalid': submitted && f['street_billing'].errors,
+                                    'is-valid': submitted && !f['street_billing'].errors}"/>
+                                    <span *ngIf="submitted && f['street_billing'].errors" class="invalid-feedback">
+                                    <span *ngIf="f['street_billing'].errors['required']">Street is required</span>
+                                    </span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Country</label>
+                                <select tabindex="5" class="form-control" formControlName="country_billing"
+                                        [ngClass]="{
+                                   'is-invalid': submitted && f['country_billing'].errors,
+                                    'is-valid': submitted && !f['country_billing'].errors}"
+                                        (change)="getBillingStatesForCountry($event.target)">
+
+                                    <option [value]="item.name"
+                                            *ngFor="let item of this.billingCountryList">{{item.name | titlecase}}</option>
+                                </select>
+
+                                <div *ngIf="submitted && f['country_billing'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['country_billing'].errors['required']">Country is required</div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="name" class="form-label">City</label>
+                                <select tabindex="7" class="form-control titleCase" formControlName="city_billing"
+                                        [ngClass]="{
+                                   'is-invalid': submitted && f['city_billing'].errors,
+                                    'is-valid': submitted && !f['city_billing'].errors}">
+
+                                    <option value="{{item}}" *ngFor="let item of billingCityList">{{item}}</option>
+                                </select>
+                                <div *ngIf="submitted && f['city_billing'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['city_billing'].errors['required']">City is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Address Line 2</label>
+                                <input tabindex="3" type="text" class="form-control titleCase"
+                                       placeholder=""
+                                       formControlName="address2_billing"
+                                       [ngClass]="{
+                                   'is-invalid': submitted && f['address2_billing'].errors,
+                                    'is-valid': submitted && !f['address2_billing'].errors}"/>
+                                <span *ngIf="submitted && f['address2_billing'].errors" class="invalid-feedback">
+                                <span *ngIf="f['address2_billing'].errors['required']">Address Line 2 is required</span>
+                                </span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Postal Code</label>
+                                <input tabindex="8" type="text" class="form-control titleCase" placeholder=""
+                                       formControlName="postal_billing" [ngClass]="{
+                                   'is-invalid': submitted && f['postal_billing'].errors,
+                                    'is-valid': submitted && !f['postal_billing'].errors}"/>
+                                <span *ngIf="submitted && f['postal_billing'].errors" class="invalid-feedback">
+                           <span *ngIf="f['postal_billing'].errors['required']">Postal code is required</span>
+                           <span *ngIf="f['postal_billing'].errors['maxlength']">Postal code max length 6</span>
+                           <span *ngIf="f['postal_billing'].errors['minlength']">Postal code Min length 6</span>
+                           <span *ngIf="f['postal_billing'].errors['pattern']">Postal code is alphanum.</span>
+                       </span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Province</label>
+                                <select  tabindex="6" class="form-control" (change)="getBillingCitiesForSelectedState($event.target)"
+                                        formControlName="province_billing"
+                                        [ngClass]="{
+                                   'is-invalid': submitted && f['province_billing'].errors}">
+
+                                    <option [value]="item.name" *ngFor="let item of billingStateList">{{item.name}}</option>
+                                </select>
+                                <span *ngIf="submitted && f['province_billing'].errors" class="invalid-feedback">
+                           <span *ngIf="f['province_billing'].errors['required']">Province  is required</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="steps row">
+                        <div class="innerfheader mt-2 mb-1 noborder">
+                            <h4><span>Step 03</span> - Shipping Address</h4>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-input" type="checkbox" id="sameAddressCheckbox" (change)="copyBillingAddressToShipping($event.target.checked)">
+                            <label class="form-label" for="sameAddressCheckbox" style="margin-left: 10px;">
+                               Shipping address same as billing address
+                            </label>
+                        </div>
+                          
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Address Line 1</label>
+                                <input tabindex="3" type="text" class="form-control titleCase"
+                                       placeholder=""
+                                       formControlName="address1_shipping"
+                                       [ngClass]="{
+                                   'is-invalid': submitted && f['address1_shipping'].errors,
+                                    'is-valid': submitted && !f['address1_shipping'].errors}"/>
+                                <span *ngIf="submitted && f['address1_shipping'].errors" class="invalid-feedback">
+                                <span *ngIf="f['address1_shipping'].errors['required']">Address 1 is required</span>
+                                </span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Street</label>
+                                <input tabindex="3" type="text" class="form-control titleCase"
+                                       placeholder=""
+                                       formControlName="street_shipping"
+                                       [ngClass]="{
+                                   'is-invalid': submitted && f['street_shipping'].errors,
+                                    'is-valid': submitted && !f['street_shipping'].errors}"/>
+                                    <span *ngIf="submitted && f['street_shipping'].errors" class="invalid-feedback">
+                                    <span *ngIf="f['street_shipping'].errors['required']">Street is required</span>
+                                    </span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Country</label>
+                                <select tabindex="5" class="form-control" formControlName="country_shipping"
+                                        [ngClass]="{
+                                   'is-invalid': submitted && f['country_shipping'].errors,
+                                    'is-valid': submitted && !f['country_shipping'].errors}"
+                                        (change)="getShippingStatesForCountry($event.target)">
+
+                                    <option [value]="item.name"
+                                            *ngFor="let item of this.shippingCountryList">{{item.name | titlecase}}</option>
+                                </select>
+
+                                <div *ngIf="submitted && f['country_shipping'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['country_shipping'].errors['required']">Country is required</div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="name" class="form-label">City</label>
+                                <select tabindex="7" class="form-control titleCase" formControlName="city_shipping"
+                                        [ngClass]="{
+                                   'is-invalid': submitted && f['city_shipping'].errors,
+                                    'is-valid': submitted && !f['city_shipping'].errors}">
+
+                                    <option value="{{item}}" *ngFor="let item of shippingCityList">{{item}}</option>
+                                </select>
+                                <div *ngIf="submitted && f['city_shipping'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['city_shipping'].errors['required']">City is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Address Line 2</label>
+                                <input tabindex="3" type="text" class="form-control titleCase"
+                                       placeholder=""
+                                       formControlName="address2_shipping"
+                                       [ngClass]="{
+                                   'is-invalid': submitted && f['address2_shipping'].errors,
+                                    'is-valid': submitted && !f['address2_shipping'].errors}"/>
+                                <span *ngIf="submitted && f['address2_shipping'].errors" class="invalid-feedback">
+                                <span *ngIf="f['address2_shipping'].errors['required']">Address Line 2 is required</span>
+                                </span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Postal Code</label>
+                                <input tabindex="8" type="text" class="form-control titleCase" placeholder=""
+                                       formControlName="postal_shipping" [ngClass]="{
+                                   'is-invalid': submitted && f['postal_shipping'].errors,
+                                    'is-valid': submitted && !f['postal_shipping'].errors}"/>
+                                <span *ngIf="submitted && f['postal_shipping'].errors" class="invalid-feedback">
+                           <span *ngIf="f['postal_shipping'].errors['required']">Postal code is required</span>
+                           <span *ngIf="f['postal_shipping'].errors['maxlength']">Postal code max length 6</span>
+                           <span *ngIf="f['postal_shipping'].errors['minlength']">Postal code Min length 6</span>
+                           <span *ngIf="f['postal_shipping'].errors['pattern']">Postal code is alphanum.</span>
+                       </span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Province</label>
+                                <select  tabindex="6" class="form-control" (change)="getShippingCitiesForSelectedState($event.target)"
+                                        formControlName="province_shipping"
+                                        [ngClass]="{
+                                   'is-invalid': submitted && f['province_shipping'].errors}">
+
+                                    <option [value]="item.name" *ngFor="let item of shippingStateList">{{item.name}}</option>
+                                </select>
+                                <span *ngIf="submitted && f['province_shipping'].errors" class="invalid-feedback">
+                           <span *ngIf="f['province_shipping'].errors['required']">Province  is required</span>
+                                </span>
+                            </div>
+                            
+                           
+                        </div>
+                    </div>
+                    <div class="steps row">
+                        <div class="innerfheader mt-4 mb-1 noborder">
+                            <h4><span>Step 04</span> - Payment Information</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Payment Code</label>
+                                <input type="text" class="form-control titleCase" placeholder=""
+                                       formControlName="paymentCode" [ngClass]="{
+                                   'is-invalid': submitted && f['paymentCode'].errors,
+                                    'is-valid': submitted && !f['paymentCode'].errors}"/>
+                                <span *ngIf="submitted && f['paymentCode'].errors" class="invalid-feedback">
+                                <span *ngIf="f['paymentCode'].errors['required']">Payment Code is required</span>
+                                </span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Payment Terms</label>
+                                <input type="text" class="form-control text-capitalize" placeholder=""
+                                       formControlName="payment" [ngClass]="{
+                                   'is-invalid': submitted && f['payment'].errors,
+                                    'is-valid': submitted && !f['payment'].errors}"/>
+                                    <span *ngIf="submitted && f['payment'].errors" class="invalid-feedback">
+                                <span *ngIf="f['payment'].errors['required']">Payment terms is required</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Mode of Payment</label>
+                                <select class="form-control" formControlName="modeOfPayment" [ngClass]="{
+                                'is-invalid': submitted && f['modeOfPayment'].errors,
+                                 'is-valid': submitted && !f['modeOfPayment'].errors}">
+                                <option>Online</option>
+                                <option>Cheque</option> 
+                                <option>eTransfer</option>
+                                <option>EFT</option>                                
+                                </select>  
+                                <!-- <input type="text" class="form-control text-capitalize" placeholder=""
+                                       formControlName="modeOfPayment" [ngClass]="{
+                                   'is-invalid': submitted && f['modeOfPayment'].errors,
+                                    'is-valid': submitted && !f['modeOfPayment'].errors}"/> -->
+                                    <span *ngIf="submitted && f['modeOfPayment'].errors" class="invalid-feedback">
+                                <span *ngIf="f['modeOfPayment'].errors['required']"> Mode Of Payment is required</span>
+                                </span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Currency</label>
+                                <input type="text" class="form-control text-capitalize" placeholder=""
+                                       formControlName="currency" [ngClass]="{
+                                   'is-invalid': submitted && f['currency'].errors,
+                                    'is-valid': submitted && !f['currency'].errors}"/>
+                                <span *ngIf="submitted && f['currency'].errors" class="invalid-feedback">
+                                <span *ngIf="f['currency'].errors['required']">Currency is required</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="steps row">
+                        <div class="innerfheader mt-4 mb-1 noborder">
+                            <h4><span>Step 05</span> - Bank Account Details</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Bank Name</label>
+                                <input type="text" class="form-control text-capitalize" placeholder=""
+                                       formControlName="bankName" [ngClass]="{
+                                   'is-invalid': submitted && f['bankName'].errors,
+                                    'is-valid': submitted && !f['bankName'].errors}"/>
+                                <span *ngIf="submitted && f['bankName'].errors" class="invalid-feedback">
+                           <span *ngIf="f['bankName'].errors['required']">Bank Name is required</span>
+                           <span *ngIf="f['bankName'].errors['pattern']">Bank Name is Only charter</span>
+                       </span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Beneficiary Name</label>
+                                <input type="text" class="form-control text-capitalize" placeholder=""
+                                       formControlName="beneficiary" [ngClass]="{
+                                   'is-invalid': submitted && f['beneficiary'].errors,
+                                    'is-valid': submitted && !f['beneficiary'].errors}"/>
+                                <span *ngIf="submitted && f['beneficiary'].errors" class="invalid-feedback">
+                           <span *ngIf="f['beneficiary'].errors['required']"> Beneficiary is required</span>
+                           <span *ngIf="f['beneficiary'].errors['pattern']">Bank Name is Only charter</span>
+                       </span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Routing Number</label>
+                                <input type="text" class="form-control text-capitalize" placeholder=""
+                                       formControlName="IFSCCode" [ngClass]="{
+                                   'is-invalid': submitted && f['IFSCCode'].errors,
+                                    'is-valid': submitted && !f['IFSCCode'].errors}"/>
+                                <span *ngIf="submitted && f['IFSCCode'].errors" class="invalid-feedback">
+                           <span *ngIf="f['IFSCCode'].errors['required']">Routing Number is required</span>
+                       </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Account Number</label>
+                                <input type="text" class="form-control text-capitalize" placeholder=""
+                                       formControlName="accountNo" [ngClass]="{
+                                   'is-invalid': submitted && f['accountNo'].errors,
+                                    'is-valid': submitted && !f['accountNo'].errors}"/>
+                                <span *ngIf="submitted && f['accountNo'].errors" class="invalid-feedback">
+                           <span *ngIf="f['accountNo'].errors['required']">AccountNo is required</span>
+                       </span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Re enter Account Number</label>
+                                <input type="text" class="form-control text-capitalize" placeholder=""
+                                       formControlName="reAccountNo" [ngClass]="{
+                                   'is-invalid': submitted && f['reAccountNo'].errors,
+                                    'is-valid': submitted && !f['reAccountNo'].errors}"/>
+                                <span *ngIf="submitted && f['reAccountNo'].errors" class="invalid-feedback">
+                           <span *ngIf="f['reAccountNo'].errors['required']">Confirm account is required</span>
+                            <span *ngIf="f['reAccountNo'].errors['matching']">Account Number does not match</span>
+                       </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="steps row">
+                        <div class="innerfheader mt-4 mb-1 noborder">
+                            <h4><span>Step 06</span> - Contact Information</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Contact First Name</label>
+                                <input type="text" class="form-control text-capitalize" placeholder=""
+                                       formControlName="first_name" [ngClass]="{
+                                   'is-invalid': submitted && f['first_name'].errors,
+                                    'is-valid': submitted && !f['first_name'].errors}"/>
+                                <span *ngIf="submitted && f['first_name'].errors" class="invalid-feedback">
+                           <span *ngIf="f['first_name'].errors['required']">First name is required</span>
+                       </span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Contact Last Name</label>
+                                <input type="text" class="form-control text-capitalize" placeholder=""
+                                       formControlName="last_name" [ngClass]="{
+                                   'is-invalid': submitted && f['last_name'].errors,
+                                    'is-valid': submitted && !f['last_name'].errors}"/>
+                                <span *ngIf="submitted && f['last_name'].errors" class="invalid-feedback">
+                           <span *ngIf="f['last_name'].errors['required']">Last name is required</span>
+                       </span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Contact Email ID</label>
+                                <input type="text" class="form-control"
+                                       placeholder=""
+                                       formControlName="contact_email_id" [ngClass]="{
+                                   'is-invalid': submitted && f['contact_email_id'].errors,
+                                    'is-valid': submitted && !f['contact_email_id'].errors}"/>
+                                <span *ngIf="submitted && f['contact_email_id'].errors" class="invalid-feedback">
+                           <span *ngIf="f['contact_email_id'].errors['required']">Email id is required</span>
+                           <span *ngIf="f['contact_email_id'].errors['email']">Email is invalid</span>
+
+                       </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Contact Phone Number</label>
+                                <input type="text" class="form-control" placeholder=""
+                                       formControlName="contact_phone_number" [ngClass]="{
+                                   'is-invalid': submitted && f['contact_phone_number'].errors,
+                                    'is-valid': submitted && !f['contact_phone_number'].errors}"/>
+                                <span *ngIf="submitted && f['contact_phone_number'].errors" class="invalid-feedback">
+                           <span *ngIf="f['contact_phone_number'].errors['required']">Contact phone number is required</span>
+                       </span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Contact Alternative Number</label>
+                                <input type="text" class="form-control" placeholder=""
+                                       formControlName="contact_alternative_number"/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Contact Alternative Email ID</label>
+                                <input type="text" class="form-control" placeholder=""
+                                       formControlName="contact_alternative_email"
+                                       [ngClass]="{
+                                   'is-invalid': submitted && f['contact_alternative_email'].errors,
+                                    'is-valid': submitted && !f['contact_alternative_email'].errors}"/>
+                                <span *ngIf="submitted && f['contact_alternative_email'].errors"
+                                      class="invalid-feedback">
+                           <span *ngIf="f['contact_alternative_email'].errors['required']">Contact alternative email is not valid</span>
+                       </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="mt-3 mb-3 d-flex flex-column align-items-center">
+                        <button type="submit" class="btn btn-primary btnarraow d-flex">SAVE<span
+                                class="barraow"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section dashboard" *ngIf="showPage == false">
+	<div class="row" style="align-items: center;">
+		<div class="col-md-12" style="padding:5px;">
+			<h1>Create Customer</h1>
+		</div>
+	</div>
+	<div class="row" style="height: 500px;">
+		<div class="col-md-12">
+			<div class="alert alert-dismissable alert-danger">
+				<strong>Oops!</strong> You dont have access to see this page.
+			</div>
+		</div>
+	</div>
+</section>

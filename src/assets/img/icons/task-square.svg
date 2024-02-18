@@ -1,0 +1,9 @@
+<svg width="24px" height="24px" id="task-square" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">  
+  <g transform="matrix(0.798131, 0, 0, 0.798131, -0.76852, -0.6111)">
+    <path d="M16.4648 11.8916H23.0427" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M8.95801 11.8911L9.89771 12.8308L12.7168 10.0117" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M16.4648 20.6621H23.0427" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M8.95801 20.6626L9.89771 21.6023L12.7168 18.7832" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M12.2393 28.3301H19.7568C26.0215 28.3301 28.5273 25.8242 28.5273 19.5596V12.042C28.5273 5.77734 26.0215 3.27148 19.7568 3.27148H12.2393C5.97461 3.27148 3.46875 5.77734 3.46875 12.042V19.5596C3.46875 25.8242 5.97461 28.3301 12.2393 28.3301Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+  </g>
+</svg>

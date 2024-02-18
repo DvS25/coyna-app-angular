@@ -1,0 +1,236 @@
+<div class="innerdash pagetitle" *ngIf="showPage == true">
+    <div class="row">
+        <div class="col-md-8 nopad d-flex align-items-center">
+            <h1>Update Company</h1>
+        </div><div class="col-md-4"> 
+                <button class="btn btn-primary btn-save" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+    </div>
+    </div>
+</div><!-- End Page Title -->
+<section class="section dashboard" *ngIf="showPage == true">
+    <div class="row">
+        <div class="innerform">
+            <div class="innerfheader">
+                <h4>Basic Information</h4>
+            </div>
+            <div class="col-md-12">
+                <form id="formCreatecompany" class="mb-3 mt-4 commform row" [formGroup]="editCompanyForm">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Company Name</label>
+                            <input type="text" class="form-control" placeholder="Company Name"
+                                   formControlName="companyName" autofocus
+                                   [ngClass]="{
+                                   'is-invalid': submitted && f['companyName'].errors,
+                                    'is-valid': submitted && !f['companyName'].errors}"/>
+
+                            <div *ngIf="submitted && f['companyName'].errors" class="invalid-feedback">
+                                <div *ngIf="f['companyName'].errors['required']">Company Name is required</div>
+                            </div>
+                        </div>                        
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Types of Services/Products</label>
+                            <input type="text" class="form-control" placeholder="Enter Types of services"
+                                   formControlName="typeOfService"
+                                   [ngClass]="{
+                                   'is-invalid': submitted && f['typeOfService'].errors,
+                                    'is-valid': submitted && !f['typeOfService'].errors}"/>
+
+                            <div *ngIf="submitted && f['typeOfService'].errors" class="invalid-feedback">
+                                <div *ngIf="f['typeOfService'].errors['required']">Type Of Service is required</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="name" class="form-label">City</label>
+                            <select class="form-control" formControlName="city"
+                                    [ngClass]="{
+                                   'is-invalid': submitted && f['city'].errors,
+                                    'is-valid': submitted && !f['city'].errors}">
+                                <option value=""> Select City</option>
+                                <option value="{{item}}" *ngFor="let item of cityList">{{item}}</option>
+                            </select>
+                            <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+                                <div *ngIf="f['city'].errors['required']">City is required</div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Account Number</label>
+                            <input type="text" class="form-control" placeholder="Enter Account Number"
+                                   formControlName="accountNumber" [ngClass]="{
+                                   'is-invalid': submitted && f['accountNumber'].errors,
+                                    'is-valid': submitted && !f['accountNumber'].errors}"/>
+
+                            <span *ngIf="submitted && f['accountNumber'].errors" class="invalid-feedback">
+                       <span *ngIf="f['accountNumber'].errors['required']">Account Number is required</span>
+                           <span *ngIf="f['accountNumber'].errors['pattern']">Account Number is not number</span>
+                       </span>
+                        </div>
+                        <!-- <div class="mb-3">
+                            <button class="addstore" (click)="addStoreName()"> + Add Store</button>
+                        </div> -->
+                        <!-- <div class="mb-3">
+                            <label for="name" class="form-label">Store Name</label>
+                            <select class="form-control" formControlName="storeName"
+                                    [ngClass]="{
+                                   'is-invalid': submitted && f['storeName'].errors,
+                                    'is-valid': submitted && !f['storeName'].errors}">
+                                <option value="">Enter Store Name</option>
+                                <option value="s1">Store Name1</option>
+                                <option value="s2">Store Name2</option>
+                            </select>
+
+                            <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
+                                <div *ngIf="f['country'].errors['required']">Store Name is required</div>
+                            </div>
+                        </div> -->
+
+<!--                        <div *ngFor="let store of getStoreFormControls(); let i = index" class="mb-3">-->
+<!--                            <label>Store Name </label>-->
+<!--                            <div class="storewithdel"><input class="form-control" [formControl]="store" type="text">-->
+<!--                                <i class="fa fa-trash" aria-hidden="true" (click)="removeStoreName(i)"></i>-->
+<!--                            </div>-->
+<!--                            <div *ngIf="submitted && f['addStoreName'].errors" class="invalid-feedback">-->
+<!--                                <div *ngIf="f['addStoreName'].errors['required']">Store Name is required</div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Contact Person Name</label>
+                            <input type="text" class="form-control" placeholder="Person Name"
+                                   formControlName="personName"
+                                   [ngClass]="{
+                                   'is-invalid': submitted && f['personName'].errors,
+                                    'is-valid': submitted && !f['personName'].errors}"/>
+
+                            <span *ngIf="submitted && f['personName'].errors" class="invalid-feedback">
+                       <span *ngIf="f['personName'].errors['required']">Person Name is required</span>
+                                <span *ngIf="f['personName'].errors['pattern']">Person Name is only character</span>
+
+                       </span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Email ID</label>
+                            <input type="text" class="form-control" placeholder="Enter Email ID"
+                                   formControlName="email" [ngClass]="{
+                                   'is-invalid': submitted && f['email'].errors,
+                                    'is-valid': submitted && !f['email'].errors}"/>
+
+                            <span *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                       <span *ngIf="f['email'].errors['required']">Email is required</span>
+                           <span *ngIf="f['email'].errors['email']">Email is not valid</span>
+                       </span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Address</label>
+                            <input type="text" class="form-control" placeholder="Enter Address"
+                                   formControlName="address" [ngClass]="{
+                                   'is-invalid': submitted && f['address'].errors,
+                                    'is-valid': submitted && !f['address'].errors}"/>
+
+                            <span *ngIf="submitted && f['address'].errors" class="invalid-feedback">
+                       <span *ngIf="f['address'].errors['required']">Address  is required</span>
+                       </span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Province</label>
+                            <select class="form-control" formControlName="province" [ngClass]="{
+                                   'is-invalid': submitted && f['province'].errors,
+                                    'is-valid': submitted && !f['province'].errors}"
+                                    (change)="selectState($event.target)">
+                                <option value="">Select Province</option>
+                                <option value="{{item.name}}" *ngFor="let item of stateList"> {{item.name}}</option>
+                            </select>
+
+                            <span *ngIf="submitted && f['province'].errors" class="invalid-feedback">
+                       <span *ngIf="f['province'].errors['required']">Province is required</span></span>
+                        </div>                        
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Contact Number</label>
+                            <input type="text" class="form-control" placeholder="Mobile Number"
+                                   formControlName="mobileNumber" autofocus
+                                   [ngClass]="{
+                                   'is-invalid': submitted && f['mobileNumber'].errors,
+                                    'is-valid': submitted && !f['mobileNumber'].errors}"
+
+                            />
+                            <div *ngIf="submitted && f['mobileNumber'].errors" class="invalid-feedback">
+                                <div *ngIf="f['mobileNumber'].errors['required']">Mobile Number is required</div>
+                                <div *ngIf="f['mobileNumber'].errors['pattern']">Mobile Number is not number</div>
+                                <div *ngIf="f['mobileNumber'].errors['minlength']">Minimum length 10</div>
+                                <div *ngIf="f['mobileNumber'].errors['maxlength']">Minimum length 12</div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Country</label>
+                            <select class="form-control" formControlName="country"
+                                    [ngClass]="{
+                                   'is-invalid': submitted && f['country'].errors,
+                                    'is-valid': submitted && !f['country'].errors}"
+                                    (change)="selectCountry($event.target)">
+                                <option value="">Select Country</option>
+                                <option [value]="item.name" *ngFor="let item of this.countryList">{{item.name}}</option>
+                            </select>
+
+                            <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
+                                <div *ngIf="f['country'].errors['required']">Country is required</div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">GST Number</label>
+                            <input type="text" class="form-control" placeholder="Enter GSTN Number"
+                                   formControlName="gst" [ngClass]="{
+                                   'is-invalid': submitted && f['gst'].errors,
+                                    'is-valid': submitted && !f['gst'].errors}"/>
+
+                            <span *ngIf="submitted && f['gst'].errors" class="invalid-feedback">
+                       <span *ngIf="f['gst'].errors['required']">GST is required</span>
+                       </span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Routing Number</label>
+                            <input type="text" class="form-control" placeholder="Enter Routing Number"
+                                   formControlName="routingNumber" [ngClass]="{
+                                   'is-invalid': submitted && f['routingNumber'].errors,
+                                    'is-valid': submitted && !f['routingNumber'].errors}"/>
+
+                            <span *ngIf="submitted && f['routingNumber'].errors" class="invalid-feedback">
+                       <span *ngIf="f['routingNumber'].errors['required']">Routing Number is required</span>
+                       </span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Description</label>
+                        <textarea class="form-control" id="name" rows="5"
+                                  formControlName="description">Description</textarea>
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <button class="btn btn-primary btnarraow btn-save" (click)="onSubmit()">
+                            <i class="fa fa-save"></i>UPDATE                            
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section dashboard" *ngIf="showPage == false">
+	<div class="row" style="align-items: center;">
+		<div class="col-md-12" style="padding:5px;">
+			<h1>Update Company</h1>
+		</div>
+	</div>
+	<div class="row" style="height: 500px;">
+		<div class="col-md-12">
+			<div class="alert alert-dismissable alert-danger">
+				<strong>Oops!</strong> You dont have access to see this page.
+			</div>
+		</div>
+	</div>
+</section>

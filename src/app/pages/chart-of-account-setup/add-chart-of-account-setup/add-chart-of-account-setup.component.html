@@ -1,0 +1,58 @@
+<p mat-dialog-title class="title">Add Chart Of Account</p>
+<div>
+  <form [formGroup]="coaForm">
+    <div mat-dialog-content>
+      <div class="row">
+        <div class="left-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Account Number</mat-label>
+            <input matInput formControlName="accountNumber" required>
+            <mat-error *ngIf="coaForm.invalid">Account Number is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="right-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Account Name</mat-label>
+            <input matInput formControlName="accountName" required>
+            <mat-error *ngIf="coaForm.invalid">Account Name is required</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="left-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Account Type</mat-label>
+            <select matNativeControl required (change)="getDetailType($event.target)" formControlName="accountType">
+              <option *ngFor="let accountType of accountTypes" [value]="accountType.coaTypeId">
+                {{accountType.name  | titlecase}}</option>
+            </select>
+            <mat-error *ngIf="coaForm.invalid">Account Type is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="right-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Detail Type</mat-label>
+            <select matNativeControl required formControlName="detailType">
+              <option *ngFor="let detailType of detailTypes" [value]="detailType.coaTypeId">
+                {{detailType.name  | titlecase}}</option>
+            </select>
+            <mat-error *ngIf="coaForm.invalid">Detail Type is required</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <div>
+    <button mat-flat-button class="cancel" (click)="onCancelClick()">
+      <span>Cancel</span>
+    </button>
+  </div>
+  <div>
+    <button mat-flat-button class="save" (click)="addChartOfAccount()" [class.save-enable]="this.coaForm.valid"
+      [disabled]="this.coaForm.invalid">
+      <span>Save</span>
+    </button>
+  </div>
+</div>

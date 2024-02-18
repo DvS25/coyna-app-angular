@@ -1,0 +1,272 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>.pagetitle label.form-label {
+   margin: 0;
+}.pagetitle button.btn.btn-primary {
+   padding: 7px 10px !important;width: 100%;
+}table.maintable {
+   width: 100%;
+}thead {
+   background: #F1FCFA;
+}thead tr {
+  border-radius: 6px;
+}table.maintable td, table.maintable th {
+   padding: 20px 10px;
+}table.maintable tbody tr {
+   border-bottom: 1px solid #E9E9E9;
+}input.form-control {
+   padding: 5px 5px !important;
+   height: 40px !important;
+   font-size: 13px !important;
+}input.form-control:disabled {
+   background: #C4C4C4 !important;
+}.pagetitle select.form-control {
+   height: 40px !important;
+}th.centeral {
+   text-align: center;
+}.noborder tr {
+   border: 0 !important;
+}table.maintable.withborder td {
+   border-left: 1px solid #E9E9E9 !important;
+   border-right: 1px solid #E9E9E9 !important;
+}.disflexbtn {
+   display: flex;
+   align-items: center;
+}.maintable .disflexbtn button.btn {
+   padding: 5px 12px !important;
+   height: 40px;
+   margin-left: 10px;
+}.lesspad td {
+   padding: 10px 10px !important;
+}input.form-control.date {
+   height: 40px !important;
+}.table.maintable.withborder  {
+   border: 1px solid #E9E9E9 !important;
+}.table.maintable.withborder[_ngcontent-mjn-c186] td[_ngcontent-mjn-c186] .noborder {
+   border: 0px solid #E9E9E9 !important;
+}
+.left10 {
+    margin-left: 10px;
+}
+.viewbtn {
+    margin: 0 auto;
+    background: transparent;
+}
+</style>
+<div class="innerdash pagetitle" *ngIf="showPage == true">
+    <div class="row" style="align-items: center;">
+      <div class="col-md-12" style="padding:0;">
+      <h1>Cash Flow Management</h1></div>
+      <form id="cash-flow-management" class="mb-3 mt-4 commform row min-height" [formGroup]="myGroup">
+         <div class="col-md-12 row mb-3">             
+            <div class="col-md-4">
+               <label for="name" class="form-label">Company Name</label>
+               <select class="form-control" formControlName="parentCompanyId" (change)="getStoreList($event.target)">
+                  <option value="">Select Company</option>
+                  <option [value]="item.companyId"
+                        *ngFor="let item of companyList">{{item.name | titlecase}}</option>
+               </select>
+            </div>
+            <div class="col-md-4">
+               <label for="name" class="form-label">As on Date*</label>
+               <input type="date" class="form-control date" id="date" formControlName="date" />
+            </div>                                  
+         
+             <div class="col-md-2">
+                <br>
+                    <button type="button" class="btn btn-primary" (click)="myFuncApply()">View</button>                        
+                  </div>
+                  <div class="col-md-2">
+                    <br>
+                    <button type="button" class="btn btn-primary" (click)="myFuncReset()">Reset</button>                           
+                  </div>
+              </div>
+        </form> 
+        <!--<form id="cash-flow-management" class="mb-3 mt-4 commform row min-height" style="align-items: flex-end;padding:0">
+                    <div class="col-md-12 row mb-3">
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Company Name*</label>
+                            <input type="text" class="form-control" placeholder="" />
+                        </div> 
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">As on Date*</label>
+                            <input type="date" class="form-control date" id="" formControlName="date" />  
+                        </div>                         
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary" style="margin-top: 25px;">View</button> 
+                        </div>   
+                    </div>
+        </form> -->
+    </div>
+    </div><!-- End Page Title -->
+
+
+<div class="cash-flow-management" *ngIf="showPage == true">
+ <!-- cash-flow-management Start -->
+ <section class="section dashboard">
+   <div class="row cash-flow-management-sc">
+       <div class="innerform">
+           <div class="innerform">
+               <div class="tablemaindiv mat-elevation-z8">
+                   <table class="maintable withborder commform table table-bordered table-striped table-hover" style="width:100%"   >  
+                     <thead>
+                         <tr>
+                             <th>
+                           <a class="tblClsSort"  style="color:white;text-decoration: none;" href="javascript:void(0);" (click)="myFuncSort('serialNumber')">Sr. #</a>
+                          
+                        </th>
+                         <th>
+                           <a class="tblClsSort" style="color:white;text-decoration: none;" href="javascript:void(0);" (click)="myFuncSort('bankName')">Bank Name</a>
+                           
+                        </th>
+                        <th  colspan="2">
+                           <a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('balanceAsPerBankStatement')">Balance as per Bank Statement</a>
+                           
+                        </th> 
+                             <th>
+                           <a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('paymentDue')">Payment Due</a>
+                          
+                        </th>
+                        <th>
+                           <a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('bankDeposit')">Bank Deposit</a>
+                           
+                        </th>
+                        <th>
+                           <a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('borrowingLimit')">Borrowing Limit</a>
+                           
+                        </th>
+                        <th>
+                           <a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('arrangeBalance')">Arrange Balance</a>
+                           
+                        </th>
+                        <th>
+                           <a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('withoutDeposit')">Without Deposit</a>
+                           
+                        </th>                        
+                         </tr>
+                     </thead>               
+                       <tbody>
+                           <tr *ngFor="let item of pdata">
+                               <td>{{item.serialNumber}}</td>
+                               <td>{{item.bankName}}</td>
+                               <td><button  class="viewbtn"><img src="assets/img/attachment.png">  </button></td>
+                               <td>{{item.balanceAsPerBankStatement}}</td>
+                               <td>{{item.paymentDue | currency}}</td>
+                               <td>{{item.bankDeposit | currency}}</td>
+                               <td>{{item.borrowingLimit | currency}}</td>
+                               <td>{{item.arrangeBalance | currency}}</td>
+                               <td>{{item.withoutDeposit | currency}}</td>                                           
+                           </tr>
+                      </tbody>
+                   </table>
+               </div>
+             
+             <div class="row mtb-20 justify-content-md-center">
+                 <div class="col">   
+                 <button type="button" class="btn btn-primary btn-sm" style="width:40px;" title="Previous" (click)="myFuncPrevious()"> < Previous</button> &nbsp;
+                     <button type="button" class="btn btn-primary btn-sm" style="width:40px;" title="Next" (click)="myFuncNext()">Next > </button>             
+                 </div>
+                 <div class="col align-right">
+                     
+                     <button type="submit" class="btn btn-primary" (click)="excelDownload()"><i class="fa fa-download"></i>Excel</button>
+                 </div>
+               </div> 
+      
+               <div class="row mtb-20 justify-content-md-center">
+                 <div class="col">                
+                     
+                 </div>
+                 <div class="col align-right">
+                     
+                 </div>
+               </div> 
+            </div> 
+       </div>
+     </div>
+</section>
+ <!--<section class="section dashboard">
+    <div class="row cash-flow-management-sc">
+        <div class="innerform">
+          <div class="tablemaindiv mat-elevation-z8">
+              <table class="maintable withborder commform b-box" style="width:100%">  
+                <thead>
+                    <tr>
+                        <th>Sr. #</th>
+                        <th>Bank Name</th>
+                        <th  colspan="2">Balance as per Bank Statement</th>
+                        <th>Payment Due</th>
+                        <th>Bank Deposit</th>
+                        <th>Borrowing Limit</th>
+                        <th>Arrange Balance</th>
+                        <th>Without Deposit</th>
+                    </tr>
+                </thead>               
+                  <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Bank Name</td>
+                        <td><button  class="viewbtn"><img src="assets/img/attachment.png">  </button></td>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                        <td>$37,266.60</td>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Bank Name</td>
+                        <td><button  class="viewbtn"><img src="assets/img/attachment.png">  </button></td>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                        <td>$37,266.60</td>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Bank Name</td>
+                        <td><button  class="viewbtn"><img src="assets/img/attachment.png">  </button></td>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                        <td>$37,266.60</td>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Bank Name</td>
+                        <td><button  class="viewbtn"><img src="assets/img/attachment.png">  </button></td>
+                        <td>$0.00</td>
+                        <td class="yellow">$0.00</td>
+                        <td>$37,266.60</td>
+                        <td>$0.00</td>
+                        <td class="red">$0.00</td>
+                        <td>$0.00</td>
+                    </tr>
+                  </tbody>
+                 
+              </table>
+          </div>
+        </div>
+      </div>
+ </section>-->
+
+<!-- cash-flow-management End --> 
+</div>
+
+<section class="section dashboard" *ngIf="showPage == false">
+	<div class="row" style="align-items: center;">
+		<div class="col-md-12" style="padding:10px;">
+			<h1>Cash Flow Management</h1>
+		</div>
+	</div>
+	<div class="row" style="height: 500px;">
+		<div class="col-md-12">
+			<div class="alert alert-dismissable alert-danger">
+				<strong>Oops!</strong> You dont have access to see this page.
+			</div>
+		</div>
+	</div>
+</section>

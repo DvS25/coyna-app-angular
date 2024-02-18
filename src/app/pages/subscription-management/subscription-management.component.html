@@ -1,0 +1,97 @@
+<div class="text-center mb-5">
+    <div class="py-1 bg-light-50 rounded-pill px-3 d-inline-block text-title-800">Our Pricing Plans</div>
+    <h1 class="fs-1 my-4 text-title-900">Our pricing is simple with no hidden fees</h1>
+    <div class="fs-6 text-light-600 mb-5">7 Days free trial. No credit card required.</div>
+    <div class="d-flex flex-row align-items-center">
+        <div class="fs-5 flex-grow-1 flex-shrink-0 text-end" [ngClass]="!isYearly ? 'text-light-900 fw-medium' : 'text-light-600'">Monthly</div>
+        <div class="flex-shrink-0 mx-5">
+            <mat-slide-toggle [(ngModel)]="isYearly"></mat-slide-toggle>
+        </div>
+        <div class="fs-5 flex-grow-1 flex-shrink-0 text-start" [ngClass]="isYearly ? 'text-light-900 fw-medium' : 'text-light-600'">Yearly</div>
+    </div>    
+</div>
+<div class="bg-light-100 p-4 rounded-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center text-title mb-4">
+                <span class="fs-1">$150 </span>
+                <span> / Per member, per year</span>
+            </div>
+            <div class="col-md-6 col-lg-4 text-title py-2">
+                <div class="d-flex flex-row flex-nowrap align-items-center">
+                    <app-icon name="tick-circle" class="fs-5 align-middle flex-shrink-0"></app-icon>
+                    <span class="ms-12 align-middle flex-grow-1">AI advisor for a day</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 text-title py-2">
+                <div class="d-flex flex-row flex-nowrap align-items-center">
+                    <app-icon name="tick-circle" class="fs-5 align-middle flex-shrink-0"></app-icon>
+                    <span class="ms-12 align-middle flex-grow-1">AI advisor for a day</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 text-title py-2">
+                <div class="d-flex flex-row flex-nowrap align-items-center">
+                    <app-icon name="tick-circle" class="fs-5 align-middle flex-shrink-0"></app-icon>
+                    <span class="ms-12 align-middle flex-grow-1">AI advisor for a day</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 text-title py-2">
+                <div class="d-flex flex-row flex-nowrap align-items-center">
+                    <app-icon name="tick-circle" class="fs-5 align-middle flex-shrink-0"></app-icon>
+                    <span class="ms-12 align-middle flex-grow-1">2 auto tracking</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 text-title py-2">
+                <div class="d-flex flex-row flex-nowrap align-items-center">
+                    <app-icon name="tick-circle" class="fs-5 align-middle flex-shrink-0"></app-icon>
+                    <span class="ms-12 align-middle flex-grow-1">2 auto tracking</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 text-title py-2">
+                <div class="d-flex flex-row flex-nowrap align-items-center">
+                    <app-icon name="tick-circle" class="fs-5 align-middle flex-shrink-0"></app-icon>
+                    <span class="ms-12 align-middle flex-grow-1">2 auto tracking</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 text-title py-2">
+                <div class="d-flex flex-row flex-nowrap align-items-center">
+                    <app-icon name="tick-circle" class="fs-5 align-middle flex-shrink-0"></app-icon>
+                    <span class="ms-12 align-middle flex-grow-1">7 Day transaction clearing</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 text-title py-2">
+                <div class="d-flex flex-row flex-nowrap align-items-center">
+                    <app-icon name="tick-circle" class="fs-5 align-middle flex-shrink-0"></app-icon>
+                    <span class="ms-12 align-middle flex-grow-1">7 Day transaction clearing</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 text-title py-2">
+                <div class="d-flex flex-row flex-nowrap align-items-center">
+                    <app-icon name="tick-circle" class="fs-5 align-middle flex-shrink-0"></app-icon>
+                    <span class="ms-12 align-middle flex-grow-1">7 Day transaction clearing</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 text-title py-2">
+                <div class="d-flex flex-row flex-nowrap align-items-center">
+                    <app-icon name="tick-circle" class="fs-5 align-middle flex-shrink-0"></app-icon>
+                    <span class="ms-12 align-middle flex-grow-1">24/7 Customer support</span>
+                </div>    
+            </div>
+            <div class="col-md-6 col-lg-4 text-title py-2">
+                <div class="d-flex flex-row flex-nowrap align-items-center">
+                    <app-icon name="tick-circle" class="fs-5 align-middle flex-shrink-0"></app-icon>
+                    <span class="ms-12 align-middle flex-grow-1">24/7 Customer support</span>
+                </div>    
+            </div>
+            <div class="col-md-6 col-lg-4 text-title py-2">
+                <div class="d-flex flex-row flex-nowrap align-items-center">
+                    <app-icon name="tick-circle" class="fs-5 align-middle flex-shrink-0"></app-icon>
+                    <span class="ms-12 align-middle flex-grow-1">24/7 Customer support</span>
+                </div>    
+            </div>
+            <div class="col-12 text-center mt-5">
+                <button class="btn btn-lg btn-primary px-5 py-3"><span class="px-3">Subscribe Now</span></button>
+            </div>
+        </div>
+    </div>
+</div>

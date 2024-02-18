@@ -1,0 +1,207 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<div class="innerdash pagetitle" *ngIf="showPage == true">
+    <div class="row">
+        <h1>Payment Processing (Finance)</h1>
+    </div>
+</div><!-- End Page Title -->
+<section class="section dashboard" *ngIf="showPage == true">
+    <div class="row">
+        <div class="innerform">
+            <div class="innerfheader">
+                <h4>Payment Process</h4>
+            </div>
+            <div class="col-md-12">
+                <form id="formCreatecompany" class="mb-3 mt-4 commform" [formGroup]="paymentForm">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Select Vendor</label>
+                            <select class="form-control" formControlName="vendorId" (change)="filterInvoicesByVendor($event.target)"
+                                    [ngClass]="{
+                                   'is-invalid': submitted && f['vendorId'].errors,
+                                    'is-valid': submitted && !f['vendorId'].errors}">
+                                <option [value]="item.vendorId"
+                                        *ngFor="let item of vendorList">{{item.name | titlecase}}</option>
+                            </select>
+                            <span *ngIf="submitted && f['vendorId'].errors" class="invalid-feedback">
+                          <span *ngIf="f['vendorId'].errors['required']"> Seller is required</span>
+                  </span>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Invoice Number</label>
+                            <select class="form-control" formControlName="invoiceNumber"
+                                    (change)="setInvoiceDate($event.target)" [ngClass]="{
+                                   'is-invalid': submitted && f['invoiceNumber'].errors,
+                                    'is-valid': submitted && !f['invoiceNumber'].errors}">
+                            
+                                <option [value]="(item.apInvoiceId )"
+                                        *ngFor="let item of invoiceList">{{item.invoiceNumber }}</option>
+
+                            </select>
+                            <span *ngIf="submitted && f['vendorId'].errors" class="invalid-feedback">
+                          <span *ngIf="f['vendorId'].errors['required']"> Invoice number is required</span>
+                  </span>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Amount Paid</label>
+                            <input type="text" class="form-control" placeholder="" readonly
+                                   formControlName="amountPaid"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Invoice Date</label>
+                            <input type="text" class="form-control" placeholder=""
+                                   name="invoiceDate" readonly
+                                   formControlName="invoiceDate" [ngClass]="{
+                                   'is-invalid': submitted && f['invoiceDate'].errors
+                                    }"/>
+                            <!--                            <span *ngIf="submitted && f['invoiceDate'].errors" class="invalid-feedback">-->
+                            <!--                          <span *ngIf="f['invoiceDate'].errors['required']"> Invoice date is required</span>-->
+                            <!--                  </span>-->
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Payment Mode</label>
+                            <select class="form-control" formControlName="paymentMode" [ngClass]="{
+                                   'is-invalid': submitted && f['paymentMode'].errors,
+                                    'is-valid': submitted && !f['paymentMode'].errors}">
+                                <option value="Online">Online</option>
+                                <option value="EFT (Electronic Fund Transfer)">EFT (Electronic Fund Transfer)</option>
+                                <option value="Cheque">Cheque</option>
+                                <option value="eTransfer">eTransfer</option>
+                            </select>
+
+                            <span *ngIf="submitted && f['paymentMode'].errors" class="invalid-feedback">
+                          <span *ngIf="f['paymentMode'].errors['required']"> Payment Mode  is required</span>
+                          </span>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Reference / Cheque Number</label>
+                            <input type="text" class="form-control" placeholder=""
+                                   formControlName="chequeNumber" isAlphaNumericWithSpace
+                                   [ngClass]="{'is-invalid': submitted && f['chequeNumber'].errors}"/>
+                            <span *ngIf="submitted && f['chequeNumber'].errors" class="invalid-feedback">
+                          <span *ngIf="f['chequeNumber'].errors['required']"> Reference / Cheque Number is required</span>
+                          </span>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Invoice Amount</label>
+                            <input type="text" class="form-control" placeholder="" readonly
+                                   formControlName="invoiceAmount"/>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Amount Paid</label>
+                            <input type="text" class="form-control" placeholder="" readonly
+                                   formControlName="amountPaid"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Pending Amount</label>
+                            <input type="number" class="form-control" placeholder="" readonly
+                                   formControlName="pendingAmount"/>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Current Payment</label>
+                            <input type="number" class="form-control" placeholder="" formControlName="amount"
+                            [ngClass] = "{'is-invalid': submitted && f['amount'].errors}"/>
+
+                            <span *ngIf="submitted && f['amount'].errors" class="invalid-feedback">
+                          <span *ngIf="f['amount'].errors['required']"> Current Payment is required</span>
+                          <span *ngIf="f['amount'].errors['greater']"> Current payment is greater than pending amount</span>
+                         </span>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Clearance Date</label>
+                            <input type="date" class="form-control" placeholder="Enter Date"
+                                   formControlName="clearanceDate"
+                                   [ngClass]="{'is-invalid': submitted && f['clearanceDate'].errors}"/>
+                            <span *ngIf="submitted && f['clearanceDate'].errors" class="invalid-feedback">
+                          <span *ngIf="f['clearanceDate'].errors['required']"> Clearance date is required</span>
+                         </span>
+                        </div>
+                        <!-- <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Payment Status</label>
+                            <select class="form-control" formControlName="paymentStatus"
+                                    [ngClass]="{'is-invalid': submitted && f['paymentStatus'].errors}">
+                                <option value="" selected>Select Payment Status</option>
+                                <option value="new">New</option>
+                                <option value="completed">Completed</option>
+                                <option value="progress">In progress</option>
+                                <option value="pending">Pending</option>
+                            </select>
+
+                            <span *ngIf="submitted && f['paymentStatus'].errors" class="invalid-feedback">
+                          <span *ngIf="f['paymentStatus'].errors['required']"> Payment status is required</span>
+                            </span>
+                        </div> -->
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Payment Confirmation</label>
+                            <select class="form-control" formControlName="confirmation"
+                                    [ngClass]="{'is-invalid': submitted && f['confirmation'].errors}">
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                            <span *ngIf="submitted && f['confirmation'].errors" class="invalid-feedback">
+                          <span *ngIf="f['confirmation'].errors['required']"> Payment confirmation is required</span>
+                    </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Upload Payment Receipt</label>
+                            <input type="file" class="form-control" formControlName="uploadDoc" multiple
+                                   id="uploadDoc" (change)="onSelectFile($event)"
+                                   [ngClass]="{'is-invalid': submitted && f['uploadDoc'].errors}"/>
+                            <span *ngIf="submitted && f['uploadDoc'].errors" class="invalid-feedback">
+                          <span *ngIf="f['uploadDoc'].errors['required']"> Payment Receipt is required</span>
+                    </span>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="name" class="form-label">Approval Information</label>
+                            <textarea class="form-control" id="name" rows="7"
+                                      formControlName="approvalInfo"
+                                      [ngClass]="{'is-invalid': submitted && f['approvalInfo'].errors}">Description</textarea>
+                            <span *ngIf="submitted && f['approvalInfo'].errors" class="invalid-feedback">
+                          <span *ngIf="f['approvalInfo'].errors['required']"> Approval Info is required</span>
+                    </span>
+                        </div>
+
+
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <button type="submit" class="btn btn-primary btnarraow btn-save" (click)="submitPayment()">
+                            Process Payment
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section dashboard" *ngIf="showPage == false">
+	<div class="row" style="align-items: center;">
+		<div class="col-md-12" style="padding:5px;">
+			<h1>Payment Processing (Finance)</h1>
+		</div>
+	</div>
+	<div class="row" style="height: 500px;">
+		<div class="col-md-12">
+			<div class="alert alert-dismissable alert-danger">
+				<strong>Oops!</strong> You dont have access to see this page.
+			</div>
+		</div>
+	</div>
+</section>

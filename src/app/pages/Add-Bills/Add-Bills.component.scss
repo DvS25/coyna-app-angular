@@ -1,0 +1,246 @@
+@import '../../../assets/css/material/table.scss';
+@import '../../../assets/css/material/checkbox.scss';
+@import '../../../assets/css/material/input.scss';
+:host {
+    --credit-no-column-width: 75px;
+    --credit-delete-column-width: 100px;
+    --item-no-column-width: 75px;
+    --item-delete-column-width: 100px;
+}
+
+.amount-container {
+    height: 90px;
+    flex-basis: 320px;
+}
+
+.close-btn {
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 20;
+    font-size: 34px;
+}
+
+:host ::ng-deep table .mdc-notched-outline__leading,
+:host ::ng-deep table .mdc-notched-outline__trailing {
+    border: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.btn-light-danger{
+    background: #ffeded; 
+    color: #ff4040;
+}
+
+.btn-light-danger:hover{
+    color: #fff;  
+    transition: background-color 0.5s ease;
+    background: #ff4040;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+:host ::ng-deep table mat-form-field {
+    min-width: 100px !important;
+}
+
+table {
+    border: 1px solid #DDDDE1;
+}
+
+tr {
+    width: 100%;
+}
+
+table,
+th,
+td {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-color: #DDDDE1;
+}
+
+thead tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+thead tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+tfoot tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+tfoot tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+th,
+td {
+    // padding: 12px 8px;
+    border-bottom: none !important;
+    border-right: none !important;
+}
+
+table tr td:last-child,
+table tr th:last-child {
+    border-right: none;
+}
+
+table tfoot tr:last-child td {
+    border-bottom: none;
+}
+
+table {
+    border-radius: 10px;
+}
+
+thead tr.tbl-header {
+    height: 80px;
+}
+
+:host ::ng-deep .expense-category-tbl .mdc-notched-outline__leading,
+:host ::ng-deep .expense-category-tbl .mdc-notched-outline__trailing,
+:host ::ng-deep .expense-item-tbl .mdc-notched-outline__leading,
+:host ::ng-deep .expense-item-tbl .mdc-notched-outline__trailing {
+    border: none;
+}
+
+.expense-category-tbl,
+.expense-item-tbl {
+    border: 1px solid #DDDDE1;
+}
+
+.expense-category-tbl .expense-category-tbl-row:first-child,
+.expense-item-tbl .expense-item-tbl-row:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.expense-category-tbl .expense-category-tbl-row:last-child,
+.expense-item-tbl .expense-item-tbl-row:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.expense-category-tbl .expense-category-tbl-row .cell,
+.expense-item-tbl .expense-item-tbl-row .cell {
+    border-bottom: 1px solid #DDDDE1;
+    border-right: 1px solid #DDDDE1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.expense-category-tbl .expense-category-tbl-row:last-child .cell,
+.expense-item-tbl .expense-item-tbl-row:last-child .cell {
+    border-bottom: none;
+}
+
+.expense-category-tbl .expense-category-tbl-row .cell:last-child,
+.expense-item-tbl .expense-item-tbl-row .cell:last-child {
+    border-right: none;
+}
+
+.expense-category-tbl .expense-category-tbl-row.header,
+.expense-item-tbl .expense-item-tbl-row.header {
+    height: 80px;
+}
+
+.expense-category-tbl .action-footer,
+.expense-item-tbl .action-footer {
+    height: 44px;
+}
+
+.expense-category-tbl .expense-category-tbl-row .no {
+    flex-basis: var(--credit-no-column-width);
+}
+
+.expense-category-tbl .expense-category-tbl-row .accName {
+    flex-basis: calc((100% - (var(--credit-no-column-width) + var(--credit-delete-column-width))) * 0.25);
+    width: calc((100% - (var(--credit-no-column-width) + var(--credit-delete-column-width))) * 0.25);
+}
+
+.expense-category-tbl .expense-category-tbl-row .description {
+    flex-basis: calc((100% - (var(--credit-no-column-width) + var(--credit-delete-column-width))) * 0.30);
+    width: calc((100% - (var(--credit-no-column-width) + var(--credit-delete-column-width))) * 0.30);
+}
+
+.expense-category-tbl .expense-category-tbl-row .amount {
+    flex-basis: calc((100% - (var(--credit-no-column-width) + var(--credit-delete-column-width))) * 0.20);
+    width: calc((100% - (var(--credit-no-column-width) + var(--credit-delete-column-width))) * 0.20);
+}
+
+.expense-category-tbl .expense-category-tbl-row .department {
+    flex-basis: calc((100% - (var(--credit-no-column-width) + var(--credit-delete-column-width))) * 0.25);
+    width: calc((100% - (var(--credit-no-column-width) + var(--credit-delete-column-width))) * 0.25);
+}
+
+.expense-category-tbl .expense-category-tbl-row .delete {
+    flex-basis: var(--credit-delete-column-width);
+}
+
+.expense-category-tbl .action-footer .cell:first-child {
+    flex-basis: calc(var(--credit-no-column-width) + ((100% - (var(--credit-no-column-width) + var(--credit-delete-column-width))) * 0.25));
+    width: calc(var(--credit-no-column-width) + ((100% - (var(--credit-no-column-width) + var(--credit-delete-column-width))) * 0.25));
+}
+
+.expense-category-tbl .action-footer .cell:last-child {
+    flex-basis: calc(var(--credit-delete-column-width) + ((100% - (var(--credit-no-column-width) + var(--credit-delete-column-width))) * 0.75));
+    width: calc(var(--credit-delete-column-width) + ((100% - (var(--credit-no-column-width) + var(--credit-delete-column-width))) * 0.75));
+}
+
+.expense-item-tbl .expense-item-tbl-row .no {
+    flex-basis: var(--item-no-column-width);
+}
+
+.expense-item-tbl .expense-item-tbl-row .proSer {
+    flex-basis: calc((100% - (var(--item-no-column-width) + var(--item-delete-column-width))) * 0.20);
+    width: calc((100% - (var(--item-no-column-width) + var(--item-delete-column-width))) * 0.20);
+}
+
+.expense-item-tbl .expense-item-tbl-row .description {
+    flex-basis: calc((100% - (var(--item-no-column-width) + var(--item-delete-column-width))) * 0.25);
+    width: calc((100% - (var(--item-no-column-width) + var(--item-delete-column-width))) * 0.25);
+}
+
+.expense-item-tbl .expense-item-tbl-row .qty {
+    flex-basis: calc((100% - (var(--item-no-column-width) + var(--item-delete-column-width))) * 0.10);
+    width: calc((100% - (var(--item-no-column-width) + var(--item-delete-column-width))) * 0.10);
+}
+
+.expense-item-tbl .expense-item-tbl-row .rate {
+    flex-basis: calc((100% - (var(--item-no-column-width) + var(--item-delete-column-width))) * 0.10);
+    width: calc((100% - (var(--item-no-column-width) + var(--item-delete-column-width))) * 0.10);
+}
+
+.expense-item-tbl .expense-item-tbl-row .amount {
+    flex-basis: calc((100% - (var(--item-no-column-width) + var(--item-delete-column-width))) * 0.15);
+    width: calc((100% - (var(--item-no-column-width) + var(--item-delete-column-width))) * 0.15);
+}
+
+.expense-item-tbl .expense-item-tbl-row .department {
+    flex-basis: calc((100% - (var(--item-no-column-width) + var(--item-delete-column-width))) * 0.20);
+    width: calc((100% - (var(--item-no-column-width) + var(--item-delete-column-width))) * 0.20);
+}
+
+.expense-item-tbl .expense-item-tbl-row .delete {
+    flex-basis: var(--item-delete-column-width);
+}
+
+.expense-item-tbl .action-footer .cell:first-child {
+    flex-basis: calc(var(--item-no-column-width) + ((100% - (var(--item-no-column-width) + var(--item-delete-column-width))) * 0.20));
+    width: calc(var(--item-no-column-width) + ((100% - (var(--item-no-column-width) + var(--item-delete-column-width))) * 0.20));
+}
+
+.expense-item-tbl .action-footer .cell:last-child {
+    flex-basis: calc(var(--item-delete-column-width) + ((100% - (var(--item-no-column-width) + var(--item-delete-column-width))) * 0.80));
+    width: calc(var(--item-delete-column-width) + ((100% - (var(--item-no-column-width) + var(--item-delete-column-width))) * 0.80));
+}
+
+

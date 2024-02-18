@@ -1,0 +1,120 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<div class="innerdash pagetitle">
+    
+    <div class="row" >
+        <div class="col-md-4 nopad d-flex align-items-center">
+        <h1>Customer Management</h1>
+        </div>
+    	<div class="col-md-3"></div>
+        <div class="col-md-2"></div>
+    </div>
+
+    <div class="row" style="align-items: center;">
+        <div class="col-md-12">
+            <form id="formCreatecompany" class="mb-3 mt-4 commform row" style="align-items: flex-end;"
+                  [formGroup]="customerFilterForm">
+
+                <div class="col-md-3">
+                    
+                    <select class="form-control" formControlName="company_id"
+                    (change)="getStores($event.target)">
+                        <option value="" hidden>Select Company</option>
+                        <option [value]="item.companyId"
+                                *ngFor="let item of companyList">{{item.name | titlecase}}</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    
+                    <select class="form-control" formControlName="store_id">
+                        <option value="" hidden>Select Store</option>
+                        <option [value]="item.companyId"
+                                *ngFor="let item of storeList">{{item.name | titlecase}}</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <button class="btn btn-primary" (click)="customerSearch()">Search</button>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary" (click)="reset()">Reset</button>
+                </div>
+
+                <div class="col-md-2">
+                    <a class="btn btn-primary mr-1" href="/customer">+ Customer</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-12 row" style="padding:0;">
+            <div class="col-md-9"></div>
+            <div class="col-md-3" style="padding:0;">
+               
+            </div>
+        </div>
+    </div>
+</div><!-- End Page Title -->
+<section class="section dashboard" *ngIf="showPage == true">
+    <div class="row">
+        <div class="innerform">
+             <div class="col-md-12">
+
+                <div class="tablemaindiv mat-elevation-z8">
+                   <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+           class="mat-elevation-z8 maintable">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="sno">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+             Customer Name
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="w1">
+            <th mat-header-cell *matHeaderCellDef> Company Name  </th>
+            <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
+        </ng-container>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="w2">
+            <th mat-header-cell *matHeaderCellDef> Store Name</th>
+            <td mat-cell *matCellDef="let element"> {{element.storeName||"-"}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="w4">
+            <th mat-header-cell *matHeaderCellDef> Options </th>
+            <td mat-cell *matCellDef="let element" class="dflexdiv0"> 
+                                <button class="viewbtn" (click)="goToCustomerDetail(element.customerId)">
+                                    <!--<img src="assets/img/view.png">--><i class="fa fa-eye"></i>
+                                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 20, 30,40,50]"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section dashboard" *ngIf="showPage == false">
+	<div class="row" style="align-items: center;">
+		<div class="col-md-12" style="padding:5px;">
+			<h1>Vendor Listing</h1>
+		</div>
+	</div>
+	<div class="row" style="height: 500px;">
+		<div class="col-md-12">
+			<div class="alert alert-dismissable alert-danger">
+				<strong>Oops!</strong> You dont have access to see this page.
+			</div>
+		</div>
+	</div>
+</section>

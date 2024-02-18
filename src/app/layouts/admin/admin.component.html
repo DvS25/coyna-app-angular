@@ -1,0 +1,414 @@
+
+<!-- <app-main-header></app-main-header>
+<app-side-menu></app-side-menu>
+<main id="main" class="main">
+    <router-outlet></router-outlet>
+</main>
+<app-main-footer></app-main-footer> -->
+
+<div class="main-wraper">
+    <!-- Header -->
+    <div class="header d-flex flex-row">        
+        <div class="logo-container d-flex justify-content-between align-items-center">
+            <div class="flex-grow-1">
+                <img src="../../../assets/img/Coyna.png" height="45" class="mw-100 mh-100">
+            </div>
+            <button class="main-menu-toggle flex-shrink-0" (click)="toggleSideMenu()"><img src="../../../assets/img/sidemenu/sidemenu-toggle-arrow.png" height="20" width="20"></button>
+        </div>
+        <div class="flex-grow-1 d-flex flex-row flex-nowrap justify-content-between align-items-center px-3">
+            <div class="fs-3 text-title font-manrope">{{PageTitle}}</div>
+            <div>
+                <button class="bg-transparent rounded-circle border border-light text-title d-inline-grid justify-content-center align-items-center" style="width: 45px;height: 45px;">
+                    <app-icon class="icon flex-shrink-0 fs-3" name="notification-bing"></app-icon>
+                </button>
+            </div>
+        </div>
+        
+    </div>
+    <!-- // Header -->
+    <!-- Side nav bar -->
+    <div class="sidebar-container">        
+        <div class="nav-container">
+            <nav>
+                <ul class="list-unstyled">
+                    <!--  -->
+                    <li>
+                        <a class="link-dropdown-btn d-flex align-items-center justify-content-between">
+                            <app-icon class="icon flex-shrink-0" name="grid-3"></app-icon>
+                            <span class="text flex-grow-1">Initialization</span>
+                            <span class="arrow-icon flex-shrink-0"><img src="../../../assets/img/sidemenu/arrow-down.png"></span>
+                        </a>
+                        <ul class="list-unstyled submenu-list">
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between" routerLink="/companysetupinfo" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Company Setup</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between" routerLink="/customerinfo" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Your Information</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between" routerLink="/subscription-management" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Subscription Management</span>`
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between"  routerLink="/user-list" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Users</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between" routerLink="/chart-of-account-setup" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Chart Of Account Setup</span>
+                                </a>
+                            </li>
+                            <li *ngIf="CompanySettings?.deptEnabled">
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between" routerLink="/department" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Departments</span>
+                                </a>
+                            </li>                      
+                        </ul>
+                    </li>
+                    <!-- // -->
+                    <!--  -->
+                    <li>
+                        <a class="nav-link d-flex align-items-center justify-content-between" routerLink="/dashboard" routerLinkActive="active">
+                            <app-icon class="icon flex-shrink-0" name="category-2"></app-icon>
+                            <span class="text flex-grow-1">Dashboard</span>                            
+                        </a>                        
+                    </li>
+                    <!-- // -->
+                    <!--  -->
+                    <li>
+                        <a class="link-dropdown-btn d-flex align-items-center justify-content-between">
+                            <app-icon class="icon flex-shrink-0" name="card-add"></app-icon>
+                            <span class="text flex-grow-1">Create New</span>
+                            <span class="arrow-icon flex-shrink-0"><img src="../../../assets/img/sidemenu/arrow-down.png"></span>
+                        </a>
+                        <ul class="list-unstyled submenu-list">
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between" routerLink="/journal-entry" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Journal Entry</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Vendor Credit</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between"  routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Customer Credit</span>`
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between" routerLink="/item-classification-list" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Product or Service</span>
+                                </a>
+                            </li>                   
+                        </ul>
+                    </li>
+                    <!-- // -->
+                    <!--  -->
+                    <li>
+                        <a class="link-dropdown-btn d-flex align-items-center justify-content-between">
+                            <app-icon class="icon flex-shrink-0" name="strongbox-2"></app-icon>
+                            <span class="text flex-grow-1">Banking</span>
+                            <span class="arrow-icon flex-shrink-0"><img src="../../../assets/img/sidemenu/arrow-down.png"></span>
+                        </a>
+                        <ul class="list-unstyled submenu-list">
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Company Setup</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Your Information</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between" routerLink="/subscription-management" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Subscription Management</span>`
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Users</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Chart Of Account Setup</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Departments</span>
+                                </a>
+                            </li>                        
+                        </ul>
+                    </li>
+                    <!-- // -->
+                    <!--  -->
+                    <li>
+                        <a class="link-dropdown-btn d-flex align-items-center justify-content-between">
+                            <app-icon class="icon flex-shrink-0" name="moneys"></app-icon>
+                            <span class="text flex-grow-1">Expenses</span>
+                            <span class="arrow-icon flex-shrink-0"><img src="../../../assets/img/sidemenu/arrow-down.png"></span>
+                        </a>
+                        <ul class="list-unstyled submenu-list">
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between" routerLink="/vendor-expense" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Expenses</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between" routerLink="/vendor-list" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Vendors</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between" routerLink="/bills" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Bills</span>
+                                </a>
+                            </li>                  
+                        </ul>
+                    </li>
+                    <!-- // -->
+                    <!--  -->
+                    <li>
+                        <a class="link-dropdown-btn d-flex align-items-center justify-content-between">
+                            <app-icon class="icon flex-shrink-0" name="money-recive"></app-icon>
+                            <span class="text flex-grow-1">Income</span>
+                            <span class="arrow-icon flex-shrink-0"><img src="../../../assets/img/sidemenu/arrow-down.png"></span>
+                        </a>
+                        <ul class="list-unstyled submenu-list">
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Receive Payments</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between" routerLink="/customer-list" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Customers</span>
+                                </a>
+                            </li>  
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between" routerLink="/invoice-list" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Invoices</span>
+                                </a>
+                            </li>                      
+                        </ul>
+                    </li>
+                    <!-- // -->
+                    <!--  -->
+                    <li>
+                        <a class="link-dropdown-btn d-flex align-items-center justify-content-between">
+                            <app-icon class="icon flex-shrink-0" name="document-text"></app-icon>
+                            <span class="text flex-grow-1">Reports</span>
+                            <span class="arrow-icon flex-shrink-0"><img src="../../../assets/img/sidemenu/arrow-down.png"></span>
+                        </a>
+                        <ul class="list-unstyled submenu-list">
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Company Setup</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Your Information</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between" routerLink="/subscription-management" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Subscription Management</span>`
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Users</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Chart Of Account Setup</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Departments</span>
+                                </a>
+                            </li>                        
+                        </ul>
+                    </li>
+                    <!-- // -->
+                    <!--  -->
+                    <li>
+                        <a class="link-dropdown-btn d-flex align-items-center justify-content-between">
+                            <app-icon class="icon flex-shrink-0" name="setting"></app-icon>
+                            <span class="text flex-grow-1">Settings</span>
+                            <span class="arrow-icon flex-shrink-0"><img src="../../../assets/img/sidemenu/arrow-down.png"></span>
+                        </a>
+                        <ul class="list-unstyled submenu-list">
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Company Setup</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Your Information</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between" routerLink="/subscription-management" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Subscription Management</span>`
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Users</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Chart Of Account Setup</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Departments</span>
+                                </a>
+                            </li>                        
+                        </ul>
+                    </li>
+                    <!-- // -->
+                    <!--  -->                   
+                    <li>
+                        <a class="link-dropdown-btn d-flex align-items-center justify-content-between">
+                            <app-icon class="icon flex-shrink-0" name="headphone"></app-icon>
+                            <!-- <span class="icon flex-shrink-0"><img src="../../../assets/img/sidemenu/headphone.png" width="20" height="20"></span> -->
+                            <span class="text flex-grow-1">Help and Support</span>
+                            <span class="arrow-icon flex-shrink-0"><img src="../../../assets/img/sidemenu/arrow-down.png"></span>
+                        </a>
+                        <ul class="list-unstyled submenu-list">
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Company Setup</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Your Information</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between" routerLink="/subscription-management" routerLinkActive="active">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Subscription Management</span>`
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Users</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Chart Of Account Setup</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sub-nav-link d-flex align-items-center justify-content-between">
+                                    <span class="icon flex-shrink-0"></span>
+                                    <span class="text flex-grow-1">Departments</span>
+                                </a>
+                            </li>                        
+                        </ul>
+                    </li>
+                    <!-- // -->
+                </ul>
+            </nav>
+        </div>
+        <div class="profile-container mx-2">
+            <a class="link-dropdown-btn profile-dropdown-btn d-flex align-items-center justify-content-between">
+                <span class="profile-img me-2">
+                    <img src="../../../assets/img/sidemenu/profile-img.png" width="37" height="37">
+                </span>
+                <span class="profile-name flex-grow-1 text-linear text-truncate font-manrope fs-14 fw-bold">{{UserData.name}}</span>
+                <span class="py-1 badge rounded-pill bg-success flex-shrink-0 font-manrope fw-bold lh-sm">
+                    <span class="me-1">&#8226;</span>
+                    <span>{{UserData.status}}</span>
+                </span>       
+                <span class="arrow-icon flex-shrink-0 ms-3 fs-10"><img src="../../../assets/img/sidemenu/arrow-up.png"></span>
+            </a>
+            <ul class="list-unstyled submenu-list mb-0">
+                <li>
+                    <a class="sub-nav-link profile-link d-flex align-items-center justify-content-between active">
+                        <span class="icon flex-shrink-0"></span>
+                        <span class="text flex-grow-1">Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="sub-nav-link profile-link d-flex align-items-center justify-content-between">
+                        <span class="icon flex-shrink-0"></span>
+                        <span class="text flex-grow-1">Change Password</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="sub-nav-link profile-link d-flex align-items-center justify-content-between" (click)="Logout()">
+                        <span class="icon flex-shrink-0"></span>
+                        <span class="text flex-grow-1">Logout</span>`
+                    </a>
+                </li>              
+            </ul>
+        </div>
+    </div>
+    <!-- //Side nav bar -->
+
+    <div class="main-content">
+        <router-outlet></router-outlet>        
+    </div>
+</div>
+

@@ -1,0 +1,166 @@
+<style>.pagetitle select.form-control {
+    height: 55px !important;
+}</style>
+
+<div class="innerdash pagetitle" *ngIf="showPage == true">
+    <div class="row" style="align-items: center;">
+        <div class="col-md-9">
+            <h1>Add Store</h1>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-primary btn-save" (click)="goToBack()"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+        </div>
+    </div>
+</div>
+<!-- End Page Title -->
+<section class="section dashboard" *ngIf="showPage == true">
+    <div class="row">
+        <div class="innerform">
+            <form id="formCreatecompany" class="mb-3 mt-4 commform row " [formGroup]="storeForm">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Store Name</label>
+                        <input tabindex="1" type="text" class="form-control text-capitalize" placeholder=""
+                               formControlName="name"   (keyup)="checkStore($event.target)"
+                               [ngClass]="{'is-invalid': submitted && f['name'].errors}"/>
+
+                        <span *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                                <span *ngIf="f['name'].errors['required']">Name is required</span>
+                                <span *ngIf="f['name'].errors['minlength']">Min length at least 3 </span>
+                        </span>
+                        <span style="color: #dc3545" *ngIf="isStore">Store name is already taken</span>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Address</label>
+                        <input tabindex="3" type="text" class="form-control text-capitalize" formControlName="address_1"
+                               placeholder=""
+                               [ngClass]="{'is-invalid': submitted && f['address_1'].errors}"/>
+
+                        <span *ngIf="submitted && f['address_1'].errors" class="invalid-feedback">
+                            <span *ngIf="f['address_1'].errors['required']">Address is required</span>
+                        </span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Country</label>
+                        <select tabindex="5" class="form-control" formControlName="country"
+                                [ngClass]="{
+                                   'is-invalid': submitted && f['country'].errors,
+                                    'is-valid': submitted && !f['country'].errors}"
+                                (change)="selectCountry($event.target)">
+                            <option [value]="item.name" *ngFor="let item of this.countryList">{{item.name}}</option>
+                        </select>
+
+                        <span *ngIf="submitted && f['country'].errors" class="invalid-feedback">
+                            <span *ngIf="f['country'].errors['required']">Country is required</span>
+                        </span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">City</label>
+                        <select tabindex="7" class="form-control" formControlName="city"
+                                [ngClass]="{
+                                   'is-invalid': submitted && f['city'].errors,
+                                    'is-valid': submitted && !f['city'].errors}">
+                            <option value="{{item}}" *ngFor="let item of cityList">{{item}}</option>
+                        </select>
+                        <span *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+                            <span *ngIf="f['city'].errors['required']">City is required</span>
+                        </span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Bank account number</label>
+                        <input tabindex="9" type="text" class="form-control" placeholder=""
+                               formControlName="accountingNumber"
+                               [ngClass]="{
+                                   'is-invalid': submitted && f['accountingNumber'].errors,
+                                    'is-valid': submitted && !f['accountingNumber'].errors}"/>
+
+                        <span *ngIf="submitted && f['accountingNumber'].errors" class="invalid-feedback">
+                                <span *ngIf="f['accountingNumber'].errors['required']">Accounting Number is required</span>
+                            </span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Company Name</label>
+                        <select tabindex="2" class="form-control" formControlName="parentCompanyId" [ngClass]="{
+                                   'is-invalid': submitted && f['parentCompanyId'].errors}" (change)="checkCompany($event.target)">
+                            <option [value]="item.companyId"
+                                    *ngFor="let item of companyList">{{item.name | titlecase}}</option>
+                        </select>
+                        <span *ngIf="submitted && f['parentCompanyId'].errors" class="invalid-feedback">
+                                    <span *ngIf="f['parentCompanyId'].errors['required']"> Company Name  is required</span>
+                            </span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Postal Code</label>
+                        <input type="text" class="form-control" placeholder=""
+                               formControlName="postalCode"
+                               [ngClass]="{'is-invalid': submitted && f['postalCode'].errors}"/>
+                        <span *ngIf="submitted && f['postalCode'].errors" class="invalid-feedback">
+                                <span *ngIf="f['postalCode'].errors['required']">Postal Code is required</span>
+                            </span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Province</label>
+                        <select class="form-control" formControlName="province" [ngClass]="{
+                                   'is-invalid': submitted && f['province'].errors,
+                                    'is-valid': submitted && !f['province'].errors}"
+                                (change)="selectState($event.target)">
+                            <option value="{{item.name}}" *ngFor="let item of stateList"> {{item.name}}</option>
+                        </select>
+                        <span *ngIf="submitted && f['province'].errors" class="invalid-feedback">
+                                <span *ngIf="f['province'].errors['required']">Province is required</span>
+                            </span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">GST Number</label>
+                        <input tabindex="8" type="text" class="form-control" placeholder=""
+                               formControlName="gst"
+                               [ngClass]="{'is-invalid': submitted && f['gst'].errors}"/>
+                        <span *ngIf="submitted && f['gst'].errors" class="invalid-feedback">
+                                <span *ngIf="f['gst'].errors['required']">Gst is required</span>
+                            </span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Routing number</label>
+                        <input tabindex="10" type="text" class="form-control" placeholder=""
+                               formControlName="routingNumber"
+                               [ngClass]="{'is-invalid': submitted && f['province'].errors}"/>
+                        <span *ngIf="submitted && f['gst'].errors" class="invalid-feedback">
+                                <span *ngIf="f['gst'].errors['required']">Gst is required</span>
+                            </span>
+                    </div>
+                </div>
+                <div class="mt-3 mb-3">
+                    <button class="btn btn-primary btnarraow btn-save" (click)="saveStore()"><i class="fa fa-save" style="padding-right: 5px;"></i>Save 
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="section dashboard" *ngIf="showPage == false">
+	<div class="row" style="align-items: center;">
+		<div class="col-md-12" style="padding:5px;">
+			<h1>Add Store</h1>
+		</div>
+	</div>
+	<div class="row" style="height: 500px;">
+		<div class="col-md-12">
+			<div class="alert alert-dismissable alert-danger">
+				<strong>Oops!</strong> You dont have access to see this page.
+			</div>
+		</div>
+	</div>
+</section>

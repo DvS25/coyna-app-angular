@@ -1,0 +1,177 @@
+ <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+ <div class="innerdash pagetitle">
+  <div class="row">
+    <h1>My Profile</h1>
+  </div>
+  </div><!-- End Page Title -->
+  <section class="section dashboard">
+    <div class="row">
+      <div class="innerform">
+        <div class="innerfheader">
+          <h4>Profile Details</h4>
+        </div>
+        <div class="row profimgdiv pt-3 pb-4">
+            <div class="col-md-2">
+                <div class="card-body profile-card d-flex flex-column align-items-left">
+                    <img *ngIf="imageUrl == ''" src="/assets/img/profile.png" class="rounded-circle"  />
+                    <img *ngIf="imageUrl" [src]="imageUrl" class="rounded-circle" style="width: 100px;height: 100px"  />
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="profbuttonsdiv">
+                    <!-- <button><img src="/assets/img/delete.png"></button> -->
+                    <input type="file" #fileInput id="profileId"
+                           (change)="profileImageUpload($event.target)" accept=".jpg,.svg,.png,.jpeg "
+                           required />
+                </div>
+<!--                <span>{{percentCompleted}}% Uploaded</span>-->
+                <div class="progress-bar" [style.width]="percentCompleted + '%'">{{percentCompleted}}% Uploaded</div>
+
+                <p>Max file size is 60KB, Minimum dimension: 330x300 And Suitable files are .jpg & .png</p>
+            </div>
+        </div>
+        <div class="col-md-9">
+          <form id="formCreatecompany" class="mb-3 mt-4 commform row" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+            <div class="col-md-6">
+              <div class="mb-3">
+                  <label for="name" class="form-label">Username</label>
+                  <input type="text" class="form-control" placeholder="Enter Username"
+                         formControlName="userName"
+                         [ngClass]="{
+                                   'is-invalid': submitted && f['userName'].errors,
+                                    'is-valid': submitted && !f['userName'].errors}"/>
+
+
+                  <span *ngIf="submitted && f['userName'].errors" class="invalid-feedback">
+                          <span *ngIf="f['userName'].errors['required']">User Name is required</span>
+                      </span>
+              </div>
+               <div class="mb-3">
+                  <label for="name" class="form-label">Phone Number</label>
+                  <input type="text" class="form-control" placeholder="Enter Phone Number"
+                         formControlName="phoneNumber"
+                         [ngClass]="{
+                                   'is-invalid': submitted && f['phoneNumber'].errors,
+                                    'is-valid': submitted && !f['phoneNumber'].errors}"/>
+
+
+                   <span *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
+                          <span *ngIf="f['phoneNumber'].errors['required']"> Phone Number  is required</span>
+                      </span>
+              </div>
+               <div class="mb-3">
+                  <label for="name" class="form-label">Department</label>
+                  <select class="form-control" formControlName="department"
+                          [ngClass]="{
+                                   'is-invalid': submitted && f['department'].errors,
+                                    'is-valid': submitted && !f['department'].errors}">
+
+                         <option value="">Select Department</option>
+                         <option value="{{item.departmentId}}" *ngFor="let item of departmentList"> {{item.name}}</option>
+
+                  </select>
+                   <span *ngIf="submitted && f['department'].errors" class="invalid-feedback">
+                          <span *ngIf="f['department'].errors['required']"> Department  is required</span>
+                      </span>
+              </div>
+
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Country</label>
+                    <select class="form-control" formControlName="country"
+                            [ngClass]="{
+                                   'is-invalid': submitted && f['country'].errors,
+                                    'is-valid': submitted && !f['country'].errors}"
+                            (change)="selectCountry($event.target)">
+                        <option value="">Select Country</option>
+                        <option [value]="item.name" *ngFor="let item of this.countryList">{{item.name}}</option>
+                    </select>
+
+                    <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
+                        <div *ngIf="f['country'].errors['required']">Country is required</div>
+                    </div>
+                </div>
+
+ <div class="mb-3">
+                    <label for="name" class="form-label">City</label>
+                    <select class="form-control" formControlName="city"
+                            [ngClass]="{
+                                   'is-invalid': submitted && f['city'].errors,
+                                    'is-valid': submitted && !f['city'].errors}">
+                        <option value=""> Select City</option>
+                        <option value="{{item}}" *ngFor="let item of cityList">{{item}}</option>
+                    </select>
+                    <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+                        <div *ngIf="f['city'].errors['required']">City is required</div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Email Address</label>
+                  <input type="text" class="form-control" placeholder="Enter Email Address"
+                         formControlName="email" [ngClass]="{
+                                   'is-invalid': submitted && f['email'].errors,
+                                    'is-valid': submitted && !f['email'].errors}"/>
+
+
+                    <span *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                          <span *ngIf="f['email'].errors['required']"> Email  is required</span>
+                        <span *ngIf="f['email'].errors['email']">Email is invalid</span>
+                      </span>
+              </div>
+               <div class="mb-3">
+                  <label for="name" class="form-label">Tagline</label>
+                  <input type="text" class="form-control" placeholder="Enter Tagline"
+                         formControlName="tagline"/>
+              </div>
+               <div class="mb-3">
+                  <label for="name" class="form-label">Gender</label>
+                  <select class="form-control" formControlName="gender">
+                         <option>Enter Gender</option>
+                         <option value="M">Male</option>
+                         <option value="F">Female</option>
+                  </select>
+              </div>
+               
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">State</label>
+                    <select class="form-control" formControlName="state" [ngClass]="{
+                                   'is-invalid': submitted && f['state'].errors,
+                                    'is-valid': submitted && !f['state'].errors}"
+                            (change)="selectState($event.target)">
+                        <option value="">Select State</option>
+                        <option value="{{item.name}}" *ngFor="let item of stateList"> {{item.name}}</option>
+                    </select>
+
+                    <span *ngIf="submitted && f['state'].errors" class="invalid-feedback">
+                       <span *ngIf="f['state'].errors['required']">State is required</span></span>
+                </div>
+
+
+
+
+               <div class="mb-3">
+                  <label for="name" class="form-label">Languages</label>
+                  <select class="form-control" formControlName="languages">
+                        <option value=" ">Select Languages</option>
+                      <option value="{{item.languageId}}" *ngFor="let item of langugeList"> {{item.name}}</option>
+                  </select>
+              </div>
+
+            </div>
+
+               <div class="mb-3">
+                  <label for="name" class="form-label">Introduce Yourself</label>
+                  <textarea class="form-control" id="name" rows="7"
+                         formControlName="memo" >Description</textarea>
+              </div>
+             <div class="mt-3 mb-3"><button type="submit" class="btn btn-primary btnarraow btn-save"><i class="fa fa-save"></i>Save</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>

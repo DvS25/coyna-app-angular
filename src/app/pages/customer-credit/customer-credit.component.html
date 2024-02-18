@@ -1,0 +1,53 @@
+<form [formGroup]="CustomerCreditForm">
+    <div class="innerdash pagetitle m-4">
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="w-100 mb-2">
+                    <mat-label>Customer</mat-label>
+                    <mat-select placeholder="Select Customer" formControlName="customer_id" required 
+                    [ngClass]="{
+                      'is-invalid': submitted ,
+                       'is-valid': submitted}">
+                      <mat-option *ngFor="let obj of CustomerList" [value]="obj.customerId">
+                        {{obj.name}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="submitted">Customer is required</mat-error>                                             
+                  </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Enter email" formControlName="email">
+                    <mat-error *ngIf="this.CustomerCreditForm.invalid">Email is required</mat-error>           
+                  </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field>
+                    <mat-label>Mailing Address</mat-label>
+                    <input matInput placeholder="Enter email address" formControlName="mailing_address">
+                    <mat-error *ngIf="this.CustomerCreditForm.invalid">Email address is required</mat-error>           
+                  </mat-form-field>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-6">
+                <mat-form-field>
+                    <mat-label>Transaction Ref No</mat-label>
+                    <input matInput placeholder="Enter No" formControlName="transaction_ref_no">
+                  </mat-form-field>
+            </div>
+            <div class="col-md-6 col-lg-6 text-end">
+                <mat-form-field>           
+                    <input matInput [matDatepicker]="picker" placeholder="Select" formControlName="date"> 
+                    <mat-datepicker-toggle matIconSuffix [for]="picker">                                                        
+                        <app-icon name="calendar" matDatepickerToggleIcon></app-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div> -->
+    </div>
+</form>

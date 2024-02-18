@@ -1,0 +1,153 @@
+ <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+ <div class="innerdash pagetitle" *ngIf="showPage == true">
+  <div class="row">
+    <div class="col-md-9">
+      <h1>Create User</h1>
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-primary btn-save" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+    </div>
+  </div>
+  </div><!-- End Page Title -->
+  <section class="section dashboard" *ngIf="showPage == true">
+    <div class="row">
+      <div class="innerform">
+            <div class="innerfheader">
+              <h4>Basic Information </h4>
+      </div>
+        <div class="col-md-12">
+          <form id="formCreatecompany" class="mb-3 mt-4 commform row" [formGroup]="financeForm" (ngSubmit)="onSubmit()" >
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Company Name</label>
+                    <select class="form-control"  formControlName="cName"
+                            (change)="getStoreList($event.target)"
+                            [ngClass]="{
+                                   'is-invalid': submitted && f['cName'].errors,
+                                    'is-valid': submitted && !f['cName'].errors}">
+
+                        
+                        <option [value]="item.companyId" *ngFor="let item of companyList">{{item.name | titlecase}}</option>
+                    </select>
+
+
+                    <span *ngIf="submitted && f['cName'].errors" class="invalid-feedback">
+                          <span *ngIf="f['cName'].errors['required']"> Company Name  is required</span>
+                          <span *ngIf="f['cName'].errors['pattern']"> Company name is only character</span>
+                      </span>
+                </div>
+              
+              <div class="mb-3">
+                  <label for="name" class="form-label">Email Id</label>
+                  <input type="text" class="form-control" placeholder=""
+                         formControlName="userId" [ngClass]="{
+                                   'is-invalid': submitted && f['userId'].errors,
+                                    'is-valid': submitted && !f['userId'].errors}"/>
+                                    <span *ngIf="submitted && f['userId'].errors" class="invalid-feedback">
+                                      <span *ngIf="f['userId'].errors['required']"> Email  is required</span>
+                                    <span *ngIf="f['userId'].errors['email']">Email is invalid</span>
+                                  </span>
+                   <span style="color: #dc3545" *ngIf="isUser">Email Id is already taken</span>
+
+               </div>
+               <div class="mb-3">
+                <label for="name" class="form-label">Contact Number</label>
+                <input type="text" class="form-control" placeholder=""
+                       formControlName="mobileNo" [ngClass]="{
+                                 'is-invalid': submitted && f['mobileNo'].errors,
+                                  'is-valid': submitted && !f['mobileNo'].errors}"/>
+
+
+                 <span *ngIf="submitted && f['mobileNo'].errors" class="invalid-feedback">
+                        <span *ngIf="f['mobileNo'].errors['required']"> Mobile Number  is required</span>
+                      <span *ngIf="f['mobileNo'].errors['pattern']">Mobile Number is not number</span><br>
+                      <span *ngIf="f['mobileNo'].errors['minlength']">Minimum 10 length </span>
+                    </span>
+            </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Store Name</label>
+                      <select class="form-control" formControlName="store_id"
+                              [ngClass]="{
+                                   'is-invalid': submitted && f['store_id'].errors,
+                                    'is-valid': submitted && !f['store_id'].errors}">
+
+                        
+                          <option [value]="item.companyId"
+                                  *ngFor="let item of storeList">{{item.name | titlecase}}</option>
+                      </select>
+
+                      <span *ngIf="submitted && f['store_id'].errors" class="invalid-feedback">
+                          <span *ngIf="f['store_id'].errors['required']"> Store  is required</span>
+                          </span>
+                </div>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Password</label>
+                  <input type="password" class="form-control" placeholder=""
+                         formControlName="password" [ngClass]="{
+                                   'is-invalid': submitted && f['password'].errors,
+                                    'is-valid': submitted && !f['password'].errors}"/>
+
+
+                   <span *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                          <span *ngIf="f['password'].errors['required']"> Password  is required</span>
+                      </span>
+              </div>         
+              </div>
+            <div class="col-md-4">
+              <div class="mb-3">
+                <label for="name" class="form-label">User Type</label>
+                  <select class="form-control" formControlName="userType"
+                          [ngClass]="{
+                               'is-invalid': submitted && f['userType'].errors,
+                                'is-valid': submitted && !f['userType'].errors}">
+
+                    
+                      <option [value]="item.type" *ngFor="let item of userTypeList">{{item.type | titlecase}}</option>
+                  </select>
+
+                  <span *ngIf="submitted && f['userType'].errors" class="invalid-feedback">
+                      <span *ngIf="f['userType'].errors['required']"> UserType  is required</span>
+                      </span>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">User Full Name</label>
+              <input type="text" class="form-control" placeholder=""
+                     formControlName="name" [ngClass]="{
+                               'is-invalid': submitted && f['name'].errors,
+                                'is-valid': submitted && !f['name'].errors}"/>
+
+
+                <span *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                      <span *ngIf="f['name'].errors['required']"> Username  is required</span>
+                    <span *ngIf="f['name'].errors['pattern']">  Name is only character</span>
+
+                  </span>
+          </div>
+                 
+              <div class="mb-3">
+    
+              </div>
+            </div>
+              <div class="mt-3 mb-3"><button type="submit" class="btn btn-primary btnarraow btn-save"><i class="fa fa-user"></i>Create User</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="section dashboard" *ngIf="showPage == false">
+	<div class="row" style="align-items: center;">
+		<div class="col-md-12" style="padding:5px;">
+			<h1>Create User</h1>
+		</div>
+	</div>
+	<div class="row" style="height: 500px;">
+		<div class="col-md-12">
+			<div class="alert alert-dismissable alert-danger">
+				<strong>Oops!</strong> You dont have access to see this page.
+			</div>
+		</div>
+	</div>
+</section>

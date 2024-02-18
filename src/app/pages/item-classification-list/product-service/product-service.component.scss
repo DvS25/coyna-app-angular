@@ -1,0 +1,65 @@
+@import '../../../../assets/css/material/table.scss';
+@import '../../../../assets/css/material/checkbox.scss';
+@import '../../../../assets/css/material/tab.scss';
+@import '../../../../assets/css/material/input.scss';
+
+:host {
+  display: block;
+  padding: 24px 0;
+  position: relative;
+}
+
+.title {    
+    font-weight: 600;           
+    margin-bottom: 30px;
+    font-size: 26px; 
+    // line-height: 35px;   
+  }
+  
+  .close-btn {
+    top: 17px;
+    right: 17px;
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 20;
+    font-size: 34px;
+  }
+
+  .divider{
+    border-top: 1px solid rgba(221, 221, 225, 1);
+    margin: 30px 0;
+  }
+
+  
+
+  .info-section {
+    padding: 0 24px;
+  }
+
+  ::ng-deep .mat-dialog-container {
+    border-radius: 30px !important;
+  }
+  
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+    border-radius: 20px;
+  }
+  
+::ng-deep .mat-mdc-dialog-actions {
+    justify-content: center;
+  }
+
+  ::ng-deep .mdc-dialog .mdc-dialog__content {
+    padding: 6px 24px 20px 24px;
+  }
+  
+::ng-deep .mdc-dialog .mdc-dialog__content {
+    padding: 6px 24px 0px 24px;
+  }
+  
+::ng-deep .mdc-dialog__actions {
+    padding: 0px !important;
+    margin-bottom: 16px !important;
+  }
+  
+:host ::ng-deep .cdk-overlay-dark-backdrop {
+  background: rgba(0, 0, 0, 0.50);
+}
+

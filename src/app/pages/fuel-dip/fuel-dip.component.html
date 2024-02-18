@@ -1,0 +1,208 @@
+ <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+ <style>.pagetitle label.form-label {
+    margin: 0;
+}.pagetitle button.btn.btn-primary {
+    padding: 13px 10px !important;width: 100%;
+}table.maintable {
+    width: 100%;
+}thead {
+    background: #F1FCFA;
+}thead tr {
+   border-radius: 6px;
+}table.maintable td, table.maintable th {
+    padding: 10px 5px;
+}table.maintable tbody tr {
+    border-bottom: 1px solid #E9E9E9;
+}input.form-control {
+    padding: 10px 5px !important;
+    height: 40px !important;
+    font-size: 13px !important;
+}input.form-control:disabled {
+    background: #C4C4C4 !important;
+}.pagetitle select.form-control {
+    height: 55px !important;
+}table.maintable.withborder td {
+    border-left: 1px solid #E9E9E9 !important;
+    border-right: 1px solid #E9E9E9 !important;
+}.maintable.withborder th {
+    font-size: 12px;
+    padding: 0 5px !important;
+}</style>
+
+ <div class="innerdash pagetitle">
+  <div class="row" style="align-items: center;">
+    <div class="col-md-4" style="padding:0;">
+    <h1>Fuel Dip</h1></div>
+
+    <form id="formCreatecompany" class="mb-3 mt-4 commform row" style="align-items: flex-end;padding:0">
+    <div class="col-md-8 row">
+        <div class="col-md-4">
+                <label for="name" class="form-label">Select</label>
+                <select class="form-control">
+                  <option>Fuel Grade</option>
+                </select>
+          </div>
+        <div class="col-md-4">
+                <label for="name" class="form-label">Select</label>
+                <select class="form-control">
+                  <option>By Product</option>
+                </select>
+          </div>
+        <div class="col-md-4">
+                <label for="name" class="form-label">Select</label>
+                <select class="form-control">
+                  <option>By Shift</option>
+                </select>
+          </div>
+
+    </div>
+
+          <div class="col-md-2"><button type="submit" class="btn btn-primary">Import</button></div>
+          <div class="col-md-2"><button type="submit" class="btn btn-primary">Export</button></div>
+      </form>
+  </div>
+  </div><!-- End Page Title -->
+  <section class="section dashboard">
+    <div class="row">
+      <div class="innerform">
+         <div class="tablemaindiv mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+           class="mat-elevation-z8 maintable withborder">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="dip">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+              DIP Date
+            </th>
+            <td mat-cell *matCellDef="let element" style="border-left:0px !important"> {{element.dip}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="op">
+            <th mat-header-cell *matHeaderCellDef> OPENING PHYSICAL </th>
+            <td mat-cell *matCellDef="let element">  </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="del">
+            <th mat-header-cell *matHeaderCellDef> DELIVERY </th>
+            <td mat-cell *matCellDef="let element"><input type="text" class="form-control" placeholder=""></td>
+        </ng-container>
+
+        <ng-container matColumnDef="ms">
+            <th mat-header-cell *matHeaderCellDef> METER SALES (EOD) </th>
+            <td mat-cell *matCellDef="let element"><input type="text" class="form-control" placeholder=""></td>
+        </ng-container>
+
+        <ng-container matColumnDef="ih">
+            <th mat-header-cell *matHeaderCellDef> INVENTORY IN HAND </th>
+            <td mat-cell *matCellDef="let element"> </td>
+        </ng-container>
+        <ng-container matColumnDef="cp">
+            <th mat-header-cell *matHeaderCellDef> CLOSING PHYSICAL </th>
+            <td mat-cell *matCellDef="let element"><input type="text" class="form-control" placeholder=""></td>
+        </ng-container>
+        <ng-container matColumnDef="vos">
+            <th mat-header-cell *matHeaderCellDef> VARIATION O/S </th>
+            <td mat-cell *matCellDef="let element"> </td>
+        </ng-container>
+        <ng-container matColumnDef="bf">
+            <th mat-header-cell *matHeaderCellDef> BROUGHT FORWARD O/S </th>
+            <td mat-cell *matCellDef="let element"><input type="text" class="form-control" placeholder=""></td>
+        </ng-container>
+        <ng-container matColumnDef="ad">
+            <th mat-header-cell *matHeaderCellDef> ADJUSTMENT </th>
+            <td mat-cell *matCellDef="let element"><input type="text" class="form-control" placeholder=""></td>
+        </ng-container>
+        <ng-container matColumnDef="acc">
+            <th mat-header-cell *matHeaderCellDef> ACCUMULATED O/S </th>
+            <td mat-cell *matCellDef="let element"><input type="text" class="form-control" placeholder=""></td>
+        </ng-container>
+        <ng-container matColumnDef="temp">
+            <th mat-header-cell *matHeaderCellDef> TEMPRATURE C </th>
+            <td mat-cell *matCellDef="let element"><input type="text" class="form-control" placeholder=""></td>
+        </ng-container>
+        <ng-container matColumnDef="options">
+            <th mat-header-cell *matHeaderCellDef> OPTIONS </th>
+            <td mat-cell *matCellDef="let element" style="border-right: 0px !important;"><button class="btn btn-primary btn-save"><i class="fa fa-save"></i>Save</button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 20]"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+</div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+ <!--<section class="section dashboard">
+     <div class="row">
+         <div class="innerform">
+             <div class="tablemaindiv mat-elevation-z8">
+                 <form [formGroup]="employeeShiftForm">
+                     <table class="form-group">
+                         <thead>
+                         <tr>
+                             <th *ngFor="let item of displayedColumns">{{item | titlecase}}</th>
+                         </tr>
+                         </thead>
+                         <tbody formArrayName="Rows">
+                         <tr *ngFor="let obj of formArr.controls; let i = index; let l = last" [formGroupName]="i">
+                             <td>
+                                 <input type="text" class="form-control" id="gsa" formControlName="gsa"
+                                        [ngClass]="{'is-invalid': obj['control']['gsa'].errors && submitted}"/>
+                                 <span *ngIf="submitted && f['gsa'].errors" class="invalid-feedback">
+                                     <span *ngIf="f['gsa'].errors['required']"> GSA is required</span>
+                                 </span>
+&lt;!&ndash;                                 <input type="textarea" class="form-control" id="gsa" formControlName="gsa">&ndash;&gt;
+                             </td>
+                             <td>
+                                 <input type="text" class="form-control" id="pos" formControlName="pos"
+                                        [ngClass]="{'is-invalid': submitted && f['pos'].errors}"/>
+                                 <span *ngIf="submitted && f['pos'].errors" class="invalid-feedback">
+                                     <span *ngIf="f['pos'].errors['required']"> POS is required</span>
+                                 </span>
+                             </td>
+                             <td>
+                                 <input type="text" class="form-control" id="gsaname" formControlName="gsaname"/>
+                             </td>
+                             <td>
+                                 <input type="text" class="form-control" id="in" formControlName="in" />
+                             </td>
+                             <td>
+                                 <input type="text" class="form-control" id="out" formControlName="out"/>
+                             </td>
+                             <td>
+                                 <input type="text" class="form-control" id="thours" formControlName="thours"/>
+                             </td>
+                             <td>
+                                 <input type="text" class="form-control" id="date" />
+                             </td>
+                             <td>
+                                 <input type="text" class="form-control" id="time" formControlName="time"/>
+                             </td>
+                             <td *ngIf=" this.formArr.length > 1">
+                                 <button (click)="deleteRow(i)" class="btn btn-danger">
+                                     Delete
+                                 </button>
+                             </td>
+                         </tr>
+                         </tbody>
+                     </table>
+                     <button type="button" (click)="addNewRow()" class="btn btn-dark">
+                         Add new Row
+                     </button>
+                     <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+                 </form>
+             </div>
+         </div>
+     </div>
+ </section>-->

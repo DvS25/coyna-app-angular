@@ -1,0 +1,237 @@
+<div class="row">
+ 
+    <div class="col-lg-6 col-md-6 mb-30 align align-self-center">
+        <mat-form-field class="w-100" subscriptSizing="dynamic">
+            <mat-label>Vendor</mat-label>
+            <mat-select [(ngModel)]="formData.entityId">
+                <mat-option *ngFor="let option of vendorlist" [value]="option.vendorId"> {{ option.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-lg-6 col-md-6 mb-30">
+        <div class="d-flex flex-row align-items-center justify-content-end">
+            <div class="amount-container d-flex flex-row flex-nowrap align-items-center justify-content-between bg-primary-opa-10per rounded-10 px-4">
+                <span class="text-title-300">Amount</span>
+                <span class="fs-30 fw-bold text-primary-700">${{grandTotal}}</span>
+            </div>
+            <span class="close-btn material-symbols-outlined text-title ms-4">close</span>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 mb-30">
+        <mat-form-field class="w-100" subscriptSizing="dynamic">
+            <mat-label>Payment Account</mat-label>
+            <mat-select [(ngModel)]="formData.paymentAccount" placeholder="Shopify Clearing">
+                <mat-option *ngFor="let option of options" [value]="option.id"> {{ option.coaName }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-30">
+        <mat-form-field class="w-100" subscriptSizing="dynamic">
+            <mat-label>Transaction ref no</mat-label>
+            <input matInput>
+        </mat-form-field>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-30">
+        <mat-form-field class="w-100">
+            <mat-label>To</mat-label>
+            <input matInput readonly [matDatepicker]="picker">                        
+            <mat-datepicker-toggle matIconSuffix [for]="picker">                                        
+                <app-icon name="calendar" matDatepickerToggleIcon></app-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>
+
+
+<div class="expense-category-tbl rounded-10 mb-30">
+    <!-- Title -->
+    <div class="text-title fs-18 p-4 fw-bold">Category Details</div>
+    <!-- // Title -->
+    <!-- Header -->
+    <div class="expense-category-tbl-row header d-flex flex-row flex-nowrap text-center text-linear bg-primary-light-50 fw-bold">
+        <div class="cell no flex-grow-0 flex-shrink-0">No</div>
+        <div class="cell accName">Account Name</div>
+        <div class="cell description flex-grow-1">Description</div>
+        <div class="cell amount flex-grow-1">Amount</div>                     
+        <div class="cell department">Department</div> 
+        <div class="cell delete flex-grow-0 flex-shrink-0"></div>
+    </div>
+    <!-- //Header -->
+    <!-- Body -->
+    <div class="expense-category-tbl-row d-flex flex-row flex-nowrap" [class.disabled-row]="categoryDetail.disabled" *ngFor="let categoryDetail of categoryDetailList;let index = index">
+        <div class="cell no flex-grow-0 flex-shrink-0">{{index + 1}}</div>
+        <div class="cell accName">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">
+                <mat-select [disabled]="categoryDetailList[index].disable" [(ngModel)]="categoryDetailList[index].coaCompanyId">
+                    <mat-option *ngFor="let option of options" [value]="option.id"> {{ option.coaName }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="cell description flex-grow-1">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">                        
+                <input  placeholder="Enter Your Description" matInput type="text" [(ngModel)]="categoryDetailList[index].description">
+            </mat-form-field>
+        </div>
+        <div class="cell amount flex-grow-1">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">                        
+                <input [readonly]="categoryDetailList[index].disable" matInput type="number" (change)="calculateGrandTotal()" class="text-center" [(ngModel)]="categoryDetailList[index].amount">
+            </mat-form-field>
+        </div>                     
+        <div class="cell department">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">                                                
+                <mat-select [disabled]="categoryDetailList[index].disable" [(ngModel)]="categoryDetailList[index].department">
+                    <mat-option *ngFor="let option of department" [value]="option.departmentId"> {{ option.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div> 
+        <div class="cell delete flex-grow-0 flex-shrink-0">
+            <button [disabled]="categoryDetailList[index].disable" class="btn-icon-tbl btn-light-danger" (click)="deleteRow(categoryDetail,true)"><app-icon name="trash"></app-icon></button>
+        </div>
+    </div>
+    <!-- // Body -->
+    <!-- Footer -->
+    <div class="action-footer expense-category-tbl-row d-flex flex-row flex-nowrap">
+        <div class="cell bg-accent-light text-black border-end-0 border-bottom-0" (click)="clearCategoryTbl()">Clear All</div>
+        <div class="cell bg-light text-black border-bottom-0" (click)="addTblData(true)">+Add Line</div>
+    </div>
+    <!-- // Footer -->
+</div>
+
+<div class="expense-item-tbl rounded-10 mb-5">
+    <!-- Title -->
+    <div class="text-title fs-18 p-4 fw-bold">Item classification</div>
+    <!-- // Title -->
+    <!-- Header -->
+    <div class="expense-item-tbl-row header d-flex flex-row flex-nowrap text-center text-linear bg-primary-light-50 fw-bold">
+        <div class="cell no flex-grow-0 flex-shrink-0">No</div>
+        <div class="cell proSer">Product/Service</div>
+        <div class="cell description flex-grow-1">Description</div>
+        <div class="cell qty flex-grow-1">Qty</div>                     
+        <div class="cell rate flex-grow-1">Rate</div>                     
+        <div class="cell amount flex-grow-1">Amount</div>                     
+        <div class="cell department">Department</div> 
+        <div class="cell delete flex-grow-0 flex-shrink-0"></div>
+    </div>
+    <!-- //Header -->
+    <!-- Body -->
+    <div class="expense-item-tbl-row d-flex flex-row flex-nowrap" *ngFor="let itemObj of itemClassificationList;let index = index">
+        <div class="cell no flex-grow-0 flex-shrink-0">{{index + 1}}</div>
+        <div class="cell proSer">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">
+                <mat-select [(ngModel)]="itemClassificationList[index].product" (selectionChange)="setCategory($event.value,index)">
+                    <mat-option *ngFor="let option of items" [value]="option.itemId"> {{ option.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="cell description flex-grow-1">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">                        
+                <input matInput type="text" [(ngModel)]="itemClassificationList[index].description">
+            </mat-form-field>
+        </div>
+        <div class="cell qty flex-grow-1">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">                        
+                <input matInput type="number" class="text-center" (change)="itemFieldChange(index, 'qty')" [(ngModel)]="itemClassificationList[index].qty">
+            </mat-form-field>
+        </div>
+        <div class="cell rate flex-grow-1">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">                        
+                <input matInput type="number" class="text-center" (change)="itemFieldChange(index, 'rate')" [(ngModel)]="itemClassificationList[index].rate">
+            </mat-form-field>
+        </div>
+        <div class="cell amount flex-grow-1">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">                        
+                <input matInput type="number" class="text-center" disabled [(ngModel)]="itemClassificationList[index].amount">
+            </mat-form-field>
+        </div>                     
+        <div class="cell department">
+            <mat-form-field subscriptSizing="dynamic" class="w-100">                                                
+                <mat-select (selectionChange)="setDepartment($event.value,index)" [(ngModel)]="itemClassificationList[index].department">
+                    <mat-option *ngFor="let option of department" [value]="option.departmentId"> {{ option.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div> 
+        <div class="cell delete flex-grow-0 flex-shrink-0">
+            <button class="btn-icon-tbl btn-light-danger" (click)="deleteRow(itemObj,false)"><app-icon name="trash"></app-icon></button>
+        </div>
+    </div>
+    <!-- // Body -->
+    <!-- Footer -->
+    <div class="action-footer expense-item-tbl-row d-flex flex-row flex-nowrap">
+        <div class="cell bg-accent-light text-black border-end-0 border-bottom-0" (click)="clearItemTblData()">Clear All</div>
+        <div class="cell bg-light text-black border-bottom-0" (click)="addTblData(false)">+Add Line</div>
+    </div>
+    <!-- // Footer -->
+</div>
+
+<div class="row">
+    <div class="col-lg-6 col-md-6 mb-30 align align-self-center">
+        <mat-form-field class="w-100" subscriptSizing="dynamic">
+            <mat-label>Notes</mat-label>
+            <input matInput placeholder="Description">
+        </mat-form-field>
+    </div>
+    <div class="col-lg-6 col-md-6 mb-4">
+        <span class="hidden-file" style="display: none;">
+            <input type="file" #fileInput ng2FileSelect [uploader]="uploader" multiple (onFileSelected)="onFileSelected($event)" />
+          </span>
+        <mat-form-field class="w-100" subscriptSizing="dynamic">
+           <mat-label>Attachments</mat-label>
+           <span class="hidden-file" *ngIf="uploader.queue.length > 0">          
+            <input matInput  placeholder="Maximum size: 20MB"  multiple readonly="true">
+        </span>
+        <app-icon  matSuffix name="upload-link"  (click)="fileInput.click()" class="me-3 fs-4 align-middle"></app-icon>
+           <span class="" *ngIf="uploader.queue.length == 0">          
+            <input matInput  placeholder="Maximum size: 20MB"   multiple readonly="true">
+        </span>
+          <table style="border: none">
+            <thead>
+                <!-- <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr> -->
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of uploader.queue;let index = index">
+                    <td [width]="250" class="fs-14 border-0 text-center">{{item.file.name}} ({{ item?.file?.size/1024/1024 | number:'.2' }} MB)</td>
+                    <td [width]="250" class="border-0" *ngIf="uploader.options.isHTML5">
+                        <div class="">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }">{{uploader.progress}}%</div>
+                        </div>
+                    </div>
+                    </td>
+                    <td [width]="200" class="text-center border-0"><app-icon  matSuffix name="cloud-download"  class="me-3 fs-4 align-middle" (click)="DownloadDocument(item.documentId,item.file.name)"></app-icon>
+                        <app-icon matSuffix name="close" class="me-3 fs-4 align-middle" (click)="DeleteDocument(item.documentId,item)"></app-icon>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+        </mat-form-field>    
+    </div>   
+    
+</div>
+
+<!-- Spacing for fixed footer -->
+<div class="my-5"></div>
+   
+<div class="journal-footer d-flex flex-row flex-nowrap align-items-center px-4 py-3 bg-primary-900">
+    <div class="flex-grow-1" *ngIf="expenceId != '0'">
+        <a href="javascript:void(0)" class="text-white text-decoration-none me-4 my-3 d-inline-block"><app-icon name="currency-exchange" class="me-3 fs-4 align-middle"></app-icon>Make Reccuring</a>        
+        <a href="javascript:void(0)" class="text-white text-decoration-none me-4 my-3 d-inline-block"><app-icon name="copy" class="me-3 fs-4 align-middle"></app-icon>Copy</a>
+        <a href="javascript:void(0)" class="text-white text-decoration-none me-4 my-3 d-inline-block"><app-icon name="trash" class="me-3 fs-4 align-middle"></app-icon>Delete</a>
+        <a href="javascript:void(0)" class="text-white text-decoration-none me-4 my-3 d-inline-block"><app-icon name="arrow-2" class="me-3 fs-4 align-middle"></app-icon>Journal Entry</a>
+        <a href="javascript:void(0)" class="text-white text-decoration-none me-4 my-3 d-inline-block"><app-icon name="printer" class="me-3 fs-4 align-middle"></app-icon>Print</a>
+        <a href="javascript:void(0)" class="text-white text-decoration-none me-4 my-3 d-inline-block"><app-icon name="scan-delete" class="me-3 fs-4 align-middle"></app-icon>Void</a>
+    </div>
+    <div class="flex-shrink-0 text-end" [ngClass]="{'flex-grow-1 d-flex flex-row justify-content-between': expenceId == '0'}">
+        <button (click)="goBack()" class="btn btn-lg w-30 me-2 px-5" style="box-shadow: 0px 1px 2px 0px #1018280D;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;"><span class="">{{expenceId == '0'? 'Cancel' : 'Close'}}</span></button>
+        <button class="btn btn-primary btn-lg px-5" (click)="onSubmit()"><span class="">Save</span></button>
+    </div>
+</div>
+
+

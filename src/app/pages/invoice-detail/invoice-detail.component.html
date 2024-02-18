@@ -1,0 +1,134 @@
+<div class="innerdash pagetitle">
+    <div class="row">
+        <div class="col-md-8 nopad d-flex align-items-center">
+            <h1>Invoice Detail</h1>
+        </div>
+        <div class="col-md-2">
+                <button class="btn btn-primary" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+        </div>
+        <div class="col-md-2 d-flex">
+            <a class="btn btn-primary mr-1" (click)="editInvoice()">Edit Invoice</a>
+        </div>
+    </div>
+</div><!-- End Page Title -->
+<section class="section dashboard">
+    <div class="row">
+        <div class="innerform">
+            <div class="col-md-9">
+                <form id="formCreatecompany" class="mb-3 mt-4 commform">
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Invoice Number: {{invoiceNumber}}</label>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Invoice Date: {{(invoiceDate) | date: 'MM/dd/yyyy' }} </label>
+
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Due Date: {{dueDate | date: 'MM/dd/yyyy' }}</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Company Name: {{companyName | titlecase}}</label>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Vendor Name: {{vendorName | titlecase}}</label>
+                        </div>
+
+
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Store: {{store | titlecase}} </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Amount:  {{amount}}</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">GST Price: {{GSTPrice}}</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Additional Charges: {{additionalCharges}} </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Payment Term:    {{paymentTerm | titlecase}}</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Additional GST:    {{additionalGst}}</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Total Amount:    {{totalAmount}}</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Payment
+                                Method:    {{paymentMethod | titlecase}}</label>
+                        </div>
+
+                        <table class="maintable withborder commform" style="width:100%">
+                            <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th>UOM</th>
+                                <th>Unit Price</th>
+                                <th>Amount</th>
+                                <th>Tax Name</th>
+                                <th>Tax Value</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let item of invoiceDtl">
+                                <td>{{getItemName(item.itemId) | titlecase}}</td>
+                                <td>{{item.quantity}}</td>
+                                <td>{{item.uom}}</td>
+                                <td>{{item.unitPrice}}</td>
+                                <td>{{item.amount}}</td>
+                                <td>{{item.taxName}}</td>
+                                <td>{{item.taxValue}}</td>
+                                <td>{{item.totalAmount}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br><br>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Uploaded Documents:
+
+                            </label>
+                            <table class="maintable withborder commform">
+                                <tr *ngFor="let item of docs">
+                                    <td> {{item.documentName | titlecase}} </td>
+                                    <td>
+                                        <div class="downloadButton mb-2">
+                                        <a  class="downloadButtonTag" (click)="getDownload(item.documentId, item.documentName)"> Download</a>
+                                        <p *ngIf="progressBar" class="mx-3 mb-0">{{percentDone}}%</p>
+                                    </div>
+                                        <mat-progress-bar mode="determinate" *ngIf="progressBar"
+                                                          [value]="percentDone">
+                                        </mat-progress-bar>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

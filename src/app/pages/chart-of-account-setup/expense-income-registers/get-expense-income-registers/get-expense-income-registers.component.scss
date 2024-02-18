@@ -1,0 +1,253 @@
+@import '../../../../../variables.scss';
+
+.header-expense {
+    font-size: 14px;
+    font-weight: 600;
+    color: $cloudBurstColor;
+}
+
+table {
+    width: 100%;
+    margin-top: 25px;
+}
+
+.mat-mdc-table .mdc-data-table__header-row {
+    background: $secondaryColor;
+    height: 50px !important;
+}
+
+.mdc-data-table__header-cell {
+    color: $primaryColor !important;
+    font-weight: 600 !important;
+    font-size: small !important;
+    padding: 9px;
+}
+
+.mat-mdc-table .mdc-data-table__row {
+    height: 55px !important;
+}
+
+:host ::ng-deep .mat-mdc-text-field-wrapper {
+    height: 40px !important;
+}
+
+:host ::ng-deep .mat-mdc-form-field-flex {
+    margin-top: -7px !important;
+}
+
+:host ::ng-deep .mdc-data-table__cell {
+    padding: 0 16px 0 10px !important;
+}
+
+.search-icon {
+    padding: 0px 10px 7px 0px !important;
+    width: 25px;
+    height: 30px;
+}
+
+.action-icon {
+    width: 34px;
+    height: 34px;
+    padding-right: 13px;
+}
+
+.search-input {
+    font-size: small !important;
+    padding-bottom: 6px;
+}
+
+.search-section {
+    display: flex;
+}
+
+.header_menu {
+    border-bottom: 1px solid #CCC;
+    width: 100%;
+}
+
+.search {
+    width: 80%;
+    float: left;
+    text-align: left;
+    font-size: small;
+    margin-right: 20px;
+}
+
+.printer-icon {
+    padding: 8px !important;
+}
+
+.printer-card {
+    border: 1px solid $darkBlueColor !important;
+    box-shadow: none !important;
+    border-radius: 8px;
+}
+
+.date-card {
+    border: 1px solid $darkBlueColor !important;
+    box-shadow: none !important;
+    border-radius: 8px;
+    color: $cloudBurstColor;
+    font-size: small;
+}
+
+.date-card-content {
+    padding: 10px !important;
+    text-align: center;
+}
+
+.printer {
+    float: left;
+    margin-right: 20px;
+}
+
+.start-date {
+    width: 25%;
+    float: left;
+    margin-right: 20px;
+}
+
+.end-date {
+    width: 25%;
+    float: left;
+    // margin-right: 25px;
+}
+
+.account-name {
+    width: 46%;
+    float: left;
+    text-align: left;
+    font-size: small;
+    margin-right: 20px;
+}
+
+:host ::ng-deep .mdc-icon-button svg,
+.mdc-icon-button img {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+:host ::ng-deep .mat-mdc-form-field {
+    display: contents !important;
+}
+
+
+:host ::ng-deep .mat-mdc-form-field-infix {
+    display: flex;
+}
+
+:host ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mdc-text-field__input {
+    font-size: small;
+    color: $cloudBurstColor;
+}
+
+.mat-column-date {
+    padding-left: 20px !important;
+    font-size: small;
+    color: $textColor;
+    font-weight: 500;
+}
+
+.mat-column-accountName {
+    font-size: small;
+    color: $textColor;
+    font-weight: 500;
+}
+
+.mat-column-transactionNumber {
+    font-size: small;
+    color: $textColor;
+    font-weight: 500;
+}
+
+.mat-column-description {
+    font-size: small;
+    color: $textColor;
+    font-weight: 500;
+}
+
+.mat-column-amount {
+    font-size: small;
+    color: $textColor;
+    font-weight: 500;
+}
+
+.mat-column-department {
+    font-size: small;
+    color: $textColor;
+    font-weight: 500;
+}
+
+.mat-column-action {
+    font-size: small;
+    color: $textColor;
+    font-weight: 500;
+}
+
+:host ::ng-deep .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
+    padding-bottom: 16px;
+}
+
+:host ::ng-deep .mdc-notched-outline__leading {
+    border-top-left-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+    border-color: $darkBlueColor !important;
+
+}
+
+:host ::ng-deep .mdc-notched-outline__trailing {
+    border-top-right-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+    border-color: $darkBlueColor !important;
+
+}
+
+//Top bottom border, if label is inside 
+:host ::ng-deep.mdc-notched-outline__notch {
+    border-top: 1px solid $darkBlueColor !important;
+    border-bottom: 1px solid $darkBlueColor !important;
+}
+
+//Top bottom border, if label is notched
+:host ::ng-deep.mdc-notched-outline--notched {
+    ::ng-deep.mdc-notched-outline__notch {
+        border-top: none !important;
+        border-bottom: 1px solid $darkBlueColor !important;
+    }
+}
+
+//Left border with edges
+:host ::ng-deep.mdc-notched-outline__leading {
+    border: 1px solid $darkBlueColor !important;
+    border-right: none !important;
+}
+
+//Right border with edges
+:host ::ng-deep.mdc-notched-outline__trailing {
+    border: 1px solid $darkBlueColor !important;
+    border-left: none !important;
+}
+
+.left-field {
+    width: 50%;
+    float: left;
+    text-align: left;
+}
+
+.right-field {
+    width: 50%;
+    float: right;
+    text-align: right;
+}
+
+.total-account {
+    background: #F8F9FA;
+    border: 1px solid $darkBlueColor !important;
+    padding: 14px 100px 1px 17px;
+}
+
+.total {
+    background: #EDF5FD;
+    border: 1px solid $darkBlueColor !important;
+    padding: 14px 100px 1px 17px;
+}

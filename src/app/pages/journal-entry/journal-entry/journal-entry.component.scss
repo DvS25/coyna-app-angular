@@ -1,0 +1,127 @@
+@import '../../../../assets/css/material/table.scss';
+@import '../../../../assets/css/material/checkbox.scss';
+@import '../../../../assets/css/material/tab.scss';
+@import '../../../../assets/css/material/input.scss';
+
+:host {
+    --no-col-width: 60px;
+    --no-col-grow: 0;
+    --delete-col-width: 65px;
+    --delete-col-grow: 0;
+    --name-col-width: 100px;
+    --name-col-grow: 1;
+    --acc-col-width: 100px;
+    --acc-col-grow: 1;
+    --debit-col-width: 90px;
+    --debit-col-grow: 1;
+    --credit-col-width: 90px;
+    --credit-col-grow: 1;
+    --description-col-width: 120px;
+    --description-col-grow: 2;
+    --dept-col-width: 100px;
+    --dept-col-grow: 1;
+    --clear-col-width: calc(var(--no-col-width) + var(--name-col-width));
+    --clear-col-grow: calc(var(--no-col-grow) + var(--name-col-grow));
+    --add-col-width: calc(var(--acc-col-width) + var(--debit-col-width) + var(--credit-col-width) + var(--description-col-width) + var(--dept-col-width) + var(--delete-col-width));
+    --add-col-grow: calc(var(--acc-col-grow) + var(--debit-col-grow) + var(--credit-col-grow) + var(--description-col-grow) + var(--dept-col-grow) + var(--delete-col-grow));
+    --total-col-width: calc(var(--no-col-width) + var(--name-col-width));
+    --total-col-grow: calc(var(--no-col-grow) + var(--name-col-grow));
+}
+
+:host ::ng-deep .journal-entry-tbl .mdc-notched-outline__leading,
+:host ::ng-deep .journal-entry-tbl .mdc-notched-outline__trailing {
+    border: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+:host ::ng-deep .mat-horizontal-stepper-header-container {
+    display: none !important;
+}
+
+.hidden-file {
+    visibility: hidden; 
+    position: absolute;
+    overflow: hidden; 
+    width: 0px; 
+    height:0px;
+    border:none;
+    margin:0; 
+    padding:0
+}
+
+.journal-entry-tbl > * mat-cell, .journal-entry-tbl > * .mat-mdc-header-cell {
+    border-bottom: 1px solid #DDDDE1;
+    border-right: 1px solid #DDDDE1;    
+}
+
+.journal-entry-tbl > * mat-cell:last-child, .journal-entry-tbl > * .mat-mdc-header-cell:last-child  {
+    border-right: none;
+}
+
+.mdc-data-table__cell, .mdc-data-table__header-cell {
+    padding: 0;
+}
+
+.journal-entry-tbl .no-cell {
+    flex: var(--no-col-grow) 0 var(--no-col-width);
+}
+
+.journal-entry-tbl .action-cell {
+    flex: var(--delete-col-grow) 0 var(--delete-col-width);
+}
+
+.journal-entry-tbl .name-cell {
+    flex: var(--name-col-grow) 0 var(--name-col-width);
+}
+
+.journal-entry-tbl .acc-cell {
+    flex: var(--acc-col-grow) 0 var(--acc-col-width);
+}
+
+.journal-entry-tbl .debit-cell {
+    flex: var(--debit-col-grow) 0 var(--debit-col-width);
+}
+
+.journal-entry-tbl .credit-cell {
+    flex: var(--credit-col-grow) 0 var(--credit-col-width);
+}
+
+.journal-entry-tbl .description-cell {    
+    flex: var(--description-col-grow) 0 var(--description-col-width);
+}
+
+.journal-entry-tbl .dept-cell {    
+    flex: var(--dept-col-grow) 0 var(--dept-col-width);    
+}
+
+.journal-entry-tbl .footer-clear-cell {
+    flex: var(--clear-col-grow) 0 var(--clear-col-width);
+}
+
+.journal-entry-tbl .footer-add-cell {
+    flex: var(--add-col-grow) 0 var(--add-col-width);
+}
+
+.journal-entry-tbl .footer-no-cell {
+    flex: var(--total-col-grow) 0 var(--total-col-width);
+}
+
+.journal-entry-tbl .footer-name-cell {
+    flex: 0;
+}
+
+:host ::ng-deep .journal-entry-tbl .mdc-text-field--outlined {
+    padding-right: 12px;
+    padding-left: 12px;
+}
+
+

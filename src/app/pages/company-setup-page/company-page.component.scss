@@ -1,0 +1,23 @@
+@import '../../../assets/css/material/input.scss';
+@import '../../../assets/css/material/slide-toggle.scss';
+
+.company-heading{
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 35.52;
+}
+
+.text-value{
+//    width: 154px;
+//    height: 22px;
+   top: 907px;
+   left: 330px;
+   gap: 10px;
+   color: rgb(115, 130, 163, 1);
+}
+
+:host::ng-deep mat-slide-toggle .mdc-form-field--align-end>label {
+    padding-right: 10px;
+    color: #7382A3;
+}
+

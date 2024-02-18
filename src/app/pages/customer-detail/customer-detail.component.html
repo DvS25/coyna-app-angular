@@ -1,0 +1,167 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<div class="innerdash pagetitle">
+    <div class="row">
+        <div class="col-md-8 nopad d-flex align-items-center">
+            <h1>Customer Detail</h1>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+        </div>
+        <div class="col-md-2 d-flex">
+            <a class="btn btn-primary mr-1" (click)="editCustomer()">Edit Customer</a>
+        </div>
+    </div>
+</div><!-- End Page Title -->
+<section class="section dashboard">
+    <div class="row">
+        <div class="innerform">
+            <div class="col-md-9">
+                <form id="formCreatecompany" class="mb-3 commform">
+                    <div class="steps row">
+                        <div class="innerfheader mt-2 mb-1 noborder">
+                            <h4><span>Step 01</span> - Customer Information</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Company Name:  {{customerInfo.companyName | titlecase}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Store:  {{customerInfo.storeName}}</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Customer Name:   {{customerInfo.name | titlecase}} </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="steps row">
+                        <div class="innerfheader mt-4 mb-1 noborder">
+                            <h4><span>Step 02</span> - Billing Address</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">
+                                    Address 1: {{billingAddress.address1 | titlecase}} </label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">
+                                    Country: {{billingAddress.country}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">
+                                    City:  {{billingAddress.city | uppercase}} </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">
+                                    Address 2: {{billingAddress.address2 | titlecase}} </label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">
+                                    Province: {{billingAddress.province}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">
+                                    Postal:  {{billingAddress.postalCode | uppercase}} </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="steps row">
+                        <div class="innerfheader mt-4 mb-1 noborder">
+                            <h4><span>Step 02</span> - Shipping Address</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">
+                                    Address 1: {{shippingAddress.address1 | titlecase}} </label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">
+                                    Country: {{shippingAddress.country}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">
+                                    City:  {{shippingAddress.city | uppercase}} </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">
+                                    Address 2: {{shippingAddress.address2 | titlecase}} </label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">
+                                    Province: {{shippingAddress.province}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">
+                                    Postal:  {{shippingAddress.postalCode | uppercase}} </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="steps row">
+                        <div class="innerfheader mt-4 mb-1 noborder">
+                            <h4><span>Step 04</span> - Bank Account Details</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Bank
+                                    Name: {{bankAccount.bankName | titlecase}} </label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Beneficiary
+                                    Name: {{bankAccount.beneficiaryName}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Routing
+                                    Number:  {{bankAccount.routingNumber | uppercase}} </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Account
+                                    Number:  {{bankAccount.accountingNumber}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Re enter Account
+                                    Number: {{bankAccount.accountingNumber}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="steps row">
+                        <div class="innerfheader mt-4 mb-1 noborder">
+                            <h4><span>Step 04</span> - Personal Information</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Contact Full
+                                    Name:  {{contactInfo.contactName | titlecase}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Contact Phone
+                                    Number:  {{contactInfo.contactNumber}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Contact Email ID: {{contactInfo.emailId}} </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Contact Alternative
+                                    Number:   {{contactInfo.alternateContactNumber}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Contact Alternative Email
+                                    ID:   {{contactInfo.alternateEmailId}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

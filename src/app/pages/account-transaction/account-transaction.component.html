@@ -1,0 +1,198 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>.pagetitle label.form-label {
+   margin: 0;
+}.pagetitle button.btn.btn-primary {
+   padding: 7px 10px !important;width: 100%;
+}table.maintable {
+   width: 100%;
+}thead {
+   background: #F1FCFA;
+}thead tr {
+  border-radius: 6px;
+}table.maintable td, table.maintable th {
+   padding: 20px 10px;
+}table.maintable tbody tr {
+   border-bottom: 1px solid #E9E9E9;
+}input.form-control {
+   padding: 5px 5px !important;
+   height: 40px !important;
+   font-size: 13px !important;
+}input.form-control:disabled {
+   background: #C4C4C4 !important;
+}.pagetitle select.form-control {
+   height: 40px !important;
+}th.centeral {
+   text-align: center;
+}.noborder tr {
+   border: 0 !important;
+}table.maintable.withborder td {
+   border-left: 1px solid #E9E9E9 !important;
+   border-right: 1px solid #E9E9E9 !important;
+}.disflexbtn {
+   display: flex;
+   align-items: center;
+}.maintable .disflexbtn button.btn {
+   padding: 5px 12px !important;
+   height: 40px;
+   margin-left: 10px;
+}.lesspad td {
+   padding: 10px 10px !important;
+}input.form-control.date {
+   height: 40px !important;
+}.table.maintable.withborder  {
+   border: 1px solid #E9E9E9 !important;
+}
+.viewbtn {
+    margin: 0 auto;
+    background: transparent;
+}
+.border-left-right {
+  border-left: 1px solid #E9E9E9 !important;
+  border-right: 1px solid #E9E9E9 !important;
+}
+</style>
+<div class="innerdash pagetitle" *ngIf="showPage == true">
+    <div class="row" style="align-items: center;">
+      <div class="col-md-12" style="padding:0;">
+      <h1>Bank Statement</h1>
+      </div>
+      
+        <form id="account-transaction" class="mb-3 mt-4 commform row min-height" style="align-items: flex-end;padding:0">
+                    <div class="col-md-12 row mb-3" [formGroup]="filterSearchForm">
+                        <div class="col-md-4">
+                            <select class="form-control" formControlName="companyId" (change)="getBanks($event.target)">
+                              <option value="" disabled>Select Company</option>
+                              <option [value]="item.companyId" *ngFor="let item of companyList">{{item.name}}</option>
+                            </select>
+                            <span *ngIf="filterSearchForm.get('companyId').invalid && isSearchClicked" style="color: red; font-size: 10px;">
+                              Company is required.
+                            </span>
+                        </div>
+                        <div class="col-md-4">
+                          <select class="form-control" formControlName="bankId" (change)="getBankAccounts($event.target)">
+                          <option value="" disabled>Select Bank</option>
+                          <option [value]="item.bankName" *ngFor="let item of bankList">{{item.bankName | uppercase}}</option>
+                          </select> 
+                          <span *ngIf="filterSearchForm.get('bankId').invalid && isSearchClicked" style="color: red; font-size: 10px;">
+                            Bank Name is required.
+                          </span>    
+                        </div>
+                        <div class="col-md-4">
+                          <select class="form-control" formControlName="accountId" (change)="saveAccountId($event.target)">
+                            <option value="" disabled>Select Account</option>
+                            <option [value]="item.bankId" *ngFor="let item of accountList">{{item.accountNumber | uppercase}}</option>
+                          </select>
+                          <span *ngIf="filterSearchForm.get('accountId').invalid && isSearchClicked" style="color: red; font-size: 10px;">
+                            Account Number is required.
+                          </span>       
+                        </div>      
+                     </div> 
+                    <div class="col-md-12 row mb-3">
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">From Date</label>
+                            <input type="date" class="form-control date" id="" formControlName="startDate"/>  
+                        </div>   
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">To Date</label>
+                            <input type="date" class="form-control date" id="" formControlName="endDate"/>      
+                        </div>
+                        <div class="col-md-2">
+                            <br>
+                        <button type="submit" class="btn btn-primary btn-save" (click)="getBankingTransactions()">View</button> 
+                      </div>  
+                      <div class="col-md-2">
+                        <br>
+                        <button type="submit" class="btn btn-primary btn-save" (click)="resetFilters()">Reset</button> 
+                      </div> 
+                    </div>
+        </form> 
+    </div>
+    </div><!-- End Page Title -->
+
+    <div class="aging-screen" *ngIf="showPage == true">
+     <section class="section dashboard">
+        <div class="row aging-sc">
+            <div class="innerform">
+              <div class="tablemaindiv mat-elevation-z8">
+                  <table class="maintable withborder commform" style="width:100%">  
+             <thead>
+               <tr>
+                 <th>
+                   <a class="tblClsSort"  style="color:white;text-decoration: none;" href="javascript:void(0);" (click)="myFuncSort('transactonNo')">Transaction No</a> 
+                 </th>
+                 <th>
+                  <a class="tblClsSort"  style="color:white;text-decoration: none;" href="javascript:void(0);" (click)="myFuncSort('transactionDate')">Transaction Date</a>
+                </th>
+                <th>
+                  <a class="tblClsSort"  style="color:white;text-decoration: none;" href="javascript:void(0);" (click)="myFuncSort('creditAmount')">Credit Amount</a> 
+                </th>
+                <th>
+                  <a class="tblClsSort"  style="color:white;text-decoration: none;" href="javascript:void(0);" (click)="myFuncSort('transactonNo')">Debit Amount</a> 
+                </th>
+                <th>
+                  <a class="tblClsSort"  style="color:white;text-decoration: none;" href="javascript:void(0);" (click)="myFuncSort('transactonNo')">Opening Balance</a> 
+                </th>
+                <th>
+                  <a class="tblClsSort"  style="color:white;text-decoration: none;" href="javascript:void(0);" (click)="myFuncSort('closingAmount')">Closing Balance</a> 
+                </th>
+               </tr>
+             </thead>               
+             <tbody>
+             <tr *ngFor="let item of dataSource">
+               <td>{{item.transactionNo}}</td>
+               <td>{{ item.transactionDate[0]+'/'+item.transactionDate[1]+'/'+item.transactionDate[2] | date: 'MM/dd/yyyy'}}</td>
+               <td *ngIf="item.creditAmount > 0; else emptyTd" [ngStyle]="{'color': item.creditAmount > 0 ? 'rgb(13, 161, 65)' : ''}">+${{ item.creditAmount }}</td>
+               <td *ngIf="item.debitAmount > 0; else emptyTd" [ngStyle]="{'color': item.debitAmount > 0 ? 'red' : ''}">-${{ item.debitAmount }}</td> 
+               <td>${{item.openingAmount}}</td>
+               <td>${{item.closingAmount}}</td>
+               <ng-template #emptyTd>
+                <td>NIL</td>
+              </ng-template>
+             </tr>
+             </tbody>
+                 </table>
+              </div>
+          
+         <div class="row mtb-20 justify-content-md-center">
+           <div class="col">
+           <button type="button" class="btn btn-primary btn-sm" style="width:40px;" title="Previous" (click)="myFuncPrevious()"> < Previous</button> &nbsp;
+             <button type="button" class="btn btn-primary btn-sm" style="width:40px;" title="Next" (click)="myFuncNext()"> Next > </button>                
+           </div>
+           <div class="col align-right">             
+             <button type="submit" class="btn btn-primary" (click)="excelDownload()">Excel<span class="barraowno"></span></button>
+           </div>
+         </div>
+     
+              <div class="row mtb-20 justify-content-md-center">
+                <div class="col">                
+                    
+                </div>
+                <div class="col align-right">
+                    
+                </div>
+              </div> 
+            </div>
+          </div>
+     </section>
+
+<div class="account-transaction" *ngIf="showPage == true">
+ <!-- account-transaction Start -->
+
+
+<!-- account-transaction End --> 
+</div>
+
+<section class="section dashboard" *ngIf="showPage == false">
+	<div class="row" style="align-items: center;">
+		<div class="col-md-12" style="padding:10px;">
+			<h1>Bank Statement</h1>
+		</div>
+	</div>
+	<div class="row" style="height: 500px;">
+		<div class="col-md-12">
+			<div class="alert alert-dismissable alert-danger">
+				<strong>Oops!</strong> You dont have access to see this page.
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,36 @@
+:host ::ng-deep .mat-mdc-paginator-range-actions .mat-mdc-icon-button.mat-mdc-button-base {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #DDDDE1;    
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    margin: 0 5px;
+}
+
+:host ::ng-deep .mat-mdc-paginator-range-actions .mat-mdc-icon-button.mat-mdc-button-base:hover {
+    background-color: var(--coy-btn-hover-bg);
+    border-color: #58A1CC;
+}
+
+:host ::ng-deep .mat-mdc-paginator-range-actions .mat-mdc-icon-button.mat-mdc-button-base:last-child {
+    margin-right: 0;
+}
+
+:host ::ng-deep .mat-mdc-paginator-icon {
+    fill: #273259;
+}
+
+:host ::ng-deep .mat-mdc-paginator-container {
+    padding: 0;
+    justify-content: space-between;
+}
+
+:host ::ng-deep  .mat-mdc-paginator-range-actions .mat-mdc-icon-button .mat-mdc-button-persistent-ripple {
+    border-radius: 7px;
+}
+
+:host ::ng-deep .mat-mdc-paginator-range-actions .mat-mdc-icon-button:hover .mat-mdc-button-persistent-ripple {
+    background-color: rgba(88, 161, 204, 0.1);
+}

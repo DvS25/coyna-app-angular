@@ -1,0 +1,55 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>.pagetitle select.form-control {
+    height: auto !important;
+}</style>
+
+<div class="innerdash pagetitle">
+
+    <div class="row">
+        <div class="col-md-12 nopad d-flex0 align-items-center">
+            <h1>Role List</h1>
+        </div>
+    </div>
+</div><!-- End Page Title -->
+<div class="role-list-screen">
+    <!-- trial-balance Start -->
+   
+    <section class="section dashboard">
+       <div class="row trial-balance-sc">
+           <div class="innerform">
+             <div class="tablemaindiv mat-elevation-z8">
+                 <table class="maintable withborder commform" style="width:100%">  
+                    <thead>
+                       <tr>
+                           <th>Role Name</th>
+                           <th>User Type</th>
+                           <th>Action</th>
+                        </tr>
+                    </thead>               
+                    <tbody>
+                         <tr *ngFor="let role of roleList; let i = index" >
+                            <td>
+                                {{role}}
+                            </td>
+							<td>
+                                {{role.userType}}
+                            </td>
+                            <td>
+								<button type="submit" class="btn btn-sm" (click)="editRow(role.roleId)" style="border-radius:50px;"><i class="fa fa-edit"></i></button>&nbsp;
+								<button type="submit" class="btn btn-sm" (click)="delRow(role.roleId)" style="border-radius:50px;"><i class="fa fa-trash"></i></button>
+							</td>
+                         </tr>                        
+                    </tbody>
+                 </table>
+             </div>
+			 
+             <div class="col-md-12 mt-3">
+                <a class="btn btn-primary mr-1 btn-save" routerLink="/add-role">Add New Role</a>
+             </div>
+
+           </div>
+         </div>
+    </section>
+   
+   </div>

@@ -1,0 +1,14 @@
+@import '../../../assets/css/material/table.scss';
+@import '../../../assets/css/material/checkbox.scss';
+
+.item-classification-tbl .description-col {
+    max-width: 300px;
+}
+
+.item-classification-tbl  .action-col {
+    width: 118px;
+}
+
+.checkbox-col {
+    width: 75px;
+}

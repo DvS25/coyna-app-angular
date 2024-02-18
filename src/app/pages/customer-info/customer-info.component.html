@@ -1,0 +1,233 @@
+<form class="" [formGroup]="CustomerForm">
+  <!-- row -->
+  <div class="row mb-30">
+    <div class="col-6">
+      <h3 class="text-title mb-2 fw-bold">Upload your Company logo here</h3> 
+      <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader" class="ng2FileDropZone d-flex flex-column flex-wrap justify-content-center p-3 flex-grow-1">
+        <input type="file" accept="image/*" class="d-none hidden-file" #fileInput ng2FileSelect [uploader]="uploader" (onFileSelected)="onFileSelected($event)"/>           
+        <span *ngIf="this.image" class="fileIpImgContainer w-100">          
+            <img *ngIf="this.image" class="mw-100 mh-100 w-100 h-100 object-fit-contain" [src]="this.image" alt="logo" />          
+        </span>
+        <span  class="flex-grow-0 flex-shrink-0" (click)="fileInput.click()">
+          <img class="mw-100 mh-100 object-fit-contain" src="../../../assets/img/icons/company_upload.svg" alt="logo" />
+          <span class="text-title ps-3">Upload Company Logo</span>
+        </span>     
+      </div>
+    </div>
+  </div>
+  <!-- // row -->
+  <!-- row -->
+  <div class="row">
+    <div class="col-lg-6 col-md-6 mb-30">
+      <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Name of your business</mat-label>
+          <input matInput placeholder="Name of your business" [(ngModel)]="CompanyData.businessName" id="businessName" name="businessName" formControlName="businessName" autofocus 
+          [ngClass]="{
+            'is-invalid': submitted && f['businessName'].errors,
+              'is-valid': submitted && !f['businessName'].errors}">   
+              <mat-error *ngIf="submitted && f['businessName'].errors">Buisness Name is required</mat-error>           
+      </mat-form-field>  
+    </div>
+    <div class="col-lg-6 col-md-6 mb-30">
+        <mat-form-field appearance="outline"  class="w-100">
+            <mat-label>Same as legal name?</mat-label>
+            <mat-select placeholder="Select" (selectionChange)="sameaslegalnameOnChange()"  [(ngModel)]="sameaslegalname" formControlName="sameaslegalname"
+            [ngClass]="{
+              'is-invalid': submitted && f['sameaslegalname'].errors,
+                'is-valid': submitted && !f['sameaslegalname'].errors}">
+              <mat-option matInput  *ngFor="let obj of SameasLegalnameList" [value]="obj.name">
+                {{obj.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && f['sameaslegalname'].errors">Same as legalname is required</mat-error>           
+          </mat-form-field> 
+    </div>
+    <div class="col-12 mb-30">
+        <section class="example-section">
+            <mat-checkbox class="me-4"  [(ngModel)]="EINTaxType" [ngModelOptions]="{standalone: true}" (change)="TaxIdTypeOnChange('EIN',$event.checked)">EIN</mat-checkbox>
+            <mat-checkbox class="example-margin" [(ngModel)]="SSNTaxType" [ngModelOptions]="{standalone: true}" (change)="TaxIdTypeOnChange('SSN',$event.checked)">SSN</mat-checkbox>
+          </section>
+    </div>
+    <div class="col-lg-6 col-md-6 mb-30"> 
+      <mat-form-field appearance="outline"  class="w-100">
+        <mat-label>{{taxIdType}} Number</mat-label>
+        <input matInput [placeholder]="taxIdType+ ' ' +'Number'" [readonly]="taxIdType == ''" [(ngModel)]="CompanyData.taxIdNumber" id="taxIdNumber" name="taxIdNumber" formControlName="taxIdNumber" autofocus 
+          [ngClass]="{
+            'is-invalid': submitted && f['taxIdNumber'].errors,
+             'is-valid': submitted && !f['taxIdNumber'].errors}">   
+        <mat-error *ngIf="submitted && f['taxIdNumber'].errors">Buisness Name is required</mat-error>                    
+      </mat-form-field> 
+    </div>
+  </div>
+  <!-- // row -->
+  <!-- row -->
+  <h2 class="text-title mb-30 fw-bold">Your Contact Information</h2>
+  <div class="row">          
+    <div class="col-lg-6 col-md-6 mb-30"> 
+      <mat-form-field appearance="outline"  class="w-100">
+        <mat-label>Email Id</mat-label>
+        <input matInput placeholder="Email Id" [(ngModel)]="CompanyData.emailId" id="emailId" name="emailId" formControlName="emailId" autofocus [ngClass]="{'is-invalid': submitted && f['emailId'].errors,'is-valid': submitted && !f['emailId'].errors}">   
+        <mat-error *ngIf="submitted && f['emailId'].errors">Email Name is required</mat-error>           
+      </mat-form-field> 
+    </div>
+    <div class="col-lg-6 col-md-6 mb-30"> 
+        <mat-form-field appearance="outline"  class="w-100">
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Address"  [(ngModel)]="CompanyData.address" id="address" name="address" formControlName="address" autofocus 
+        [ngClass]="{
+          'is-invalid': submitted && f['address'].errors,
+            'is-valid': submitted && !f['address'].errors}">   
+            <mat-error *ngIf="submitted && f['address'].errors">Address Name is required</mat-error>           
+          </mat-form-field> 
+    </div>
+    <div class="col-lg-6 col-md-6 mb-30">
+      <mat-form-field appearance="outline"  class="w-100">
+        <mat-label>Country</mat-label>
+        <mat-select placeholder="Select" formControlName="country"  [(ngModel)]="CompanyData.country"  (selectionChange)="CountryOnChange($event.value)"
+          [ngClass]="{
+            'is-invalid': submitted && f['country'].errors,
+              'is-valid': submitted && !f['country'].errors}">
+          <mat-option matInput  *ngFor="let obj of countryList" [value]="obj.countryId">
+            {{obj.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f['country'].errors">Country is required</mat-error>            
+      </mat-form-field>  
+    </div>
+    <div class="col-lg-6 col-md-6 mb-30">
+      <mat-form-field appearance="outline"  class="w-100">
+          <mat-label>State</mat-label>
+          <mat-select placeholder="Select" formControlName="state" [(ngModel)]="CompanyData.state"  (selectionChange)="StateOnChange($event.value)"
+          [ngClass]="{
+            'is-invalid': submitted && f['state'].errors,
+              'is-valid': submitted && !f['state'].errors}">
+            <mat-option matInput  *ngFor="let obj of stateList" [value]="obj.stateId">
+              {{obj.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="submitted && f['state'].errors">State is required</mat-error>            
+        </mat-form-field>  
+    </div>
+    <div class="col-lg-6 col-md-6 mb-30">
+      <mat-form-field appearance="outline"  class="w-100">
+          <mat-label>City</mat-label>
+          <mat-select placeholder="Select" [(ngModel)]="CompanyData.city" formControlName="city"
+          [ngClass]="{
+            'is-invalid': submitted && f['city'].errors,
+              'is-valid': submitted && !f['city'].errors}">
+            <mat-option matInput  *ngFor="let obj of cityList" [value]="obj.cityId">
+              {{obj.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="submitted && f['city'].errors">City is required</mat-error>            
+        </mat-form-field>  
+    </div>
+    <div class="col-lg-6 col-md-6 mb-30">
+      <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Zipcode</mat-label>
+          <input matInput placeholder="Zipcode" id="zipCode"  [(ngModel)]="CompanyData.zipCode"  name="zipCode" formControlName="zipCode" autofocus 
+          [ngClass]="{
+            'is-invalid': submitted && f['zipCode'].errors,
+              'is-valid': submitted && !f['zipCode'].errors}">  
+              <mat-error *ngIf="submitted && f['zipCode'].errors">Zipcode is required</mat-error>            
+      </mat-form-field>  
+    </div>
+    <div class="col-lg-6 col-md-6 mb-30"> 
+      <mat-form-field appearance="outline"  class="w-100">
+        <mat-label>Contact Number</mat-label>
+        <input matInput placeholder="Contact Number" [(ngModel)]="CompanyData.contactNumber" id="contactNumber" name="contactNumber" formControlName="contactNumber" autofocus 
+          [ngClass]="{
+        'is-invalid': submitted && f['contactNumber'].errors,
+          'is-valid': submitted && !f['contactNumber'].errors}">   
+        <mat-error *ngIf="submitted && f['contactNumber'].errors">Contact Number Name is required</mat-error>          
+      </mat-form-field> 
+    </div>
+    <div class="col-lg-6 col-md-6 mb-30"> 
+        <mat-form-field appearance="outline"  class="w-100">
+            <mat-label>Website</mat-label>
+            <input matInput placeholder="Website" id="website" [(ngModel)]="CompanyData.website" name="website" formControlName="website" autofocus 
+        [ngClass]="{
+          'is-invalid': submitted && f['website'].errors,
+            'is-valid': submitted && !f['website'].errors}">   
+            <mat-error *ngIf="submitted && f['website'].errors">Website Name is required</mat-error>          
+          </mat-form-field> 
+    </div>
+    <!-- <div class="col-lg-6 col-md-6 mb-30">
+        <section class="example-section">
+            <mat-checkbox class="example-margin" value="EIN">EIN</mat-checkbox>
+            <mat-checkbox class="example-margin" value="SSN">SSN</mat-checkbox>
+          </section>
+    </div> -->
+  </div>  
+  <!--  -->
+<div class="row" *ngIf="sameaslegalname == 'No'">
+  <div class="col-12 mb-30" >
+      <h2 class="text-title mb-2 fw-bold">Legal Contact Information</h2>
+  </div>  
+  <div class="col-lg-6 col-md-6 mb-30"> 
+    <mat-form-field appearance="outline"  class="w-100">
+      <mat-label>Email Id</mat-label>
+      <input matInput placeholder="Email Id"  [(ngModel)]="LegalData.emailIs" [ngModelOptions]="{standalone: true}" autofocus >   
+    </mat-form-field> 
+  </div>
+  <div class="col-lg-6 col-md-6 mb-30"> 
+      <mat-form-field appearance="outline"  class="w-100">
+          <mat-label>Address</mat-label>
+          <input matInput placeholder="Address" [(ngModel)]="LegalData.address" [ngModelOptions]="{standalone: true}" autofocus >   
+        </mat-form-field> 
+  </div>
+    <div class="col-lg-6 col-md-6 mb-30">
+      <mat-form-field appearance="outline"  class="w-100">
+          <mat-label>Country</mat-label>
+          <mat-select placeholder="Select" [(ngModel)]="LegalData.country"  (selectionChange)="CountryOnChange($event.value)" [ngModelOptions]="{standalone: true}">
+            <mat-option matInput  *ngFor="let obj of countryList" [value]="obj.countryId">
+              {{obj.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>  
+  </div>
+    <div class="col-lg-6 col-md-6 mb-30">
+      <mat-form-field appearance="outline"  class="w-100">
+          <mat-label>State</mat-label>
+          <mat-select placeholder="Select" [(ngModel)]="LegalData.state" [ngModelOptions]="{standalone: true}"  (selectionChange)="StateOnChange($event.value)">
+            <mat-option matInput  *ngFor="let obj of stateList" [value]="obj.stateId">
+              {{obj.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>  
+  </div>
+        <div class="col-lg-6 col-md-6 mb-30">
+          <mat-form-field appearance="outline"  class="w-100">
+              <mat-label>City</mat-label>
+              <mat-select placeholder="Select" [(ngModel)]="LegalData.city" [ngModelOptions]="{standalone: true}">
+                <mat-option matInput  *ngFor="let obj of cityList" [value]="obj.cityId">
+                  {{obj.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>  
+      </div>
+      <div class="col-lg-6 col-md-6 mb-30">
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Zipcode</mat-label>
+            <input matInput placeholder="Zipcode"  [(ngModel)]="LegalData.zipcode" [ngModelOptions]="{standalone: true}" autofocus  >  
+        </mat-form-field>  
+    </div>
+    <div class="col-lg-6 col-md-6 mb-30"> 
+        <mat-form-field appearance="outline"  class="w-100">
+            <mat-label>Contact Number</mat-label>
+            <input matInput placeholder="Contact Number"  [(ngModel)]="LegalData.contactNumber" [ngModelOptions]="{standalone: true}" autofocus >   
+          </mat-form-field> 
+    </div>
+    <div class="col-lg-6 col-md-6 mb-30"> 
+        <mat-form-field appearance="outline"  class="w-100">
+            <mat-label>Website</mat-label>
+            <input matInput placeholder="Website" [(ngModel)]="LegalData.website" [ngModelOptions]="{standalone: true}" autofocus >   
+          </mat-form-field> 
+    </div>   
+  </div>
+  <!-- // row -->
+  <div class="mb-4 text-end">
+    <button class="btn btn-primary btn-lg px-5" (click)="SaveCompanyInfo()">Save</button>
+  </div>
+</form>
+    

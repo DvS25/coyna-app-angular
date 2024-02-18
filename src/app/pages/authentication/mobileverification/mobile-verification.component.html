@@ -1,0 +1,77 @@
+<div class="container-fluid">
+    <div class="row vh-100 overflow-hidden">
+        <div class="col-md-6 bg-section position-relative h-100 d-none d-md-block">
+            <div class="bg-text-container text-white ms-4">
+                <h1 class="fs-1">Lorem ipsum dolor</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate felis laoreet nibh efficitur.</p>
+            </div>
+            <div class="bg-stripes-1 position-absolute"></div>
+            <div class="bg-stripes-2 position-absolute"></div>
+            <div class="bg-stripes-3 position-absolute"></div>            
+        </div>
+        <div class="col-md-6 h-100 overflow-auto">
+            <div class="d-grid justify-content-center align-items-center h-100">
+                <div class="login-content pt-3">
+                    <div class="text-center">
+                        <img src="../../../../assets/img/Coyna.png" class="mb-4" height="81">
+                        <h1 class="mb-4 text-title"><b>Verify Phone Number</b></h1>
+                        <p class="text_head">You have receive otp on your phone number. 
+                            Kindly enter it to complete sign up.</p>
+                    </div>
+                    <div class="mb-4" style="text-align: center;">
+                        <ng-otp-input #ngOtpInput class="ngOtpIp" [config]="{length:4}"></ng-otp-input>
+                        <input type="text" formControlName="pinNumber" class="d-none">
+                    </div>
+                    <div class="text_head mt-4 mb-4">
+                        <a href="#" class="mb-4">Resend Code</a>
+                    </div>
+
+                    <button class="btn btn-primary btn-lg d-block mt-4" style="width: 435px">Verify</button>
+
+                    <!-- <mat-tab-group dynamicHeight mat-stretch-tabs animationDuration="500ms">
+                        <mat-tab label="Email">                  
+                            <form class="py-5"  [formGroup]="MobileVerificationForm">                                
+                                <mat-form-field appearance="outline" class="w-100 mb-2">
+                                    <mat-label>Email / Phone</mat-label>
+                                    <input matInput placeholder="Enter Email / Phone" id="email" name="email-username" formControlName="userName" autofocus
+                                    [ngClass]="{
+                                    'is-invalid': submitted && f['userName'].errors,
+                                     'is-valid': submitted && !f['userName'].errors}">   
+                                     <mat-error *ngIf="submitted && f['userName'].errors">UserName is required</mat-error>                                             
+                                </mat-form-field>                                
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Password</mat-label>
+                                    <input matInput [type]="passwordType" id="password" placeholder="Enter password" name="password"
+                                    formControlName="password" autofocus  aria-describedby="password"
+                                    [ngClass]="{
+                                    'is-invalid': submitted && f['password'].errors,
+                                     'is-valid': submitted && !f['password'].errors}">       
+                                     <mat-error *ngIf="submitted && f['password'].errors">Password is required</mat-error>                                              
+                                </mat-form-field>
+                                <div class="pb-3 text-end"><a style="color: #58A1CC;">Forgot your password?</a></div>
+                                <button class="btn btn-primary btn-lg w-100 d-block">Login</button>
+                                <div class="d-flex flex-row flex-nowrap align-items-center my-3">
+                                    <mat-divider class="flex-grow-1"></mat-divider>
+                                    <span class="mx-3 flex-shrink-0 text-title">OR</span>
+                                    <mat-divider class="flex-grow-1"></mat-divider>
+                                </div>
+                                <button class="btn btn-lg w-100 mb-5 text-title" style="border: 1px solid #ECEDEF;border-radius: 10px;"><img src="../../../../assets/img/gmail-logo.png" class="me-3"> Continue with Google</button>
+                                <div class="text-center text-title">Don’t have an account?  <a href="javascript:void()" class="text-decoration-none text-linear" (click)="RedirectToSignup()" >Sign up</a></div>
+                            </form>                                      
+                        </mat-tab>
+                        <mat-tab label="Phone number">
+                            <form class="py-5">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Phone Number</mat-label>
+                                    <input matInput placeholder="Enter Phone Number">                                                        
+                                </mat-form-field>
+                                <button class="btn btn-primary btn-lg w-100 d-block">Send OTP</button>
+                            </form>
+                        </mat-tab>
+                    </mat-tab-group> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

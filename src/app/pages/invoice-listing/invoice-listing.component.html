@@ -1,0 +1,189 @@
+<div *ngIf="showPage == true">
+    <div class="innerdash pagetitle">
+        <div [formGroup]="dateFormGroup">
+        <div class="row">
+            <div class="col-md-3 nopad d-flex align-items-center">
+                <h1>Invoice Listing</h1>
+            </div>
+            <div class="col-md-3">
+                <span class="form-label" style="font-size: 12px;">Invoice Start Date</span>
+                <input type="date" class="form-control date" id="invoiceStartDate" formControlName="invoiceStartDate" [ngClass]="{
+                    'is-invalid': filterSubmitted && f['invoiceStartDate'].errors,
+                     'is-valid': filterSubmitted && !f['invoiceStartDate'].errors}"/>
+            </div>
+            <div class="col-md-2">
+                <label for="invoiceEndDate" class="form-label" style="font-size: 12px;">Invoice End Date</label>
+                <input type="date" class="form-control date" id="invoiceEndDate" formControlName="invoiceEndDate" [ngClass]="{
+                    'is-invalid': filterSubmitted && f['invoiceEndDate'].errors,
+                     'is-valid': filterSubmitted && !f['invoiceEndDate'].errors}"/>
+            </div>
+            <div class="col-md-2">
+                <br>
+                <a class="btn btn-primary btn-save" style="height: 45px;" href="/invoice-management">Add Invoice</a>
+            </div>
+        </div>
+    </div>
+        <div class="row" style="align-items: center;">
+            <div class="col-md-12">
+                <form id="formCreatecompany" class="mb-3 mt-4 commform row" style="align-items: flex-end;"
+                      [formGroup]="filterForm">
+
+                    <div class="col-md-3">
+                        <select class="form-control" formControlName="company_id" (change)="getStore($event.target)">
+                            <option value="" hidden>Select Company</option>
+                            <option [value]="item.companyId"
+                                    *ngFor="let item of companyList">{{item.name | titlecase}}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <select class="form-control" formControlName="store_id">
+                            <option value="" hidden>Select Store</option>
+                            <option [value]="item.companyId"
+                                    *ngFor="let item of storeList">{{item.name | titlecase}}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <select class="form-control" formControlName="vendor_id">
+                            <option value="" hidden>Select Vendor</option>
+                            <option [value]="item.vendorId"
+                                    *ngFor="let item of vendorList">{{item.name | titlecase}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button (click)="search()" class="btn btn-primary btn-save">Search</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button (click)="reset()" class="btn btn-primary btn-save">Reset</button>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="col-md-12 row" style="padding:0;">
+                <div class="col-md-9"></div>
+                <div class="col-md-3" style="padding:0;">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+    </div><!-- End Page Title -->
+
+
+    <section class="section dashboard">
+        <div class="row">
+            <div class="innerform">
+                <div class="col-md-12">
+
+                    <div class="tablemaindiv mat-elevation-z8">
+                        <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+                               class="mat-elevation-z8 maintable">
+
+                            <!-- Position Column -->
+                            <ng-container matColumnDef="vname">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    sortActionDescription="Sort by number">
+                                    Vendor Name
+                                </th>
+                                <td mat-cell *matCellDef="let element"> {{(element.vendorName | titlecase)}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="invoiceNumber">
+                                <th mat-header-cell *matHeaderCellDef> Invoice Number</th>
+                                <td mat-cell *matCellDef="let element"> {{element.invoiceNumber}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="invoiceDate">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                sortActionDescription="Sort by number"> Invoice Date</th>
+                                <td mat-cell *matCellDef="let element"> {{(element.invoiceDateString | date: 'MM/dd/yyyy' )}} </td>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="duedate">
+                                <th mat-header-cell *matHeaderCellDef> Due Date</th>
+                                <td mat-cell *matCellDef="let element"> {{(element.dueDateString | date: 'MM/dd/yyyy' )}} </td>
+                            </ng-container>
+
+                            <!-- Weight Column -->
+                            <ng-container matColumnDef="totalAmount">
+                                <th mat-header-cell *matHeaderCellDef > Total Amount</th>
+                                <td mat-cell *matCellDef="let element"> {{element.totalAmount}} </td>
+                            </ng-container>
+
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="pstatus">
+                                <th mat-header-cell *matHeaderCellDef> Payment Status</th>
+                                <td mat-cell *matCellDef="let element">{{element.paymentStatus}}
+<!--                                    <span *ngIf="Object.keys(element.invoiceDtl[0].apPayment).length === 0 && element.invoiceDtl[0].apPayment.constructor === Object"> New</span>-->
+<!--                                    <span> {{element.paymentStatus | titlecase}}</span>-->
+
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="invoice">
+                                <th mat-header-cell *matHeaderCellDef> <span style="padding-right: 15px;">View</span><span style="padding-right: 10px;">Payment</span> Delete</th>
+                                <td mat-cell *matCellDef="let element" class="dflexdiv">
+                                    <button class="viewbtn" (click)="viewInvoice(element.apInvoiceId)">
+                                        <!--<img src="assets/img/view.png">--><i class="fa fa-eye"></i>
+                                    </button>
+                                    <button class="viewbtn" (click)="intitatePayment(element.apInvoiceId)">
+                                        <!--<img src="assets/img/view.png">--><i class="fa fa-usd"></i>
+                                    </button>
+                                    <button class="viewbtn" (click)="deleteInvoice(element.apInvoiceId)">
+                                        <!--<img src="assets/img/view.png">--><i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <!--<ng-container matColumnDef="invoice">
+                                <th mat-header-cell *matHeaderCellDef> Payment</th>
+                                <td mat-cell *matCellDef="let element" class="dflexdiv">                                    
+                                    <button class="viewbtn" (click)="intitatePayment(element.apInvoiceId)">
+                                        <img src="assets/img/view.png">
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="invoice">
+                                <th mat-header-cell *matHeaderCellDef> Delete</th>
+                                <td mat-cell *matCellDef="let element" class="dflexdiv">                                    
+                                    <button class="viewbtn" (click)="deleteInvoice(element.apInvoiceId)">
+                                        <img src="assets/img/view.png"><i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </ng-container>-->
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[10, 20,30,40,50]"
+                                       showFirstLastButtons
+                                       aria-label="Select page of periodic elements">
+                        </mat-paginator>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<section class="section dashboard" *ngIf="showPage == false">
+	<div class="row" style="align-items: center;">
+		<div class="col-md-12" style="padding:5px;">
+			<h1>Invoice Listing</h1>
+		</div>
+	</div>
+	<div class="row" style="height: 500px;">
+		<div class="col-md-12">
+			<div class="alert alert-dismissable alert-danger">
+				<strong>Oops!</strong> You dont have access to see this page.
+			</div>
+		</div>
+	</div>
+</section>

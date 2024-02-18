@@ -1,0 +1,171 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<div class="innerdash pagetitle">
+    <div class="row">
+        <div class="col-md-8 nopad d-flex align-items-center">
+            <h1>Vendor Detail</h1>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+        </div>
+        <div class="col-md-2 d-flex">
+            <a class="btn btn-primary mr-1" (click)="editVendorDetails()">Edit Vendor</a>
+        </div>
+    </div>
+</div><!-- End Page Title -->
+<section class="section dashboard">
+    <div class="row">
+        <div class="innerform">
+            <div class="col-md-9">
+                <form id="formCreatecompany" class="mb-3 commform">
+                    <div class="steps row">
+                        <div class="innerfheader mt-2 mb-1 noborder">
+                            <h4><span>Step 01</span> - Company Information</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Company Name:  {{vendorInfo.companyName | titlecase}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Street:  {{vendorInfo.address.street | titlecase}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Country:  {{vendorInfo.address.country | titlecase}}</label>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="name" class="form-label">City:  {{vendorInfo.address.city | titlecase}}</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Vendor Name:   {{vendorInfo.name | titlecase}} </label>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Store:  {{vendorInfo.storeName}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Postal Code:  {{vendorInfo.address.postalCode}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Province:  {{vendorInfo.address.province}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="steps row">
+                        <div class="innerfheader mt-4 mb-1 noborder">
+                            <h4><span>Step 02</span> - Company Documents</h4>
+                        </div>
+                        <div class="col-md-6">
+<!--                            <div class="mb-3">-->
+<!--                                <label for="name" class="form-label">Company Verification Documents : 01  <button class=""> Download</button></label>-->
+<!--                            </div>-->
+<!--                            <div class="mb-3">-->
+<!--                                <label for="name" class="form-label">Company Verification Documents : 02</label>-->
+<!--                            </div>-->
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Payment Code:  {{payment.paymentCode}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">GST Number:  {{vendorInfo.gst}}</label>
+                            </div>
+<!--                            <div class="mb-3">-->
+<!--                                <label for="name" class="form-label">Company GST / HST: </label>-->
+<!--                            </div>-->
+<!--                            documentId-->
+                            <div>
+                                <label for="name" class="form-label">Uploaded Documents:  </label>
+                                <table>
+                                    <tr *ngFor="let item of document" style="height: 35px">
+                                        <td> {{item.documentName | titlecase}}</td>
+                                        <td>
+                                            <a class="downloadButtonTag"
+                                                    (click)="getDownload(item.documentId, item.documentName)"> Download
+                                             </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Currency:  {{payment.currency}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Language:  {{vendorInfo.language}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Payment Terms:  {{payment.paymentTerms}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Mode of Payment:  {{payment.paymentMode}} </label>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="steps row">
+                        <div class="innerfheader mt-4 mb-1 noborder">
+                            <h4><span>Step 03</span> - Bank Account Details</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Bank
+                                    Name: {{bankAccount.bankName | titlecase}} </label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Beneficiary
+                                    Name: {{bankAccount.beneficiaryName}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Routing
+                                    Number:  {{bankAccount.routingNumber | uppercase}} </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Account
+                                    Number:  {{bankAccount.accountingNumber}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Re enter Account
+                                    Number: {{bankAccount.accountingNumber}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="steps row">
+                        <div class="innerfheader mt-4 mb-1 noborder">
+                            <h4><span>Step 04</span> - Personal Information</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Contact Full
+                                    Name:  {{contactInfo.contactName | titlecase}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Contact Phone
+                                    Number:  {{contactInfo.contactNumber}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Contact Email ID: {{contactInfo.emailId}} </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Contact Alternative
+                                    Number:   {{contactInfo.alternateContactNumber}}</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Contact Alternative Email
+                                    ID:   {{contactInfo.alternateEmailId}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

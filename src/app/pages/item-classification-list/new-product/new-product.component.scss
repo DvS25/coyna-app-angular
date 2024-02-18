@@ -1,0 +1,60 @@
+@import '../../../../assets/css/material/table.scss';
+@import '../../../../assets/css/material/checkbox.scss';
+@import '../../../../assets/css/material/tab.scss';
+@import '../../../../assets/css/material/input.scss';
+
+
+:host ::ng-deep .mat-dialog-container {
+    border-radius: 40px !important;
+  }
+  
+  :host ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+    border-radius: 20px;
+  }
+  
+  :host ::ng-deep .mat-mdc-dialog-actions {
+    justify-content: center;
+  }
+
+  .title {
+    text-align: center;
+    font-size: large;
+    font-weight: 600;
+    margin-top: 26px;
+    color: #273259;
+    font-family: 'Manrope';
+  }
+  
+  :host ::ng-deep .mdc-dialog .mdc-dialog__content {
+    padding: 6px 24px 20px 24px;
+  }
+  
+  :host ::ng-deep .mdc-dialog .mdc-dialog__content {
+    padding: 6px 24px 0px 24px;
+  }
+  
+  :host ::ng-deep .mdc-dialog__actions {
+    padding: 0px !important;
+    margin-bottom: 16px !important;
+  }
+
+// ::ng-deep .mat-mdc-form-field {
+//     display: flex !important;
+//   }
+.product-form-container,  .product-action-container {
+  display: grid;
+  grid-template-columns: 1fr  1fr;
+  gap: 30px;
+}
+
+.product-form-container .item-image {
+  grid-column: 2;
+    grid-row: 1/4;
+}
+
+.product-form-container mat-form-field {
+  min-width: 300px;
+}
+
+
+

@@ -1,0 +1,87 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>.pagetitle select.form-control {
+    height: auto !important;
+}</style>
+<div class="innerdash pagetitle">
+    <div class="row">
+        <div class="col-md-12 nopad d-flex0 align-items-center">
+            <h1>Add Role Name</h1>
+        </div>
+    </div>
+</div><!-- End Page Title -->
+
+<div class="role-screen">
+   
+    <section class="section dashboard">
+       <div class="row trial-balance-sc">
+			<form class="mb-3 mt-4 commform row" [formGroup]="addRoleForm">
+           <div class="innerform">
+             <div class="tablemaindiv mat-elevation-z8">
+                 <table class="maintable withborder commform" style="width:100%">  
+                   <thead>
+                       <tr>
+                           <th>Add Role</th>
+                           <th></th>
+                       </tr>
+                   </thead>               
+                     <tbody>
+                        <tr>
+                            <td>Role Name</td>
+                            <td>
+								<input type="text" class="form-control" placeholder="" formControlName="roleName"/>
+								<span *ngIf="formSubmitted && f['roleName'].errors" >
+									<span *ngIf="f['roleName'].invalid" class="error-message">
+										<span style="font-size: 10px; color: red;" *ngIf="f['roleName'].errors.required">Rolename is required</span>
+									</span>
+								</span>
+							</td>
+                        </tr>
+                        <tr>
+                            <td>User Type</td>
+                            <td>
+								<select class="form-control" formControlName="userType">
+									<option value="">Select UserType</option>
+									<option [value]="item.type" *ngFor="let item of userTypeList">{{item.type | titlecase}}</option>
+								</select>
+								<span *ngIf="formSubmitted && f['userType'].errors" >
+									<span *ngIf="f['userType'].invalid" class="error-message">
+										<span style="font-size: 10px; color: red;" *ngIf="f['userType'].errors.required">UserType is required</span>
+									</span>
+								</span>
+							</td>
+                        </tr>
+						<tr>
+                            <td>Permissions</td>
+                            <td>
+								<table  class="maintable withborder commform" style="width:100%">
+									<thead>
+										<tr>
+											<th width="5%">#</th>
+											<th>Permission</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let per of permissionList; let i = index">
+											<td><input type="checkbox" id="chk_per_{{i}}"></td>
+											<td><label for="chk_per_{{i}}">{{per.name}}</label></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+                        </tr>
+                     </tbody>
+                 </table>
+
+             </div>
+             <div class="col-md-12 mt-3">
+                <button type="submit" class="btn btn-primary btnarraow btn-save" (click)="saveRole()" style="float:left;">><i class="fa fa-save"></i>Save</button>
+                <button type="submit" class="btn btn-danger" (click)="backToList()" style="float:right;border-radius:50px; width:200px;">Back To List</button>                
+             </div>
+
+           </div>
+			</form>
+		 </div>
+    </section>
+   
+   </div>

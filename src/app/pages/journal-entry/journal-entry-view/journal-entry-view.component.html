@@ -1,0 +1,87 @@
+<div class="row mt-2">
+    <div class="col-md-6 col-lg-6">
+        <mat-form-field class="w-100">
+            <mat-label>JE Number</mat-label>
+            <input matInput placeholder="0001" [(ngModel)]="JournalData.entityId">
+        </mat-form-field>        
+    </div>
+    <div class="col-12">
+        <!-- <button class="btn">Drag</button> -->
+        <div style="overflow-x: auto;">
+            <table class="font-inter">                                
+                <!-- <colgroup>
+                    <col style="min-width: 55px;">
+                    <col style="min-width: 55px;">
+                    <col style="width: 19%;">                    
+                    <col style="min-width: 120px;">
+                    <col style="min-width: 120px;">
+                    <col style="min-width: 25%;">
+                    <col style="min-width: 11%;">
+                    <col style="min-width: 13%;">
+                    <col style="width: 75px;">
+                </colgroup> -->
+                <thead>
+                    <tr style="height: 60px !important;">
+                        <th style="padding-left: 20px;">{{JournalData.companyName}}</th>
+                    </tr>
+                    <tr class="text-center text-linear bg-primary-light-50">
+                        <th>Date</th>
+                        <th>Account Name>Account Name</th>
+                        <th>Transaction Number</th>
+                        <th>Debits</th>
+                        <th>Credits</th>
+                        <th>Description</th>
+                        <!-- <th>Name</th>  -->
+                        <th *ngIf="CompanySettings.deptEnabled">Department</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of tblData;let index = index">
+                        <td class="text-center"  style="min-width: 120px;">{{JournalData.transactionDate}}</td>
+                        <td class="text-center" style="min-width: 200px;">Account Name>
+                           {{tblData[index].coaCompanyName}}                           
+                        </td>
+                        <td class="text-center" style="min-width: 200px;">
+                           {{JournalData.entityId}}                           
+                        </td>
+                        <td class="text-center" class="text-center" style="min-width: 120px;" *ngIf="tblData[index].debit_amout">
+                            ${{tblData[index].debit_amout}}
+                        </td>
+                        <td class="text-center" class="text-center" style="min-width: 120px;" *ngIf="!tblData[index].debit_amout">
+                            -
+                        </td>
+                        <td class="text-center" style="min-width: 120px;" *ngIf="tblData[index].credit_amout">                        
+                            ${{tblData[index].credit_amout}}
+                        </td>
+                        <td class="text-center" style="min-width: 120px;" *ngIf="!tblData[index].credit_amout">                        
+                            -
+                        </td>
+                        <td class="text-center" style="min-width: 180px;">                        
+                            {{tblData[index].description}}
+                        </td>
+                        <td class="text-center" style="min-width: 185px;" *ngIf="CompanySettings.deptEnabled">
+                           {{tblData[index].departmentName}}
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr style="height: 60px;" class="bg-primary-light text-center">                        
+                        <td colspan="3" style="text-align: left;padding-left: 30px;" class="text-title border-end-0 fw-bold">Total</td>
+                        <td class="text-primary-700 border-end-0 fw-bold">${{JournalData.total_debit_amount | number : '1.2-2'}}</td>
+                        <td class="text-primary-700 border-end-0 fw-bold">${{JournalData.total_credit_amount | number : '1.2-2'}}</td>
+                        <td colspan="4"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="my-5"></div>
+
+<div>
+    <div class="flex-shrink-0 text-end me-4">
+        <button class="btn btn-primary btn-lg" (click)="RedirectToReport()"><span class="">Return to reports</span></button>
+    </div>
+</div>
+      

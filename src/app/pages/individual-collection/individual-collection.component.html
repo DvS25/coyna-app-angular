@@ -1,0 +1,232 @@
+ <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+ <style>.pagetitle label.form-label {
+    margin: 0;
+}.pagetitle button.btn.btn-primary {
+    padding: 13px 10px !important;width: 100%;
+}table.maintable {
+    width: 100%;
+}thead {
+    background: #F1FCFA;
+}thead tr {
+   border-radius: 6px;
+}table.maintable td, table.maintable th {
+    padding: 20px 10px;
+}table.maintable tbody tr {
+    border-bottom: 1px solid #E9E9E9;
+}input.form-control {
+    padding: 10px 5px !important;
+    height: 40px !important;
+    font-size: 13px !important;
+}input.form-control:disabled {
+    background: #C4C4C4 !important;
+}.pagetitle select.form-control {
+    height: 55px !important;
+}th.centeral {
+    text-align: center;
+}.noborder tr {
+    border: 0 !important;
+}table.maintable.withborder td {
+    border-left: 1px solid #E9E9E9 !important;
+    border-right: 1px solid #E9E9E9 !important;
+}</style>
+
+ <div class="innerdash pagetitle">
+  <div class="row" style="align-items: center;">
+    <div class="col-md-4">
+    <h1>Individual Collection</h1></div>
+
+    <div class="col-md-8">
+      <form id="formCreatecompany" class="mb-3 mt-4 commform row" style="align-items: flex-end;">
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+                <label for="name" class="form-label">Select</label>
+                <select class="form-control">
+                  <option>By Location</option>
+                </select>
+          </div>
+          <div class="col-md-4">
+                <label for="name" class="form-label">Select</label>
+                <select class="form-control">
+                  <option>By Shift</option>
+                </select>
+          </div>
+          <div class="col-md-3"><button type="submit" class="btn btn-primary">Export Data</button></div>
+
+      </form>
+    </div>
+  </div>
+  </div><!-- End Page Title -->
+
+  <section class="section dashboard">
+    <div class="row">
+      <div class="innerform">
+        <div class="tablemaindiv mat-elevation-z8">
+            <table class="maintable noborder" style="width:70%">
+                <thead>
+                    <tr>
+                        <th>FUEL</th>
+                        <th class="centeral">POS1</th>
+                        <th class="centeral">POS2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>REGULAR</td>
+                        <td class="dflex"><div class="row"><div class="col-md-6"><input type="text" class="form-control" placeholder="QTY" /></div><div class="col-md-6"><input type="text" class="form-control" placeholder="AMOUNT" /></div></div></td>
+                        <td class="dflex"><div class="row"><div class="col-md-6"><input type="text" class="form-control" placeholder="QTY" /></div><div class="col-md-6"><input type="text" class="form-control" placeholder="AMOUNT" /></div></div></td>
+                    </tr>
+                    <tr>
+                        <td>PLUS</td>
+                        <td class="dflex"><div class="row"><div class="col-md-6"><input type="text" class="form-control" placeholder="QTY" /></div><div class="col-md-6"><input type="text" class="form-control" placeholder="AMOUNT" /></div></div></td>
+                        <td class="dflex"><div class="row"><div class="col-md-6"><input type="text" class="form-control" placeholder="QTY" /></div><div class="col-md-6"><input type="text" class="form-control" placeholder="AMOUNT" /></div></div></td>
+                    </tr>
+                    <tr>
+                        <td>SUPER CLEAN</td>
+                        <td class="dflex"><div class="row"><div class="col-md-6"><input type="text" class="form-control" placeholder="QTY" /></div><div class="col-md-6"><input type="text" class="form-control" placeholder="AMOUNT" /></div></div></td>
+                        <td class="dflex"><div class="row"><div class="col-md-6"><input type="text" class="form-control" placeholder="QTY" /></div><div class="col-md-6"><input type="text" class="form-control" placeholder="AMOUNT" /></div></div></td>
+                    </tr>
+                    <tr>
+                        <td>ULTRA</td>
+                        <td class="dflex"><div class="row"><div class="col-md-6"><input type="text" class="form-control" placeholder="QTY" /></div><div class="col-md-6"><input type="text" class="form-control" placeholder="AMOUNT" /></div></div></td>
+                        <td class="dflex"><div class="row"><div class="col-md-6"><input type="text" class="form-control" placeholder="QTY" /></div><div class="col-md-6"><input type="text" class="form-control" placeholder="AMOUNT" /></div></div></td>
+                    </tr>
+                    <tr>
+                        <td>DIESEL</td>
+                        <td class="dflex"><div class="row"><div class="col-md-6"><input type="text" class="form-control" placeholder="QTY" /></div><div class="col-md-6"><input type="text" class="form-control" placeholder="AMOUNT" /></div></div></td>
+                        <td class="dflex"><div class="row"><div class="col-md-6"><input type="text" class="form-control" placeholder="QTY" /></div><div class="col-md-6"><input type="text" class="form-control" placeholder="AMOUNT" /></div></div></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="innerform">
+        <h4 style="color: #222222;font-size: 17px;">CIGARETTES</h4>
+        <div class="tablemaindiv mat-elevation-z8">
+            <table class="maintable withborder" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ROW</th>
+                        <th>S1</th>
+                        <th>S2</th>
+                        <th>S3</th>
+                        <th>S4</th>
+                        <th>S5</th>
+                        <th>S6</th>
+                        <th>S7</th>
+                        <th>S8</th>
+                        <th>TOTAL</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border-left: 0px !important;">START</td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" disabled /></td>
+                        <td>OPEN</td>
+                        <td style="width:150px;border-right:0 !important"><input type="text" class="form-control" placeholder="" disabled /></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: 0px !important;">END</td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" disabled /></td>
+                        <td>ADD</td>
+                        <td style="width:150px;border-right:0 !important"><input type="text" class="form-control" placeholder="" disabled /></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: 0px !important;">CARTOON</td>
+                        <td>8’S</td>
+                        <td>10’S</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>SUB</td>
+                        <td style="width:150px;border-right:0 !important"><input type="text" class="form-control" placeholder="" disabled /></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: 0px !important;">START</td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" disabled /></td>
+                        <td>CLOSE</td>
+                        <td style="width:150px;border-right:0 !important"><input type="text" class="form-control" placeholder="" disabled /></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: 0px !important;">END</td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" /></td>
+                        <td><input type="text" class="form-control" placeholder="" disabled /></td>
+                        <td>SOLD</td>
+                        <td style="width:150px;border-right:0 !important"><input type="text" class="form-control" placeholder="" disabled /></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: 0px !important;"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Z1</td>
+                        <td style="width:150px;border-right:0 !important"><input type="text" class="form-control" placeholder="" disabled /></td>
+                    </tr>
+                    <tr>
+                        <td style="border-left: 0px !important;"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>DIFF</td>
+                        <td style="width:150px;border-right:0 !important"><input type="text" class="form-control" placeholder="" disabled /></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+

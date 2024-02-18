@@ -1,0 +1,56 @@
+<p mat-dialog-title class="title">Custom Role</p>
+<div>
+  <form [formGroup]="customRoleForm">
+    <div mat-dialog-content>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Custom Role</mat-label>
+          <input matInput formControlName="customRole" placeholder="Type here" required>
+          <mat-error *ngIf="customRoleForm.invalid">Custom Role is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div style="margin-top: 10px;">
+        <div class="row">
+          <div class="left-field">
+            <mat-checkbox formControlName="initializationChecked">Initialization</mat-checkbox>
+          </div>
+          <div class="right-field">
+            <mat-checkbox formControlName="expensesChecked">Expenses</mat-checkbox>
+          </div>
+        </div>
+        <div class="row">
+          <div class="left-field">
+            <mat-checkbox formControlName="dashboardChecked">Dashboard</mat-checkbox>
+          </div>
+          <div class="right-field">
+            <mat-checkbox formControlName="incomesChecked">Incomes</mat-checkbox>
+          </div>
+        </div>
+        <div class="row">
+          <div class="left-field">
+            <mat-checkbox formControlName="createNewChecked">Create new</mat-checkbox>
+          </div>
+          <div class="right-field">
+            <mat-checkbox formControlName="reportsChecked">Reports</mat-checkbox>
+          </div>
+        </div>
+        <div class="row">
+          <div class="left-field">
+            <mat-checkbox formControlName="bankingChecked">Banking</mat-checkbox>
+          </div>
+          <div class="right-field">
+            <mat-checkbox formControlName="settingChecked">Setting</mat-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <div>
+    <button mat-flat-button class="save" (click)="onSave()" [class.save-enable]="this.customRoleForm.valid"
+      [disabled]="this.customRoleForm.invalid">
+      <span>Save</span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" id="tick-circle" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g id="surface1">
+<path style="fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke:currentColor;stroke-opacity:1;stroke-miterlimit:4;" d="M 6.666667 9.860026 L 8.730469 11.923828 C 8.893229 12.086589 9.156901 12.086589 9.319661 11.923828 L 13.75 7.5 M 10 18.333333 C 5.397135 18.333333 1.666667 14.602865 1.666667 10 C 1.666667 5.397135 5.397135 1.666667 10 1.666667 C 14.602865 1.666667 18.333333 5.397135 18.333333 10 C 18.333333 14.602865 14.602865 18.333333 10 18.333333 Z M 10 18.333333 " transform="matrix(1.2,0,0,1.2,0,0)"/>
+</g>
+</svg>

@@ -1,0 +1,202 @@
+<div mat-dialog-title class="d-flex flex-row flex-nowrap align-items-center pt-3">
+  <img src="../../../../assets/img/service.svg" width="46" height="46" class="flex-shrink-0">
+  <span class="text-title ms-3 flex-grow-1 mb-0">Service</span>
+  <span class="close-btn material-symbols-outlined text-title" mat-dialog-close>close</span>
+</div>
+<mat-dialog-content class="py-4">
+  <form [formGroup]="ServiceForm" class="service-form-container">
+    <!-- Service -->
+    <div>
+      <mat-form-field>
+        <mat-label>Service</mat-label>
+        <input matInput placeholder="Enter Service" formControlName="name">
+        <mat-error *ngIf="this.ServiceForm.invalid">Service is required</mat-error>           
+      </mat-form-field>
+    </div>
+    <!-- Add Image -->
+    <div class="d-flex flex-column item-image">
+      <h3 class="text-title mb-2 fw-bold flex-shrink-0">Add Image</h3> 
+      <div ng2FileDrop [uploader]="uploader" class="ng2FileDropZone d-flex flex-column flex-wrap p-3 justify-content-center flex-grow-1">
+        <input type="file" accept="image/*" class="d-none hidden-file" #fileInput ng2FileSelect [uploader]="uploader" (onFileSelected)="onFileSelected($event)" />        
+        <span *ngIf="this.image" class="flex-grow-1 mb-2 position-relative">
+          <span class="position-absolute top-0 bottom-0 start-0 end-0">
+            <img *ngIf="this.image" class="mw-100 mh-100 w-100 h-100 object-fit-contain" [src]="this.image" alt="logo" />
+          </span>          
+        </span>
+        <span  class="flex-shrink-0 flex-grow-0" (click)="fileInput.click()">
+          <img class="mw-100 mh-100 object-fit-contain" src="../../../assets/img/icons/company_upload.svg" alt="logo" />
+          <span class="text-title ps-3">Upload image</span>
+        </span>
+      </div>
+    </div>
+    <!--SKU -->
+    <div>
+      <mat-form-field>
+        <mat-label>SKU</mat-label>
+        <input matInput placeholder="Enter SKU" formControlName="name">
+        <mat-error *ngIf="this.ServiceForm.invalid">Service is required</mat-error>           
+      </mat-form-field>
+    </div>
+    <!-- Department -->
+    <div>
+      <mat-form-field appearance="outline"  class="w-100">
+        <mat-label>Department</mat-label>
+        <mat-select placeholder="Select" formControlName="departmentId" required 
+        [ngClass]="{
+          'is-invalid': submitted ,
+           'is-valid': submitted}">
+          <mat-option matInput *ngFor="let obj of DepartmentList" [value]="obj.departmentId">
+            {{obj.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted">Department is required</mat-error>                                             
+      </mat-form-field>
+    </div>
+    <!-- Description -->
+    <div>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input matInput placeholder="Enter Description" formControlName="description">
+        <mat-error *ngIf="this.ServiceForm.invalid">Description is required</mat-error>           
+      </mat-form-field>
+    </div>
+    <!-- Quantity -->
+    <div>
+      <mat-form-field>
+        <mat-label>Quantity</mat-label>
+        <input matInput placeholder="Enter Quantity" formControlName="qtyInStock">
+        <mat-error *ngIf="this.ServiceForm.invalid">Quantity is required</mat-error>           
+      </mat-form-field>
+    </div>
+    <!-- Sales Price/Rate -->
+    <div>
+      <mat-form-field>
+        <mat-label>Sales Price/Rate</mat-label>
+        <input matInput placeholder="Sales Price/Rate" formControlName="price">
+        <mat-error *ngIf="this.ServiceForm.invalid">Sales Price is required</mat-error>           
+      </mat-form-field>
+    </div>
+    <!--  -->
+    <div>
+      <mat-form-field appearance="outline"  class="w-100 mb-2">
+        <mat-label>Income Account</mat-label>
+        <mat-select placeholder="Select" formControlName="coaCompanyId" required 
+        [ngClass]="{
+          'is-invalid': submitted ,
+           'is-valid': submitted}">
+          <mat-option matInput *ngFor="let obj of IncomeAccountList" [value]="obj.id">
+            {{obj.coaName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted">Income Account is required</mat-error>                                             
+      </mat-form-field>
+    </div>
+    <!--  -->
+    <div class="text-end">
+      <button class="coy-btn coy-btn-light-primary w-75 h-100" (click)="onCancelClick()"><span class="">Cancel</span></button>
+    </div>
+    <!--  -->
+    <div>
+      <button class="btn btn-primary btn-lg w-75" (click)="SaveNewService()"><span class="">Save</span></button>
+    </div>
+  </form>
+</mat-dialog-content>
+<!-- <div class="mb-1">
+  <form [formGroup]="ServiceForm">
+    <div class="innerdash pagetitle m-4">
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field>
+            <mat-label>Service</mat-label>
+            <input matInput placeholder="Enter Service" formControlName="name">
+            <mat-error *ngIf="this.ServiceForm.invalid">Service is required</mat-error>           
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <div class="col-6 mb-4">
+            <h3 class="text-title mb-2" style="font-weight: 600;">Add Image</h3> 
+            <div ng2FileDrop
+            [uploader]="uploader"
+            class="well my-drop-zone">
+            <input type="file" accept="image/*" class="hidden-file" #fileInput ng2FileSelect [uploader]="uploader" (onFileSelected)="onFileSelected($event)" />
+            <span  class="drop-heading me-4 mt-2" (click)="fileInput.click()"> <img *ngIf="this.image" class="mw-100 mh-100 object-fit-contain"  src="../../../assets/img/icons/company_upload.svg" alt="logo" /></span>
+            <span *ngIf="this.image" class="drop-heading"> <img *ngIf="this.image" class="mw-100 mh-100 object-fit-contain" width="200" height="120" [src]="this.image" alt="logo" /></span>
+            </div>
+        </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field>
+            <mat-label>Service</mat-label>
+            <input matInput placeholder="Enter Service" formControlName="name">
+            <mat-error *ngIf="this.ServiceForm.invalid">Service is required</mat-error>           
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field appearance="outline"  class="w-100 mb-2">
+            <mat-label>Department</mat-label>
+            <mat-select placeholder="Select" formControlName="departmentId" required 
+            [ngClass]="{
+              'is-invalid': submitted ,
+               'is-valid': submitted}">
+              <mat-option matInput *ngFor="let obj of DepartmentList" [value]="obj.departmentId">
+                {{obj.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted">Department is required</mat-error>                                             
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="Enter Description" formControlName="description">
+            <mat-error *ngIf="this.ServiceForm.invalid">Description is required</mat-error>           
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field>
+            <mat-label>Quantity</mat-label>
+            <input matInput placeholder="Enter Quantity" formControlName="qtyInStock">
+            <mat-error *ngIf="this.ServiceForm.invalid">Quantity is required</mat-error>           
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field>
+            <mat-label>Sales Price/Rate</mat-label>
+            <input matInput placeholder="Sales Price/Rate" formControlName="price">
+            <mat-error *ngIf="this.ServiceForm.invalid">Sales Price is required</mat-error>           
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field appearance="outline"  class="w-100 mb-2">
+            <mat-label>Income Account</mat-label>
+            <mat-select placeholder="Select" formControlName="coaCompanyId" required 
+            [ngClass]="{
+              'is-invalid': submitted ,
+               'is-valid': submitted}">
+              <mat-option matInput *ngFor="let obj of IncomeAccountList" [value]="obj.id">
+                {{obj.coaName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted">Income Account is required</mat-error>                                             
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </form>
+</div> -->
+<!-- <div mat-dialog-actions>
+  <div class="row" style="padding-left: 250px;">
+    <div class="col-12 mb-3">
+      <button class="btn btn-primary btn-lg w-30 me-2" (click)="onCancelClick()"><span class="">Cancel</span></button>
+      <button class="btn btn-primary btn-lg w-30 me-2" (click)="SaveNewService()"><span class="">Save</span></button>
+    </div>
+  </div>
+</div> -->

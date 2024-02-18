@@ -1,0 +1,182 @@
+<div class="row">
+    <div class="col-4">
+        <mat-tab-group [selectedIndex]="selectedIndex" (selectedTabChange)="triggerTab($event)">
+            <mat-tab label="All"></mat-tab>
+            <mat-tab label="Un-Paid"></mat-tab>
+            <mat-tab label="Paid"></mat-tab>
+        </mat-tab-group>
+    </div>
+    <div class="col-8 d-flex flex-row flex-nowrap justify-content-end" style="padding-left:50px">
+        <button class="btn btn-light"><img src="../../../assets/img/buttons/Frame.png"></button>
+        <button class="btn btn-light ms-4"><img src="../../../assets/img/buttons/printer.png"></button>
+        <button class="btn btn-light ms-4 px-4 action-btn">Manage Recurring bills</button>
+        <button class="btn btn-primary ms-4 px-4 action-btn" [routerLink]="['/AddBills']">Add Bill</button>
+    </div>
+    <div class="col-12 mt-4">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header collapsedHeight="56px" expandedHeight="56px">
+                <mat-panel-description>
+                    <span class="material-symbols-outlined fs-3">
+                        filter_alt
+                    </span>
+                    <span class="fs-14 ms-2">Filter</span>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+                <div class="row align-items-center pt-4">
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col-3">
+                                <mat-form-field class="w-100">
+                                    <mat-label>Vendor</mat-label>
+                                    <mat-select>
+                                        <mat-option value="All">All</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-3" [hidden]="isUnpaid">
+                                <mat-form-field class="w-100">
+                                    <mat-label>Type</mat-label>
+                                    <input matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-3">
+                                <mat-form-field class="w-100">
+                                    <mat-label>Bill Date</mat-label>
+                                    <input matInput [matDatepicker]="picker">
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker">
+                                        <app-icon name="calendar" matDatepickerToggleIcon></app-icon>
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-3">
+                                <mat-form-field class="w-100">
+                                    <mat-label>Due Date</mat-label>
+                                    <input matInput [matDatepicker]="picker1">
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker1">
+                                        <app-icon name="calendar" matDatepickerToggleIcon></app-icon>
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #picker1></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-3">
+                                <mat-form-field class="w-100">
+                                    <mat-label>Bill Amount</mat-label>
+                                    <input matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-3" [hidden]="isPaid">
+                                <mat-form-field class="w-100">
+                                    <mat-label>Balance Payable</mat-label>
+                                    <input matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-3" [hidden]="isPaid">
+                                <mat-form-field class="w-100">
+                                    <mat-label>Aging</mat-label>
+                                    <input matInput>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-end">
+                        <button class="btn btn-primary mb-4">Save Filter</button>
+                    </div>
+                </div>
+            </ng-template>
+
+        </mat-expansion-panel>
+    </div>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mt-4">
+    <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+            <!-- <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        [aria-label]="checkboxLabel()">
+          </mat-checkbox> -->
+        </th>
+        <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+        <th mat-header-cell [hidden]="isUnpaid" *matHeaderCellDef>
+            Type
+        </th>
+        <td mat-cell [hidden]="isUnpaid" *matCellDef="let element">{{element.transactionCategory}}</td>
+    </ng-container>
+    <ng-container matColumnDef="vendors">
+        <th mat-header-cell *matHeaderCellDef>Vendors</th>
+        <td mat-cell *matCellDef="let element">{{element.vendors}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Bill Date</th>
+        <td mat-cell *matCellDef="let element">{{element.transactionDate}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="due_date">
+        <th mat-header-cell *matHeaderCellDef>Due Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.dueDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bill_amount">
+        <th mat-header-cell *matHeaderCellDef>Bill Amount</th>
+        <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="balance_payable">
+        <th mat-header-cell [hidden]="isPaid" *matHeaderCellDef>Balance Payable</th>
+        <td mat-cell [hidden]="isPaid" *matCellDef="let element"> {{element.balanceAmount}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="aging">
+        <th mat-header-cell [hidden]="isPaid" *matHeaderCellDef>Aging</th>
+        <td mat-cell [hidden]="isPaid" *matCellDef="let element"> {{element.aging}} Days</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element">
+            <!-- <span class="badge bg-success1" *ngIf="element.paymentStatus == 'PAID'">{{element.paymentStatus}}</span>
+            <span class="badge bg-warning1" *ngIf="element.paymentStatus == 'UNPAID'">{{element.paymentStatus}}</span> -->
+            <button mat-flat-button
+                [ngClass]="element.paymentStatus === 'PAID' ? 'active-button' : 'inactive-button'">{{element.paymentStatus
+                ===
+                'PAID' ? 'PAID' : 'UNPAID'}}</button>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element">
+            <button class="btn-icon-tbl btn-light-primary"><app-icon name="edit-2"></app-icon></button>
+            <!-- <button *ngIf="currentTabName =='All'" class="btn-icon-tbl btn-light-warning m-2"><img
+                    src="../../../assets/img/tbl-btn-icons/copy.png" width="22"></button> -->
+            <button (click)="moveTo()" class="btn-icon-tbl btn-light-success m-1"><app-icon
+                    name="money-send"></app-icon></button>
+            <button class="btn-icon-tbl btn-light-danger m-1"><app-icon name="trash"></app-icon></button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+    </tr>
+</table>
+
+
+
+
+
+
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" firstPageLabel="Muthu" lastPageLabel="kumaran" showFirstLastButtons
+    aria-label="Select page of periodic elements">
+</mat-paginator>
+<!-- <div class="mt-3 mb-3"><button type="submit" class="btn btn-primary"><i class="bi bi-download mr-2"></i>Export as CSV</button></div> -->

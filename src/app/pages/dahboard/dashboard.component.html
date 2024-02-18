@@ -1,0 +1,272 @@
+<style>
+</style>
+ <div class="innerdash pagetitle">
+  <!-- <div class="row" style="padding-left:10px;">
+    <h1>Dashboard</h1>
+  </div> -->
+  </div><!-- End Page Title -->
+  <section class="section dashboard" *ngIf="showPage == true">
+    <div class="row">
+
+      <!-- Left side columns -->
+      <div class="col-lg-12">
+        <form class="commform mb-3" [formGroup]="filterSearchForm">
+
+        <div class="row">
+          <div class="col-md-3">
+            <select class="form-control" formControlName="companyId" (change)="getStores($event.target)">
+                <option value="">Select company</option>
+				<option [value]="item.companyId" *ngFor="let item of companyList">{{item.name | titlecase}}</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <select class="form-control" formControlName="storeId">
+                <option value="">Select Store</option>
+				<option [value]="item.companyId" *ngFor="let item of storeList">{{item.name}}</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+           <input type="date" class="form-control" placeholder="From Date" formControlName="startDate">
+          </div>
+          <div class="col-md-2">
+           <input type="date" class="form-control" placeholder="To Date" formControlName="endDate">
+          </div>
+          <div class="col-md-2">
+           <button type="submit" class="btn btn-primary" (click)="filterSearch()">Filter</button>
+          </div>
+        </div>
+      </form>
+        <div class="row">
+          <!-- Sales Card -->
+          <div class="col-xxl-3 col-md-3">
+            <div class="card gradient-bg info-card sales-card">
+              <div class="card-body">
+                <h5 class="card-title">Pay</h5>
+                <div class="d-flex align-items-center mt-1 mb-1" style="justify-content: space-between;">
+                  <div class="countnum">
+                    <h6><span>{{itemGridUltra}}</span></h6>
+                  </div>
+                  <div class="d-flex align-items-right justify-content-right">
+                   <i class="fa fa-file"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xxl-3 col-md-3">
+            <div class="card gradient-bg info-card sales-card">
+              <div class="card-body">
+                <h5 class="card-title">Receive</h5>
+                <div class="d-flex align-items-center mt-1 mb-1" style="justify-content: space-between;">
+                  <div class="countnum">
+                    <h6><span>{{itemGridRegular}}</span></h6>
+                  </div>
+                  <div class="d-flex align-items-right justify-content-right">
+                   <i class="fa fa-circle-check"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xxl-3 col-md-3">
+          </div>
+          <div class="col-xxl-3 col-md-3">
+          </div>
+		</div>
+		
+            <div class="row">
+              <div class="col-md-8">
+                <div class="card">
+          
+                  <div class="card-body">
+                    <h5 class="card-title ktitle" style="border-bottom: 1px solid #E9E9E9;">Month on Month Sales New</h5>
+                    <div id="chart">
+                      <apx-chart
+                      [series]="chartOptions.series"
+                      [chart]="chartOptions.chart"
+                      [xaxis]="chartOptions.xaxis"
+                      [stroke]="chartOptions.stroke"
+                      [colors]="chartOptions.colors"
+                      [dataLabels]="chartOptions.dataLabels"
+                      [legend]="chartOptions.legend"
+                      [markers]="chartOptions.markers"
+                      [grid]="chartOptions.grid"
+                      [yaxis]="chartOptions.yaxis"
+                      [title]="chartOptions.title"
+                      ></apx-chart>
+                    </div>
+                  </div>
+                      </div>
+              </div>
+            <!-- <div class="col-md-8">
+              <div class="card">
+              <div class="filter">
+                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <li class="dropdown-header text-start">
+                    <h6>Filter</h6>
+                  </li>
+                  <li><a class="dropdown-item" href="#">Today</a></li>
+                  <li><a class="dropdown-item" href="#">This Month</a></li>
+                  <li><a class="dropdown-item" href="#">This Year</a></li>
+                </ul>
+              </div>
+			  
+			
+
+              <div class="card-body">
+                <h5 class="card-title ktitle" style="border-bottom: 1px solid #E9E9E9;">Month on Month sales</h5>
+                <div class="linechart">
+
+
+
+<div class="slds-p-top--medium">
+    <div>
+        <svg version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="quiz-graph">
+            <defs>
+                <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+                    <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#5BBB7B" stroke-width="1"></path>
+                </pattern>
+            </defs>
+            <rect x="50" width="calc(100% - 0px)" height="350px" style="padding-top:30px;" fill="url(#grid)" stroke="gray"></rect>
+  
+            <g class="x-labels">
+                <text x="50" y="370">Jan</text>
+                <text x="100" y="370">Feb</text>
+                <text x="150" y="370">Marc</text>
+                <text x="200" y="370">April</text>
+                <text x="250" y="370">May</text>
+                <text x="300" y="370">Jun</text>
+                <text x="350" y="370">July</text>
+                <text x="400" y="370">Aug</text>
+                <text x="450" y="370">Sep</text>
+                <text x="500" y="370">Oct</text>
+                <text x="550" y="370">Nov</text>
+                <text x="600" y="370">Dec</text>
+            </g>
+            <g class="y-labels"> 
+                <text x="42" y="10">300</text>   
+                <text x="42" y="55">250</text>
+                <text x="42" y="105">200</text>   
+                <text x="42" y="155">150</text>
+                <text x="42" y="205">100</text>   
+                <text x="42" y="255">50</text>
+                <text x="42" y="305">0</text>
+            </g>
+            <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#FFEDE8;stop-opacity:1"></stop>
+                <stop offset="100%" style="stop-color:white;stop-opacity:0"></stop>
+            </linearGradient>
+            <polyline fill="url(#grad)" stroke="#5BBB7B" stroke-width="0" points="
+            50,300
+            51,0
+            150,100
+            250,80
+            350,160
+            450,100
+            550,100
+            650,150
+            750,200
+            750,300
+            "></polyline>
+
+            <polyline fill="none" stroke="#5BBB7B" stroke-width="2" points="
+            50,0
+            150,100
+            250,80
+            350,160
+            450,100
+            550,100
+            650,150
+            750,200
+            "></polyline>
+            <g>
+                <circle class="quiz-graph-start-dot" cx="50" cy="0" data-value="7.2" r="6"></circle>
+                <circle class="quiz-graph-dot" cx="150" cy="100" data-value="8.1" r="6" q-title="Q1" answer-count="200" percent-value="66%"></circle>
+                <circle class="quiz-graph-dot" cx="250" cy="80" data-value="7.7" r="6" q-title="Q2" answer-count="220" percent-value="73%"></circle>
+                <circle class="quiz-graph-dot" cx="350" cy="160" data-value="6.8" r="6" q-title="Q3" answer-count="140" percent-value="46%"></circle>
+                <circle class="quiz-graph-dot" cx="450" cy="100" data-value="6.7" r="6" q-title="Q4" answer-count="200" percent-value="66%"></circle>
+                <circle class="quiz-graph-dot" cx="550" cy="100" data-value="6.7" r="6" q-title="Q5" answer-count="200" percent-value="66%"></circle>
+                <circle class="quiz-graph-dot" cx="650" cy="150" data-value="6.7" r="6" q-title="Q6" answer-count="150" percent-value="50%"></circle>
+                <circle class="quiz-graph-dot" cx="750" cy="200" data-value="6.7" r="6" q-title="Complited Quiz" answer-count="100" percent-value="33%"></circle>
+            </g>
+        </svg>
+    </div>
+</div>
+                  </div>
+
+              </div>
+            </div>
+            </div> -->
+            <div class="col-md-4">
+              <div class="card">
+              <!-- <div class="filter">
+                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <li class="dropdown-header text-start">
+                    <h6>Filter</h6>
+                  </li>
+                  <li><a class="dropdown-item" href="#">Today</a></li>
+                  <li><a class="dropdown-item" href="#">This Month</a></li>
+                  <li><a class="dropdown-item" href="#">This Year</a></li>
+                </ul>
+              </div> -->
+              <div class="card-body">
+                <h5 class="card-title ktitle" style="border-bottom: 1px solid #E9E9E9;">Payable & Receivable</h5>
+               <div class="donut"><div class="hole"></div></div>
+                <div class="legend">
+      <div class="segment1"><div><span class="colorspan"></span>Payable <h6>60%</h6></div></div> 
+      <div class="segment2"><div><span class="colorspan"></span>Receivable <h6>40%</h6></div></div> 
+    </div>
+              </div>
+            </div>
+            </div>
+          </div>
+	
+	
+	<!-- <div class="row">
+		<div class="col-md-8">
+			<div class="card">
+
+				<div class="card-body">
+					<h5 class="card-title ktitle" style="border-bottom: 1px solid #E9E9E9;">Month on Month Sales New</h5>
+					<div id="chart">
+						<apx-chart
+						[series]="chartOptions.series"
+						[chart]="chartOptions.chart"
+						[xaxis]="chartOptions.xaxis"
+						[stroke]="chartOptions.stroke"
+						[colors]="chartOptions.colors"
+						[dataLabels]="chartOptions.dataLabels"
+						[legend]="chartOptions.legend"
+						[markers]="chartOptions.markers"
+						[grid]="chartOptions.grid"
+						[yaxis]="chartOptions.yaxis"
+						[title]="chartOptions.title"
+					  ></apx-chart>
+					</div>
+				</div>
+            </div>
+		</div>
+	</div> -->
+          <!-- Recent Sales -->
+          
+          <!-- Top Selling -->
+        
+        </div>
+      <!-- Right side columns -->
+      
+
+    </div>
+  </section>
+
+  <section class="section dashboard" *ngIf="showPage == false">
+	<div class="row" style="height: 500px;">
+		<div class="col-md-12">
+			<div class="alert alert-dismissable alert-danger">
+				<strong>Oops!</strong> You dont have access to see this page.
+			</div>
+		</div>
+	</div>
+  </section>
+<!--</main>&lt;!&ndash; End #main &ndash;&gt;-->

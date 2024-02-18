@@ -1,0 +1,64 @@
+<div class="innerdash pagetitle">
+    <div class="row">
+        <div class="col-md-4 nopad d-flex align-items-center">
+            <h1>Store Detail</h1>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+        </div>
+        <div class="col-md-3 d-flex">
+            <a class="btn btn-primary mr-1" (click)="goTO()">Edit Store</a>
+        </div>
+    </div>
+</div>
+<!-- End Page Title -->
+<section class="section dashboard text-capitalize"  >
+    <div class="row">
+        <div class="innerform">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label> <strong> Store Name:</strong>  {{storeDetails.name}}</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Country:  {{storeDetails.address.country}}</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">City:  {{storeDetails.address.city}}</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Address:  {{storeDetails.address.address1}}</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Postal Code:  {{storeDetails.address.postalCode}}</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Bank account
+                            number:  {{storeDetails.bankAccount.accountingNumber}}</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Company Name: {{name}} </label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Province:  {{storeDetails.address.province}}</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">GST Number:  {{storeDetails.gst}}</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Routing number:  {{storeDetails.bankAccount.routingNumber}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

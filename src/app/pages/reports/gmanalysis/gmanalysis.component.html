@@ -1,0 +1,521 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>.pagetitle label.form-label {
+   margin: 0;
+}.pagetitle button.btn.btn-primary {
+   padding: 7px 10px !important;width: 100%;
+}table.maintable {
+   width: 100%;
+}thead {
+   background: #F1FCFA;
+}thead tr {
+  border-radius: 6px;
+}table.maintable td, table.maintable th {
+   padding: 20px 10px;
+}table.maintable tbody tr {
+   border-bottom: 1px solid #E9E9E9;
+}input.form-control {
+   padding: 5px 5px !important;
+   height: 40px !important;
+   font-size: 13px !important;
+}input.form-control:disabled {
+   background: #C4C4C4 !important;
+}.pagetitle select.form-control {
+   height: 40px !important;
+}th.centeral {
+   text-align: center;
+}.noborder tr {
+   border: 0 !important;
+}table.maintable.withborder td {
+   border-left: 1px solid #E9E9E9 !important;
+   border-right: 1px solid #E9E9E9 !important;
+}.disflexbtn {
+   display: flex;
+   align-items: center;
+}.maintable .disflexbtn button.btn {
+   padding: 5px 12px !important;
+   height: 40px;
+   margin-left: 10px;
+}.lesspad td {
+   padding: 10px 10px !important;
+}input.form-control.date {
+   height: 40px !important;
+}.table.maintable.withborder  {
+   border: 1px solid #E9E9E9 !important;
+}
+.viewbtn {
+    margin: 0 auto;
+    background: transparent;
+}
+.withborder .border-left-right {
+  border-left: 1px solid #E9E9E9 !important;
+  border-right: 1px solid #E9E9E9 !important;
+}
+table.maintable td, table.maintable th {
+    padding: 20px;
+    border: 0px !important;
+    font: 500 10px/20px Roboto, sans-serif;
+}
+.withborder  .border-colspan { 
+    text-align: center;
+    border-left: 1px solid #E9E9E9 !important;
+    border-right: 1px solid #E9E9E9 !important;
+    border-bottom: 1px solid #E9E9E9 !important;
+  }
+</style>
+<div class="innerdash pagetitle" *ngIf="showPage == true">
+    <div class="row" style="align-items: center;">
+      <div class="col-md-12" style="padding:0;">
+      <h1>GM Analysis</h1></div>
+      <form id="gmanalysis" class="mb-3 mt-4 commform row min-height" [formGroup]="myGroup">
+        <div class="col-md-12 row mb-3">
+          
+           <div class="col-md-3">
+              <label for="name" class="form-label">Company Name*</label>
+              <select class="form-control" formControlName="parentCompanyId" (change)="getStoreList($event.target)">
+                 <option value="">Select Company</option>
+                 <option [value]="item.companyId"
+                       *ngFor="let item of companyList">{{item.name | titlecase}}</option>
+              </select>
+           </div>
+           <div class="col-md-3">
+              <label for="name" class="form-label">Store Name*</label>
+              <select class="form-control" formControlName="storeId">
+                 <option value="">Select Store</option>
+                 <option [value]="item.companyId"
+                       *ngFor="let item of storeList">{{item.name | titlecase}}</option>
+              </select>
+           </div> 
+           <div class="col-md-2">
+            <label for="name" class="form-label">Financial Year*</label>
+            <select required class="form-control" formControlName="fin_year">
+               <option value="">All</option>
+               <option value="2020">2020</option>
+               <option value="2021">2021</option>
+               <option value="2022">2022</option>
+               <option value="2023">2023</option>
+            </select>
+         </div>
+         <div class="col-md-2">
+                <br>
+                <button type="button" class="btn btn-primary" (click)="myFuncApply()">View</button>                        
+           </div>
+           <div class="col-md-2">
+        <br>
+             <button type="button" class="btn btn-primary btn-save" (click)="myFuncReset()">Reset</button>                           
+           </div>
+           <!--<div class="col-md-4">
+            <label for="name" class="form-label">Review By</label>
+            <select class="form-control" formControlName="reviewBy">
+               <option value="month">By Month</option>
+              
+            </select>
+         </div>  -->                     
+        </div>
+
+        <div class="col-md-12 row mb-3">
+            <!--<div class="col-md-4">
+                <label for="name" class="form-label">Financial Year*</label>
+                <select required class="form-control" formControlName="fin_year">
+                   <option value="">All</option>
+                   <option value="2020">2020</option>
+                   <option value="2021">2021</option>
+                   <option value="2022">2022</option>
+                   <option value="2023">2023</option>
+                </select>
+             </div>-->
+             <!--<div class="col-md-4">
+                <label for="name" class="form-label">Month(s)*</label>
+                <select required class="form-control" formControlName="month">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                 </select>
+             </div>-->
+           
+        </div>
+       </form> 
+
+        <!--<form id="gmanalysis" class="mb-3 mt-4 commform row min-height" style="align-items: flex-end;padding:0">
+                    <div class="col-md-12 row mb-3">
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Company Name*</label>
+                            <input type="text" class="form-control" placeholder="" />
+                        </div> 
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Store Name*</label>
+                            <input type="text" class="form-control" placeholder="" />
+                        </div> 
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Review By</label>
+                            <select class="form-control">
+                                <option>Review</option>     
+                            </select>      
+                        </div> 
+                    </div>
+                    <div class="col-md-12 row mb-3">
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Financial Year*</label>
+                            <select class="form-control">
+                                <option>2023</option>
+                                <option>2022</option>                                
+                            </select>      
+                        </div> 
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Month(s)*</label>
+                            <input type="date" class="form-control date" id="" formControlName="date" />  
+                        </div>                
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary" style="margin-top: 25px;">View</button> 
+                        </div>  
+                         
+                    </div>
+        </form> -->
+    </div>
+    </div><!-- End Page Title -->
+
+
+<div class="gmanalysis" *ngIf="showPage == true">
+ <!-- gmanalysis Start -->
+ <section class="section dashboard">
+    <div class="row gmanalysis-sc">
+        <div class="innerform">
+            <div class="innerform">
+                <div class="tablemaindiv mat-elevation-z8">
+                    <table class="maintable withborder commform table table-bordered table-striped table-hover" style="width:100%"   >  
+                      <thead>
+                          <tr>
+                            <th rowspan="2">
+                            <a class="tblClsSort"  style="color:white;text-decoration: none;" href="javascript:void(0);" (click)="myFuncSort('month')">MONTH</a>
+                            
+                         </th>
+                         <th class="border-colspan">C-STORE                           
+                         </th>
+                         <th colspan="3" class="border-colspan">TOBACCO
+                         </th> 
+                         <th colspan="3" class="border-colspan">CIGARETTE
+                         </th>
+                         <th colspan="3" class="border-colspan">LOTTO
+                         </th>
+                         <th colspan="3" class="border-colspan">PREPAID
+                         </th>
+                         <th colspan="3" class="border-colspan">OTHERS
+                         </th>
+                         <th colspan="4" class="border-colspan">GROSS MARGIN
+                         </th>                         
+                        </tr>
+                        <tr>
+                        
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('totalSales')">Total Sales</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('tobaccoSales')">Actual Sales</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('tobaccoSalesPercentage')">Sales %</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('calcGM25Percentage')">Calculated GM (25%)</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('cigSales')">Actual Sales</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('cigSalesPercentage')">Sales %</a>
+                               </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('calcGM10Percentage')">Calculated GM (10%)</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('lottoSales')">Actual Sales</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('lottoSalesPercentage')">Sales %</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('lcalcGM5Percentage')">Calculated GM (5%)</a>
+                                </th>
+                                <!-- need tp chanage -->
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('prepaidSales')">Actual Sales</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('prepaidSalesPercentage')">Sales %</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('pcalcGM5Percentage')">Calculated GM (5%)</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('otherSales')">Actual Sales</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('otherSalesPercentage')">Sales %</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('calcGM40Percentage')">Calculated GM (40%)</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('actualGM')">Actual GM</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('actualGMPercentage')">%</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('calculatedGM')">Calculated GM</a>
+                                </th>
+                            <th class="border-left-right"><a class="tblClsSort" style="color:white;text-decoration: none;"  href="javascript:void(0);" (click)="myFuncSort('calculatedGMPercentage')">%</a>
+                                </th>
+                      </thead>               
+                        <tbody>		 
+                            <tr *ngFor="let item of pdata">
+                                <td>{{item.month}}</td>
+                                <td>{{item.totalSales | currency}}</td>
+                                <td>{{item.tobaccoSales | currency}}</td>
+                                <td>{{item.tobaccoSalesPercentage}}</td>
+                                <td>{{item.calcGM25Percentage}}</td>
+                                <td>{{item.cigSales | currency}}</td>
+                                <td>{{item.cigSalesPercentage}}</td>
+                                <td>{{item.calcGM10Percentage}}</td>
+                                <td>{{item.lottoSales | currency}}</td>
+                                <td>{{item.lottoSalesPercentage}}</td>
+                                <td>{{item.lcalcGM5Percentage}}</td>
+                                <td>{{item.prepaidSales  | currency}}</td>
+                                <td>{{item.prepaidSalesPercentage}}</td>
+                                <td>{{item.pcalcGM5Percentage}}</td>
+                                <td>{{item.otherSales | currency}}</td>
+                                <td>{{item.otherSalesPercentage}}</td>
+                                <td>{{item.calcGM40Percentage}}</td>
+                                <td>{{item.actualGM | currency}}</td>
+                                <td>{{item.actualGMPercentage}}</td>
+                                <td>{{item.calculatedGM}}</td>
+                                <td>{{item.calculatedGMPercentage}}</td>
+                                <!-- <td>
+                                  <div class="btn-group-vertical">
+                                      <button class="attachbtn"><img  src="assets/img/attachment.png"></button>                              
+                                      <button class="attachbtn"><img  src="assets/img/delete.png"></button>
+                                  </div>
+                                </td> -->
+                                      
+                            </tr>
+                       </tbody>
+                    </table>
+                </div>
+              
+              <div class="row mtb-20 justify-content-md-center">
+                  <div class="col"> 
+                     <button type="button" class="btn btn-primary btn-sm" style="width:40px;" title="Previous" (click)="myFuncPrevious()"> < Previous</button> &nbsp;
+                      <button type="button" class="btn btn-primary btn-sm" style="width:40px;" title="Next" (click)="myFuncNext()">Next > </button>            
+                  </div>
+                  <div class="col align-right">
+                     <button type="submit" class="btn btn-primary" (click)="excelDownload()"><i class="fa fa-download"></i>Excel</button>   
+                  </div>
+                </div> 
+       
+                <div class="row mtb-20 justify-content-md-center">
+                  <div class="col">                
+                      
+                  </div>
+                  <div class="col align-right">
+                      
+                  </div>
+                </div> 
+             </div> 
+        </div>
+      </div>
+ </section>
+
+<!-- <section class="section dashboard">
+    <div class="row gmanalysis-sc">
+        <div class="innerform" style="margin: 0;padding: 11px !important;">
+          <div class="tablemaindiv mat-elevation-z8">
+              <table class="maintable withborder commform b-box" style="width:100%">  
+                <thead>
+                    <tr>
+                        <th rowspan="2">MONTH</th>
+                        <th class="border-colspan">C-STORE</th>
+                        <th colspan="3" class="border-colspan">TOBACCO</th>
+                        <th colspan="3" class="border-colspan">CIGARETTE</th>
+                        <th colspan="3" class="border-colspan">LOTTO</th>
+                        <th colspan="3" class="border-colspan">DATA WAVE</th>
+                        <th colspan="3" class="border-colspan">OTHERS</th>
+                        <th colspan="4" class="border-colspan">GROSS MARGIN</th>
+                    </tr>
+                    <tr>
+                        
+                        <th class="border-left-right">Total Sales</th>
+                        <th class="border-left-right">Actual Sales</th>
+                        <th class="border-left-right">Sales %</th>
+                        <th class="border-left-right">Calculated GM (25%)</th>
+                        <th class="border-left-right">Actual Sales</th>
+                        <th class="border-left-right">Sales %</th>
+                        <th class="border-left-right">Calculated GM (10%)</th>
+                        <th class="border-left-right">Actual Sales</th>
+                        <th class="border-left-right">Sales %</th>
+                        <th class="border-left-right">Calculated GM (5%)</th>
+                        <th class="border-left-right">Actual Sales</th>
+                        <th class="border-left-right">Sales %</th>
+                        <th class="border-left-right">Calculated GM (5%)</th>
+                        <th class="border-left-right">Actual Sales</th>
+                        <th class="border-left-right">Sales %</th>
+                        <th class="border-left-right">Calculated GM (40%)</th>
+                        <th class="border-left-right">Actual GM</th>
+                        <th class="border-left-right">%</th>
+                        <th class="border-left-right">Calculated GM</th>
+                        <th class="border-left-right">%</th>
+                    </tr>                   
+                </thead>               
+                  <tbody>
+                    <tr>
+                        <td>Jan-2023</td>
+                        <td>$1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>$195,682.40</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>25.44%</td>
+                        <td>(6.21%)</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td>Jan-2023</td>
+                        <td>$1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>$195,682.40</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>25.44%</td>
+                        <td>(6.21%)</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td>Jan-2023</td>
+                        <td>$1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>$195,682.40</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>25.44%</td>
+                        <td>(6.21%)</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td>Jan-2023</td>
+                        <td>$1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>$195,682.40</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>25.44%</td>
+                        <td>(6.21%)</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td>Jan-2023</td>
+                        <td>$1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>$195,682.40</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>25.44%</td>
+                        <td>(6.21%)</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td>Jan-2023</td>
+                        <td>$1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>1,339.95</td>
+                        <td>$195,682.40</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>25.44%</td>
+                        <td>(6.21%)</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                    </tr>
+                    
+                  </tbody>
+                
+              </table>
+          </div>
+        </div>
+      </div>
+ </section>-->
+
+<!-- gmanalysis End --> 
+</div>
+
+<section class="section dashboard" *ngIf="showPage == false">
+	<div class="row" style="align-items: center;">
+		<div class="col-md-12" style="padding:10px;">
+			<h1>GM Analysis</h1>
+		</div>
+	</div>
+	<div class="row" style="height: 500px;">
+		<div class="col-md-12">
+			<div class="alert alert-dismissable alert-danger">
+				<strong>Oops!</strong> You dont have access to see this page.
+			</div>
+		</div>
+	</div>
+</section>

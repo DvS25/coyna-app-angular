@@ -1,0 +1,210 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>.pagetitle label.form-label {
+   margin: 0;
+}.pagetitle button.btn.btn-primary {
+   padding: 7px 10px !important;width: 100%;
+}table.maintable {
+   width: 100%;
+}thead {
+   background: #F1FCFA;
+}thead tr {
+  border-radius: 6px;
+}table.maintable td, table.maintable th {
+   padding: 20px 10px;
+}table.maintable tbody tr {
+   border-bottom: 1px solid #E9E9E9;
+}input.form-control {
+   padding: 5px 5px !important;
+   height: 40px !important;
+   font-size: 13px !important;
+}input.form-control:disabled {
+   background: #C4C4C4 !important;
+}.pagetitle select.form-control {
+   height: 40px !important;
+}th.centeral {
+   text-align: center;
+}.noborder tr {
+   border: 0 !important;
+}table.maintable.withborder td {
+   border-left: 1px solid #E9E9E9 !important;
+   border-right: 1px solid #E9E9E9 !important;
+}.disflexbtn {
+   display: flex;
+   align-items: center;
+}.maintable .disflexbtn button.btn {
+   padding: 5px 12px !important;
+   height: 40px;
+   margin-left: 10px;
+}.lesspad td {
+   padding: 10px 10px !important;
+}input.form-control.date {
+   height: 40px !important;
+}.table.maintable.withborder  {
+   border: 1px solid #E9E9E9 !important;
+}.table.maintable.withborder[_ngcontent-mjn-c186] td[_ngcontent-mjn-c186] .noborder {
+   border: 0px solid #E9E9E9 !important;
+}
+</style>
+<div class="innerdash pagetitle">
+    <div class="row" style="align-items: center;">
+      <div class="col-md-12" style="padding:0;">
+      <h1>Payable Analysis</h1></div>
+      
+        <form id="formEmployeeSearch" class="mb-3 mt-4 commform row min-height" style="align-items: flex-end;padding:0">
+                    <div class="col-md-12 row mb-3">
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Financial Year*</label>
+                            <select class="form-control">
+                                <option>2023</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">As On Date*</label>
+                            <input type="date" class="form-control date" id="date" formControlName="date" />                     
+                        </div>
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Company</label>
+                            <input type="text" class="form-control" placeholder="" />
+                        </div>                       
+                    </div>
+
+                    <div class="col-md-12 row mb-3">
+                        <div class="col-md-4">                            
+                                <label for="name" class="form-label">Site Name</label>
+                                <input type="text" class="form-control" placeholder="" /> 
+                        </div>
+                        <div class="col-md-4">
+                                <label for="name" class="form-label">Payment Mode</label>
+                                <select class="form-control">
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                    <option>Option 3</option>
+                                </select>                 
+                        </div>  
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Aging Based On*</label>
+                            <select class="form-control">
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                                <option>Option 3</option>
+                            </select>                  
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 row mb-3">
+                        <div class="col-md-2 align-center">
+                            <button type="submit" class="btn btn-primary">View</button>                        
+                         </div>
+                         <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary">Export</button>                           
+                         </div>
+                         <div class="col-md-2">
+                                                  
+                         </div>                         
+                    </div>
+        </form> 
+    </div>
+    </div><!-- End Page Title -->
+
+
+<div class="aging-screen">
+ <!-- Aging Start -->
+<section class="section dashboard">
+   <div class="row aging-sc">
+       <div class="innerform">
+         <!-- <h4 style="color: #222222;font-size: 17px;">Aging Reports</h4> -->
+         <div class="tablemaindiv mat-elevation-z8">
+             <table class="maintable withborder commform b-box" style="width:100%">  
+               <thead>
+                   <tr>
+                       <th>A/C TITLE</th>
+                       <th>OUTSTANDING AMOUNT</th>
+                       <th>UN-ADJUSTED AMOUNT</th>
+                       <th>NOT DUE</th>
+                       <th>TOTAL  <br> DUE</th>
+                       <th>DUE <br>
+                        1-7</th>
+                       <th>DUE  <br> 8-15</th>
+                       <th>DUE  <br> 16-30</th>
+                       <th>DUE  <br> 31-45</th>
+                       <th>DUE  <br> 46-60</th>
+                       <th>OVER DUE  <br> 60+</th>
+                       
+                   </tr>
+               </thead>               
+                 <tbody>
+                     <tr>
+                         <td>COSTCO WHOLESALE</td>
+                         <td>text</td>
+                         <td>text</td>
+                         <td>text</td>
+                         <td>text</td>                      
+                         <td>text</td>
+                         <td>text</td>
+                         <td>text</td>
+                         <td>text</td>
+                         <td>text</td>
+                         <td>text</td>
+                     </tr>
+                     <tr>
+                        <td>COSTCO WHOLESALE</td>
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>                      
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>
+                    </tr>
+                    <tr>
+                        <td>COSTCO WHOLESALE</td>
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>                      
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>
+                    </tr>
+                    <tr>
+                        <td>COSTCO WHOLESALE</td>
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>                      
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>
+                        <td>text</td>
+                    </tr>
+                    
+                 </tbody>
+             </table>
+         </div>
+
+         <!-- <div class="row mtb-20 justify-content-md-center">
+           <div class="col">                
+               <button type="submit" class="btn btn-primary btnarraow">Save<span class="barraow"></span></button>
+           </div>
+           <div class="col align-right">
+               <button type="submit" class="btn btn-primary">Export<span class="barraowno"></span></button>
+           </div>
+         </div>  -->
+       </div>
+     </div>
+
+</section>
+
+
+
+<!-- Aging End --> 
+</div>
+

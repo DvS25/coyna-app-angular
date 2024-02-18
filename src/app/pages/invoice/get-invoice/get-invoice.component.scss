@@ -1,0 +1,303 @@
+@import '../../../../assets/css/material/tab.scss';
+@import '../../../../variables.scss';
+
+:host ::ng-deep .mat-expansion-panel-body {
+  padding: 0;
+}
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
+
+::ng-deep .mat-expansion-indicator::after {
+  margin-bottom: 6px !important;
+}
+
+// .mat-expansion-panel-header.mat-expanded, .mat-expansion-panel-header {
+//     height: 56px;
+// }
+
+.mat-expansion-panel-header.mat-expanded {
+  border: 1px solid #58A1CC;
+  color: #58A1CC;
+  background: rgba(88, 161, 204, 0.1);
+}
+
+.mat-expansion-panel-header {
+  width: 150px;
+  margin-left: auto;
+  border: 1px solid #DDDDE1;
+  color: #DDDDE1;
+  border-radius: 10px;
+  padding: 0 20px;
+}
+
+.mat-expansion-panel-header.mat-expanded .mat-expansion-panel-header-description {
+  color: #58A1CC;
+}
+
+.printer {
+  float: left;
+  margin-right: 20px;
+}
+
+.customer-filter {
+  width: 10%;
+  font-size: small;
+  margin-right: 10%;
+}
+
+.bill-date-filter {
+  width: 10%;
+  font-size: small;
+  margin-right: 10%;
+}
+
+.from-date-filter {
+  width: 10%;
+  font-size: small;
+  margin-right: 10%;
+}
+
+.save-filter {
+  width: 15% !important;
+  font-size: small;
+  margin-left: 5%;
+}
+
+.save {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: $primaryColor !important;
+  color: white !important;
+  border: none;
+  border-radius: 5px !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  float: right;
+  align-self: center;
+}
+
+.forward-icon {
+  padding: 8px !important;
+}
+
+.forward-card {
+  border: 1px solid $darkBlueColor !important;
+  box-shadow: none !important;
+  border-radius: 8px;
+  padding-left: 10px;
+}
+
+.forward {
+  float: left;
+  margin-right: 15px;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  margin-top: 25px;
+}
+
+.mat-mdc-table .mdc-data-table__header-row {
+  background: $secondaryColor;
+  height: 50px !important;
+}
+
+.mdc-data-table__header-cell {
+  color: $primaryColor !important;
+  font-weight: 600 !important;
+  font-size: small !important;
+  padding: 9px;
+  width: 25%;
+}
+
+.mat-mdc-table .mdc-data-table__row {
+  height: 55px !important;
+}
+
+
+::ng-deep .mdc-data-table__cell {
+  padding: 0 16px 0 10px !important;
+}
+
+::ng-deep .mat-mdc-form-field {
+  display: flex !important;
+}
+
+::ng-deep .mat-dialog-container {
+  border-radius: 40px !important;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 20px;
+}
+
+::ng-deep .mat-mdc-dialog-actions {
+  justify-content: center;
+}
+
+::ng-deep .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
+  padding-bottom: 16px;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mdc-text-field__input {
+  font-size: small;
+  color: $cloudBurstColor;
+}
+
+::ng-deep .mdc-dialog .mdc-dialog__content {
+  padding: 6px 24px 20px 24px;
+}
+
+::ng-deep .mdc-dialog .mdc-dialog__content {
+  padding: 6px 24px 0px 24px;
+}
+
+::ng-deep .mdc-dialog__actions {
+  padding: 0px !important;
+  margin-bottom: 16px !important;
+}
+
+::ng-deep .mdc-notched-outline__leading {
+  border-top-left-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
+}
+
+::ng-deep .mdc-notched-outline__trailing {
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+}
+
+//Top bottom border, if label is inside 
+::ng-deep.mdc-notched-outline__notch {
+  border-top: 1px solid $darkBlueColor !important;
+  border-bottom: 1px solid $darkBlueColor !important;
+}
+
+//Top bottom border, if label is notched
+::ng-deep.mdc-notched-outline--notched {
+  ::ng-deep.mdc-notched-outline__notch {
+    border-top: none !important;
+    border-bottom: 1px solid $darkBlueColor !important;
+  }
+}
+
+//Left border with edges
+::ng-deep.mdc-notched-outline__leading {
+  border: 1px solid $darkBlueColor !important;
+  border-right: none !important;
+}
+
+//Right border with edges
+::ng-deep.mdc-notched-outline__trailing {
+  border: 1px solid $darkBlueColor !important;
+  border-left: none !important;
+}
+
+::ng-deep .mt-4 {
+  margin-top: 0.5rem !important;
+}
+
+.action-icon {
+  width: 34px;
+  height: 34px;
+  padding-right: 13px;
+}
+
+
+.header_menu {
+  border-bottom: 1px solid #CCC;
+  width: 100%;
+}
+
+.mat-column-customers {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  width: 10%;
+}
+
+.mat-column-invoice_date {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  width: 10%;
+}
+
+.mat-column-type {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  width: 10%;
+}
+
+.mat-column-due_date {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  width: 10%;
+}
+
+.mat-column-invoice_amt {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  width: 10%;
+}
+
+.mat-column-bal_receivable {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  width: 10%;
+}
+
+.mat-column-aging {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  width: 10%;
+}
+
+.mat-column-status {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  width: 16%;
+}
+
+.mat-column-action {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  padding-right: 15px;
+}
+
+.active-button {
+  background-color: #EAFFF2 !important;
+  border-radius: 5px;
+  border: 1px solid #73E59A;
+  color: #73E59A !important;
+  height: 24px;
+  font-size: 9px;
+  padding: 0 0 0 0 !important;
+  font-weight: 600;
+  width: 27%;
+}
+
+.inactive-button {
+  background-color: #FFF7E1 !important;
+  border-radius: 5px;
+  border: 1px solid #FFC224;
+  color: #FFC224 !important;
+  height: 24px;
+  font-size: 9px;
+  padding: 0 0 0 0 !important;
+  font-weight: 600;
+  width: 27%;
+}

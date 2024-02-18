@@ -1,0 +1,50 @@
+@import '../../../assets/css/material/table.scss';
+@import '../../../assets/css/material/checkbox.scss';
+@import '../../../assets/css/material/input.scss';
+
+.filter-section {
+    height: 0px;
+    overflow: hidden;
+    transition: height 225ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filter-btn .material-symbols-outlined {
+    transition: transform 225ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filter-btn.expanded .material-symbols-outlined {
+    transform: rotate(180deg);
+}
+
+.btn-light-primary:hover{
+    color: #fff; 
+    transition: background-color 0.5s ease;
+    background: #2a7af2;
+}
+
+.btn-light-danger{
+    background: #ffeded; 
+    color: #ff4040;
+}
+
+.btn-light-primary{
+    background: #dceaff; 
+    color: #2a7af2;
+}
+
+.btn-light-danger:hover{
+    color: #fff;  
+    transition: background-color 0.5s ease;
+    background: #ff4040;
+}
+
+.btn-light-success{
+    background: #d0ffef; 
+    color: #37c997;
+}
+
+.btn-light-success:hover{
+    color: #fff; 
+    transition: background-color 0.5s ease;
+    background: #37c997;
+}

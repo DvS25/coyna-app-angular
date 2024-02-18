@@ -1,0 +1,42 @@
+<p mat-dialog-title class="title">Create New User</p>
+<div>
+  <form [formGroup]="userForm">
+    <div mat-dialog-content>
+
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Full Name</mat-label>
+          <input matInput formControlName="fullName" required [readonly]="isReadOnly">
+          <mat-error *ngIf="userForm.invalid">Full Name is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div style="margin-top: 10px;">
+        <mat-form-field appearance="outline">
+          <mat-label>Email Address</mat-label>
+          <input matInput formControlName="emailAddress" required [readonly]="isReadOnly">
+          <mat-error *ngIf="userForm.invalid">Email Address is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <mat-form-field appearance="outline">
+          <mat-label>Role</mat-label>
+          <select matNativeControl required formControlName="role" (change)="onRoleSelect($event.target)">
+            <option [value]="0">Custom Role</option>
+            <option *ngFor="let role of roles" [value]="role.roleId">
+              {{role.name  | titlecase}}</option>
+          </select>
+          <mat-error *ngIf="userForm.invalid">Role is required</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <div>
+    <button mat-flat-button class="save" (click)="addUser()" [class.save-enable]="this.userForm.valid"
+      [disabled]="this.userForm.invalid">
+      <span>Add User</span>
+    </button>
+  </div>
+</div>

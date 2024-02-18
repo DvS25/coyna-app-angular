@@ -1,0 +1,186 @@
+<!-- <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet"> -->
+<div class="row">
+  <div class="col-4">
+    <mat-tab-group>
+      <mat-tab label="All"></mat-tab>
+      <mat-tab label="Overdue"></mat-tab>
+      <mat-tab label="Paid"></mat-tab>
+    </mat-tab-group>
+  </div>
+  <div class="col-8 d-flex flex-row flex-nowrap justify-content-end"
+    style="padding-left:50px;     height: fit-content;">
+    <button class="btn btn-light"><img src="../../../assets/img/buttons/Frame.png" style="    width: 19px;
+            height: 21px;"></button>
+    <button class="btn btn-light ms-4"><img src="../../../assets/img/buttons/printer.png" style="    width: 19px;
+            height: 21px;"></button>
+    <button class="btn btn-light ms-4 px-4 action-btn" style="font-size: small;">Manage Recurring invoices</button>
+    <button class="btn btn-primary ms-4 px-4 action-btn" style="font-size: small;" (click)="addInvoice()">Add
+      Invoice</button>
+  </div>
+  <div class="col-12 mt-4">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px" style="margin-bottom: 25px;">
+        <mat-panel-description>
+          <span class="material-symbols-outlined fs-3">
+            filter_alt
+          </span>
+          <span class="fs-14 ms-2">Filter</span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <!-- <div class="row align-items-center pt-4">
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Customer</mat-label>
+                                    <select matNativeControl>
+                                      <option [value]="All">All</option>
+                                    </select>
+                                    <mat-error *ngIf="coaForm.invalid">Account Type is required</mat-error>
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-3">
+                                <mat-form-field class="w-100">
+                                    <mat-label>From</mat-label>
+                                    <input matInput [matDatepicker]="picker"> 
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker">                                                                                
+                                        <app-icon name="calendar" matDatepickerToggleIcon></app-icon>
+                                    </mat-datepicker-toggle>                                                         
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-3">
+                                <mat-form-field class="w-100">
+                                    <mat-label>To</mat-label>
+                                    <input matInput [matDatepicker]="picker">                        
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker">                                        
+                                        <app-icon name="calendar" matDatepickerToggleIcon></app-icon>
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-3">
+                                <mat-form-field class="w-100">
+                                    <mat-label>Bill date</mat-label>
+                                    <mat-select>
+                                    <mat-option value="All">last 12 Month</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-end">
+                        <button class="btn btn-primary mb-4">Save Filter</button>
+                    </div>
+                </div> -->
+
+        <div class="row">
+          <div class="customer-filter">
+            <mat-form-field appearance="outline" style="width: 12em;">
+              <mat-label>Customer</mat-label>
+              <select matNativeControl>
+                <option [value]="All">All</option>
+              </select>
+              <!-- <mat-error *ngIf="coaForm.invalid">Account Type is required</mat-error> -->
+            </mat-form-field>
+          </div>
+          <div class="from-date-filter">
+            <mat-form-field appearance="outline" style="width: 12em;">
+              <mat-label>From</mat-label>
+              <input matInput [matDatepicker]="picker" readonly>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <!-- <mat-error *ngIf="customerForm.invalid">Date is required</mat-error> -->
+            </mat-form-field>
+          </div>
+          <div class="from-date-filter">
+            <mat-form-field appearance="outline" style="width: 12em;">
+              <mat-label>To</mat-label>
+              <input matInput [matDatepicker]="picker" readonly>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <!-- <mat-error *ngIf="customerForm.invalid">Date is required</mat-error> -->
+            </mat-form-field>
+          </div>
+          <div class="bill-date-filter">
+            <mat-form-field appearance="outline" style="width: 12em;">
+              <mat-label>Bill Date</mat-label>
+              <select matNativeControl>
+                <option [value]="">Last 12 Month</option>
+              </select>
+              <!-- <mat-error *ngIf="coaForm.invalid">Account Type is required</mat-error> -->
+            </mat-form-field>
+          </div>
+          <!-- <div class="save-filter"  style="width: 12em;">
+                        <button class="btn btn-primary ms-4 px-4 action-btn">Save Filter</button>    
+                      </div> -->
+          <div class="save-filter">
+            <button mat-flat-button class="save">
+              <span>Save Filter</span>
+            </button>
+          </div>
+        </div>
+      </ng-template>
+
+    </mat-expansion-panel>
+  </div>
+</div>
+
+<table mat-table [dataSource]="invoices" class="mat-elevation-z4">
+
+  <ng-container matColumnDef="customers">
+    <th mat-header-cell *matHeaderCellDef>Customers</th>
+    <td mat-cell *matCellDef="let invoice">{{invoice.transactionType | titlecase}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="invoice_date">
+    <th mat-header-cell *matHeaderCellDef>Invoice Date</th>
+    <td mat-cell *matCellDef="let invoice">{{invoice.transactionDate | titlecase}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef>Type</th>
+    <td mat-cell *matCellDef="let invoice">{{invoice.transactionType | titlecase}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="due_date">
+    <th mat-header-cell *matHeaderCellDef>Due Date</th>
+    <td mat-cell *matCellDef="let invoice">{{invoice.dueDate}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="invoice_amt">
+    <th mat-header-cell *matHeaderCellDef>Invoice Amount</th>
+    <td mat-cell *matCellDef="let invoice">{{invoice.amount}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="bal_receivable">
+    <th mat-header-cell *matHeaderCellDef>Bal. Receivable</th>
+    <td mat-cell *matCellDef="let invoice">{{invoice.type}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="aging">
+    <th mat-header-cell *matHeaderCellDef>Aging</th>
+    <td mat-cell *matCellDef="let invoice">{{invoice.type}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>Status</th>
+    <td mat-cell *matCellDef="let invoice">
+      <button mat-flat-button
+        [ngClass]="invoice.status === 'ACTIVE' ? 'active-button' : 'inactive-button'">{{invoice.status === 'ACTIVE' ? 'Paid' : 'Overdue'}}</button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let invoice">
+      <img src="assets/img/edit.svg" alt="edit" class="action-icon" (click)="addOrEditCoa(true, chartOfAccount)">
+      <img src="assets/img/invoice_action.svg" alt="invoice_action" class="action-icon" (click)="register()">
+      <img src="assets/img/trash.svg" alt="trash" class="action-icon" (click)="deleteChartOfAccount(chartOfAccount)">
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

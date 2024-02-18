@@ -1,0 +1,75 @@
+<div class="innerdash pagetitle">
+      <div class="row">
+        <div class="col-md-4 nopad d-flex align-items-center">
+        <h1>Company Detail</h1>
+    </div>
+<div class="col-md-3">
+                
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-primary" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+          </div>
+    <div class="col-md-3 d-flex">
+        <a class="btn btn-primary mr-1" (click)="editCompany()">Edit Company</a>
+    </div>
+    </div>
+</div><!-- End Page Title -->
+<section class="section dashboard">
+    <div class="row">
+        <div class="innerform">
+            <div class="col-md-9">
+            <form id="formCreatecompany" class="mb-3 mt-4 commform row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Company Name:  {{name}}</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Contact Number:  {{contactNumber}}</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Types of Services/Products:  {{companyType}}</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Country:  {{country}}</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">City:  {{city}}</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Store Name:  {{storeName}}</label>
+                            <ul>
+                                <li *ngFor="let item of storeList"> {{item.name}}</li>
+                            </ul>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Routing Number:  {{routingNumber}}</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Contact Person Name:  {{contactName}}</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Email ID:  {{emailId}}</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Address:   {{address}}</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Province:  {{province}}</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">GST Number:  {{gst}}</label>
+                        </div><div class="mb-3">
+                            <label for="name" class="form-label">Account Number:  {{accountingNumber}}</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Description:  {{memo}}</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

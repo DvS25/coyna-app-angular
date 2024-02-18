@@ -1,0 +1,247 @@
+<div class="Container">
+    <mat-stepper  #stepper>
+      <mat-step [stepControl]="companyForm">
+        <p id="rcorners1" style="text-align: center;padding-top: 65px">
+          <span class="row">
+          <span  style="color: white;font-size: 30px;line-height: 43px;font-weight: 700;font-family: Manrope;">Welcome to Coyna</span>
+          <span  style="color: white;font-size: 18px;line-height: 43px;font-weight: 700;font-family: Manrope;">Let us embark on a journey of effortless and structured financial management.</span>
+          </span>
+      </p>
+    <form class=""  [formGroup]="companyForm">                                
+    <div class="col-lg-12 display">
+        <div class="col-lg-6 row mb-2">
+            <mat-form-field appearance="outline"  class="w-100 mb-2">
+                <mat-label>How did you regulate your finances in the past?</mat-label>
+                <mat-select placeholder="Select"  formControlName="pastFinanceId" required [ngClass]="{
+                  'is-invalid': submitted && f['pastFinanceId'].errors,
+                   'is-valid': submitted && !f['pastFinanceId'].errors}">
+                  <mat-option matInput   *ngFor="let obj of PastFinanceList" [value]="obj.metadataId">
+                    {{obj.metadataName}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="submitted && f['pastFinanceId'].errors">PastFinance is required</mat-error>                                             
+              </mat-form-field>  
+        </div>
+        <div class="col-lg-12 row mb-2">
+        <div class="col-lg-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Name of your business</mat-label>
+                    <input matInput placeholder="Business name" id="businessName" name="businessName"  formControlName="businessName" autofocus  
+                    [ngClass]="{
+                      'is-invalid': submitted && f['businessName'].errors,
+                       'is-valid': submitted && !f['businessName'].errors}">  
+                       <mat-error *ngIf="submitted && f['businessName'].errors">BusinessName is required</mat-error>            
+                </mat-form-field>  
+        </div>
+        <div class="col-lg-6 mb-2">
+            <mat-form-field appearance="outline"  class="w-100 mb-2">
+                <mat-label>Date of incorporation</mat-label>
+                <input matInput placeholder="Date of incorporation" [matDatepicker]="picker" formControlName="dateOfIncorporation"
+                [ngClass]="{
+                  'is-invalid': submitted && f['dateOfIncorporation'].errors,
+                   'is-valid': submitted && !f['dateOfIncorporation'].errors}">
+                <mat-datepicker-toggle matIconSuffix [for]="picker">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="submitted && f['dateOfIncorporation'].errors">Date Of Incorporation is required</mat-error>           
+              </mat-form-field>
+        </div>
+    </div>
+    <div class="col-lg-12 row mb-2">
+    <div class="col-lg-6 mb-2">
+        <mat-form-field appearance="outline"  class="w-100 mb-2">
+            <mat-label>Business structure for tax purposes?</mat-label>
+            <mat-select placeholder="Select"  formControlName="taxStructureId"
+            [ngClass]="{
+              'is-invalid': submitted && f['taxStructureId'].errors,
+               'is-valid': submitted && !f['taxStructureId'].errors}">
+              <mat-option matInput  *ngFor="let obj of TaxStructureList" [value]="obj.metadataId">
+                {{obj.metadataName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && f['taxStructureId'].errors">Tax Structure is required</mat-error>           
+          </mat-form-field>  
+    </div>
+    <div class="col-lg-6 mb-2">
+        <mat-form-field appearance="outline"  class="w-100 mb-2">
+            <mat-label>Which industry do you operate?</mat-label>
+            <mat-select placeholder="Select"  formControlName="industryTypeId" 
+            [ngClass]="{
+              'is-invalid': submitted && f['industryTypeId'].errors,
+               'is-valid': submitted && !f['industryTypeId'].errors}">
+              <mat-option matInput  *ngFor="let obj of IndustryList" [value]="obj.metadataId">
+                {{obj.metadataName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && f['industryTypeId'].errors">Industry Type is required</mat-error>           
+          </mat-form-field>  
+    </div>
+    <div class="col-lg-6 mb-2">
+        <mat-form-field appearance="outline"  class="w-100 mb-2">
+            <mat-label>What is your designated position within the organization?</mat-label>
+            <mat-select placeholder="Select"  formControlName="designationId"
+            [ngClass]="{
+              'is-invalid': submitted && f['designationId'].errors,
+               'is-valid': submitted && !f['designationId'].errors}">
+              <mat-option matInput  *ngFor="let obj of DestinationList" [value]="obj.metadataId">
+                {{obj.metadataName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && f['designationId'].errors">Designation is required</mat-error>           
+          </mat-form-field>  
+    </div>
+    <div class="col-lg-6 mb-2">
+        <mat-form-field appearance="outline" class="w-100 mb-2">
+            <mat-label>Who are a part of the team?</mat-label>
+            <input matInput placeholder="Number of employees/contractors?" id="numberOfEmployees" name="numberOfEmployees" formControlName="numberOfEmployees" autofocus 
+            [ngClass]="{
+              'is-invalid': submitted && f['numberOfEmployees'].errors,
+               'is-valid': submitted && !f['numberOfEmployees'].errors}">   
+               <mat-error *ngIf="submitted && f['numberOfEmployees'].errors">Number Of Employees is required</mat-error>           
+        </mat-form-field> 
+    </div>
+    <div class="col-lg-6 mb-2">
+        <mat-form-field appearance="outline" class="w-100 mb-2">
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Address" id="address" name="address" formControlName="address" autofocus 
+            [ngClass]="{
+              'is-invalid': submitted && f['address'].errors,
+               'is-valid': submitted && !f['address'].errors}">  
+               <mat-error *ngIf="submitted && f['address'].errors">Address is required</mat-error>            
+        </mat-form-field>  
+    </div>
+    <div class="col-lg-6 mb-2">
+      <mat-form-field appearance="outline"  class="w-100 mb-2">
+          <mat-label>Country</mat-label>
+          <mat-select placeholder="Select" formControlName="country"  (selectionChange)="CountryOnChange($event.value)"
+          [ngClass]="{
+            'is-invalid': submitted && f['country'].errors,
+             'is-valid': submitted && !f['country'].errors}">
+            <mat-option matInput  *ngFor="let obj of countryList" [value]="obj.countryId">
+              {{obj.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="submitted && f['country'].errors">Country is required</mat-error>            
+        </mat-form-field>  
+  </div>
+    <div class="col-lg-6 mb-2">
+      <mat-form-field appearance="outline"  class="w-100 mb-2">
+          <mat-label>State</mat-label>
+          <mat-select placeholder="Select" formControlName="state"  (selectionChange)="StateOnChange($event.value)"
+          [ngClass]="{
+            'is-invalid': submitted && f['state'].errors,
+             'is-valid': submitted && !f['state'].errors}">
+            <mat-option matInput  *ngFor="let obj of stateList" [value]="obj.stateId">
+              {{obj.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="submitted && f['state'].errors">State is required</mat-error>            
+        </mat-form-field>  
+  </div>
+        <div class="col-lg-6 mb-2">
+          <mat-form-field appearance="outline"  class="w-100 mb-2">
+              <mat-label>City</mat-label>
+              <mat-select placeholder="Select" formControlName="city"
+              [ngClass]="{
+                'is-invalid': submitted && f['city'].errors,
+                 'is-valid': submitted && !f['city'].errors}">
+                <mat-option matInput  *ngFor="let obj of cityList" [value]="obj.cityId">
+                  {{obj.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="submitted && f['city'].errors">City is required</mat-error>            
+            </mat-form-field>  
+      </div>
+      <div class="col-lg-6 mb-2">
+        <mat-form-field appearance="outline" class="w-100 mb-2">
+            <mat-label>Zipcode</mat-label>
+            <input matInput placeholder="Zipcode" id="zipcode" name="zipcode" formControlName="zipcode" autofocus 
+            [ngClass]="{
+              'is-invalid': submitted && f['zipcode'].errors,
+               'is-valid': submitted && !f['zipcode'].errors}">  
+               <mat-error *ngIf="submitted && f['zipcode'].errors">Zipcode is required</mat-error>            
+        </mat-form-field>  
+    </div>
+    <div class="col-lg-6 mb-2">
+        <mat-form-field appearance="outline"  class="w-100 mb-2">
+            <mat-label>Home currency</mat-label>
+            <mat-select placeholder="Select" formControlName="currencyId"
+            [ngClass]="{
+              'is-invalid': submitted && f['currencyId'].errors,
+               'is-valid': submitted && !f['currencyId'].errors}">
+              <mat-option matInput  *ngFor="let obj of CurrencyList" [value]="obj.metadataId">
+                {{obj.metadataName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && f['currencyId'].errors">Currency is required</mat-error>            
+          </mat-form-field>  
+    </div>
+    </div>
+    <div class="col-lg-12">
+      <!-- <span class="text-coyna">How would you like to use Coyna?</span> -->
+      <!-- <section class="example-section"> -->
+        <h4 class="text-coyna">How would you like to use Coyna?</h4>.
+        <span  *ngFor="let item of CoynaList">
+        <p><mat-checkbox color="primary"  [value]="item.metadataId" formControlName="useCoynaIds"  (change)="onChange($event)">{{item.metadataName}}</mat-checkbox></p>
+        </span>
+      <!-- </section> -->
+    </div>
+    <div class="col-lg-12">
+      <div>
+        <!-- <button mat-button matStepperPrevious>Back</button> -->
+        <button class="btn btn-primary btn-lg w-40"  (click)="SaveCompany(stepper)">Next</button>
+      </div>
+    </div>
+    </div>
+    </form>
+    </mat-step>
+    
+    <mat-step>
+      <p id="rcorners1" style="text-align: center;padding-top: 65px">
+        <span class="row">
+        <span  style="color: white;font-size: 30px;line-height: 43px;font-weight: 700;font-family: Manrope;">Link your bank accounts</span>
+        <span  style="color: white;font-size: 18px;line-height: 43px;font-weight: 700;font-family: Manrope;">Let us embark on a journey of effortless and structured financial management.</span>
+        </span>
+    </p>
+      <form class=""  [formGroup]="companyForm">                                
+        <div class="col-lg-12 display2">
+          <div class="search-ip d-flex flex-row flex-nowrap align-items-center">
+            <img src="../../../assets/img/search-normal.png" width="20" height="20">
+            <input type="text" class="form-control border-0" placeholder="Search">
+        </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="display3 row">
+            <div class="col-lg-6">
+            <button class="btn btn-outline-primary btn-lg w-40" (click)="Skipnow(stepper)">Skip Now</button>
+          </div>
+          <div class="col-lg-6" style="text-align: right;">
+            <button class="btn btn-primary btn-lg w-40" (click)="SaveCompany(stepper)">Continue</button>
+         </div>
+          </div>
+        </div>
+        </form>
+    </mat-step>
+    <mat-step>
+      <form class=""  [formGroup]="companyForm">                                
+          <div class="col-md-12 h-100 overflow-auto">
+            <div class="d-grid justify-content-center align-items-center h-100">
+                <div class="login-content pt-3">
+                    <div class="text-center">
+                        <img src="../../../../assets/img/Coyna.png" class="mb-4" style="height: 81px;width: 195px;">
+                        <h1 class="mb-2 text-title" style="font-size: 32px;line-height: 38.73px;font-weight: 500;">Welcome to Coyna</h1>
+                        <span  style="color: #7382A3;font-size: 16px;line-height: 31px;font-weight: 400;">Simplify. Automate. Thrive</span>
+                    </div>
+                    <div class="text-center mt-4">
+                        <img src="../../../assets/img/welcomecompany.svg" class="mb-4">
+                    </div>
+                  
+                </div>
+                <button class="btn btn-primary btn-lg w-100 d-block" (click)="SetupCompany()">Let’s Start</button>
+            </div>
+        </div>
+        </form>
+    </mat-step>
+  </mat-stepper>
+</div>

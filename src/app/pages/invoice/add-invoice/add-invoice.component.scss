@@ -1,0 +1,342 @@
+@import "../../../../variables.scss";
+@import '../../../../assets/css/material/table.scss';
+@import '../../../../assets/css/material/checkbox.scss';
+@import '../../../../assets/css/material/tab.scss';
+@import '../../../../assets/css/material/input.scss';
+table {
+  width: 100%;
+  margin-top: 25px;
+}
+
+.left-field {
+  width: 83%;
+  color: #273259;
+  font-weight: 600;
+}
+
+.right-field {
+  width: 16%;
+  text-align: right;
+}
+
+.invoice-left-field {
+  width: 50%;
+  float: left;
+  text-align: left;
+  display: inline-grid;
+}
+
+.invoice-right-field {
+  width: 50%;
+  float: right;
+  text-align: right;
+  font-size: 15px;
+  display: inline-grid;
+}
+
+.mat-mdc-table .mdc-data-table__header-row {
+  background: $secondaryColor;
+  height: 55px !important;
+}
+
+.mdc-data-table__header-cell {
+  color: $primaryColor !important;
+  font-weight: 600 !important;
+  font-size: small !important;
+  padding: 9px;
+  width: 25%;
+}
+
+.date-card {
+  border: 1px solid #DDDDE1 !important;
+  box-shadow: none !important;
+  border-radius: 15px;
+  color: #7382A3;
+  font-size: small;
+  background-color: #7382A31A;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.date-card-content {
+  padding: 0px !important;
+  text-align: center;
+}
+
+.mat-mdc-table .mdc-data-table__row {
+  height: 40px !important;
+}
+
+::ng-deep .mat-mdc-card-content:first-child {
+  padding-top: 0px !important;
+}
+
+::ng-deep .mat-mdc-card-content:last-child {
+  padding-bottom: 0px !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  height: 40px !important;
+}
+
+::ng-deep .mat-mdc-form-field-flex {
+  margin-top: -7px !important;
+}
+
+::ng-deep .mdc-data-table__cell {
+  padding: 0 16px 0 10px !important;
+}
+
+::ng-deep .mat-mdc-form-field {
+  font-size: small !important;
+}
+
+::ng-deep .mdc-notched-outline__leading {
+  border-top-left-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
+  border-color: $darkBlueColor !important;
+}
+
+::ng-deep .mdc-notched-outline__trailing {
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+  border-color: $darkBlueColor !important;
+}
+
+//Top bottom border, if label is inside
+::ng-deep.mdc-notched-outline__notch {
+  border-top: 1px solid $darkBlueColor !important;
+  border-bottom: 1px solid $darkBlueColor !important;
+}
+
+//Top bottom border, if label is notched
+::ng-deep.mdc-notched-outline--notched {
+  ::ng-deep.mdc-notched-outline__notch {
+    border-top: none !important;
+    border-bottom: 1px solid $darkBlueColor !important;
+  }
+}
+
+//Left border with edges
+::ng-deep .category-detail-field .mdc-notched-outline__leading {
+  border: 0px solid $darkBlueColor !important;
+  border-right: none !important;
+}
+
+
+//Right border with edges
+::ng-deep .category-detail-field .mdc-notched-outline__trailing {
+  border: 0px solid $darkBlueColor !important;
+  border-left: none !important;
+}
+
+::ng-deep .mat-mdc-form-field-infix {
+  display: flex;
+}
+
+::ng-deep .mdc-data-table__header-cell {
+   border-bottom-width: 0px !important; 
+}
+
+.balance-due {
+  border: 1px solid $darkBlueColor !important;
+  box-shadow: none !important;
+  border-radius: 8px;
+  color: $cloudBurstColor;
+  font-size: small;
+}
+
+.balance-due-content {
+  padding: 10px !important;
+  text-align: center;
+}
+
+.action-icon {
+  width: 24px;
+  height: 22px;
+}
+
+::ng-deep .mdc-icon-button svg,
+.mdc-icon-button img {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.invoice-header {
+  width: 100%;
+  float: left;
+}
+
+.customer-card {
+  border: 1px solid $darkBlueColor !important;
+  box-shadow: none !important;
+  padding-top: 20px;
+  padding-bottom: 6px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-width: 0px !important;
+}
+
+.mat-column-no {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  border-right: 1px solid #DDDDE1;
+  text-align: center;
+}
+
+.mat-column-accountName {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  border-right: 1px solid #DDDDE1;
+  text-align: center;
+}
+
+.mat-column-description {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  border-right: 1px solid #DDDDE1;
+  text-align: center;
+}
+
+.mat-column-amount {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  border-right: 1px solid #DDDDE1;
+  text-align: center;
+}
+
+.mat-column-department {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  border-right: 1px solid #DDDDE1;
+  text-align: center;
+}
+
+.mat-column-action {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  text-align: center;
+}
+
+.mat-column-clearAll {
+  font-size: small;
+  color: #000000;
+  font-weight: 500;
+  background: #FFF2F2;
+  text-align: center;
+}
+
+.mat-column-blankCell {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  background: #F8F9FA;
+  text-align: center;
+}
+
+.mat-column-addLine {
+  font-size: small;
+  color: #000000;
+  font-weight: 500;
+  background: #F8F9FA;
+  text-align: right;
+}
+
+.mat-column-blankCell-amt {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  background: #EDF5FD;
+  text-align: center;
+}
+
+.mat-column-total {
+  font-size: smaller;
+  color: $textColor;
+  font-weight: 500;
+  color: #7382A3;
+  background: #EDF5FD;
+  text-align: center;
+}
+
+.mat-column-totalAmount {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  color: #2399E0;
+  background: #EDF5FD;
+  text-align: center;
+}
+
+.mat-column-product {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  border-right: 1px solid #DDDDE1;
+  text-align: center;
+}
+
+.mat-column-description {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  border-right: 1px solid #DDDDE1;
+  text-align: center;
+}
+
+.mat-column-qty {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  border-right: 1px solid #DDDDE1;
+  text-align: center;
+}
+
+.mat-column-rate {
+  font-size: small;
+  color: $textColor;
+  font-weight: 500;
+  border-right: 1px solid #DDDDE1;
+  text-align: center;
+}
+
+.save {
+  float: right;
+  text-align: right;
+  font-size: 14.4px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.save-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: $primaryColor !important;
+  color: white !important;
+  border: none;
+  border-radius: 5px !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  float: right;
+  align-self: center;
+}
+
+.hidden-file {
+  visibility: hidden; 
+  position: absolute;
+  overflow: hidden; 
+  width: 0px; 
+  height:0px;
+  border:none;
+  margin:0; 
+  padding:0
+}

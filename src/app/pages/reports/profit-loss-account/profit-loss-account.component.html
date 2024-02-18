@@ -1,0 +1,235 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>.pagetitle label.form-label {
+   margin: 0;
+}.pagetitle button.btn.btn-primary {
+   padding: 7px 10px !important;width: 100%;
+}table.maintable {
+   width: 100%;
+}thead {
+   background: #F1FCFA;
+}thead tr {
+  border-radius: 6px;
+}table.maintable td, table.maintable th {
+   padding: 20px 10px;
+}table.maintable tbody tr {
+   border-bottom: 1px solid #E9E9E9;
+}input.form-control {
+   padding: 5px 5px !important;
+   height: 40px !important;
+   font-size: 13px !important;
+}input.form-control:disabled {
+   background: #C4C4C4 !important;
+}.pagetitle select.form-control {
+   height: 40px !important;
+}th.centeral {
+   text-align: center;
+}.noborder tr {
+   border: 0 !important;
+}table.maintable.withborder td {
+   border-left: 1px solid #E9E9E9 !important;
+   border-right: 1px solid #E9E9E9 !important;
+}.disflexbtn {
+   display: flex;
+   align-items: center;
+}.maintable .disflexbtn button.btn {
+   padding: 5px 12px !important;
+   height: 40px;
+   margin-left: 10px;
+}.lesspad td {
+   padding: 10px 10px !important;
+}input.form-control.date {
+   height: 40px !important;
+}.table.maintable.withborder  {
+   border: 1px solid #E9E9E9 !important;
+}.table.maintable.withborder[_ngcontent-mjn-c186] td[_ngcontent-mjn-c186] .noborder {
+   border: 0px solid #E9E9E9 !important;
+}
+.left10 {
+    margin-left: 10px;
+}
+</style>
+<div class="innerdash pagetitle">
+    <div class="row" style="align-items: center;">
+      <div class="col-md-12" style="padding:0;">
+      <h1>Profit / (Loss) Account</h1></div>
+      
+        <form id="profit-lossaccount" class="mb-3 mt-4 commform row min-height" style="align-items: flex-end;padding:0">
+                    <div class="col-md-12 row mb-3">
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Report Name</label>
+                            <select class="form-control">
+                                <option>Report Name</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Company Name</label>
+                            <input type="text" class="form-control" placeholder="" />
+                        </div>  
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Store Name</label>
+                            <input type="text" class="form-control" placeholder="" /> 
+                        </div>
+                                            
+                    </div>
+
+                    <div class="col-md-12 row mb-3">
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Financial Year*</label>
+                            <select class="form-control">
+                                <option>2023</option>
+                                <option>2022</option>                                
+                            </select>      
+                        </div> 
+                        <div class="col-md-4">       
+                            <label for="name" class="form-label">Period Length</label>
+                            <select class="form-control">
+                                <option>Quarterly</option>
+                                <option>Monthly</option>                                
+                            </select>   
+                        </div>
+                        <div class="col-md-4">
+                                <label for="name" class="form-label">Quarterly</label>
+                                <select class="form-control">
+                                    <option>Q1</option>
+                                    <option>Q2</option> 
+                                    <option>Q3</option> 
+                                    <option>Q4</option>
+                                    <option>All</option>                                 
+                                </select>             
+                        </div>               
+                    </div>
+
+                    <div class="col-md-12 row mb-3">
+                        
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Period From*</label>
+                            <input type="date" class="form-control date" id="date" formControlName="date" />              
+                        </div>
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">To*</label>
+                            <input type="date" class="form-control date" id="date" formControlName="date" />                  
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary" style="margin-top: 25px;">View</button>              
+                        </div>  
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary" style="margin-top: 25px;">Export</button>              
+                        </div>  
+                    </div>
+        </form> 
+    </div>
+    </div><!-- End Page Title -->
+
+
+<div class="profit-loss-account-screen">
+ <!-- profit-loss-account Start -->
+
+ <section class="section dashboard">
+    <div class="row profit-loss-account-sc">
+        <div class="innerform">
+          <div class="tablemaindiv mat-elevation-z8">
+              <table class="maintable withborder commform b-box" style="width:100%">  
+                <thead>
+                    <tr>
+                        <th>DESCRIPTION</th>
+                        <th>STORE</th>
+                        <th>TOTAL</th>
+                    </tr>
+                </thead>               
+                  <tbody>
+                    <!--Row 1 Start-->
+                      <tr>
+                          <td>
+                            <a class="nav-link collapsed" data-bs-target="#tables-accordian1" data-bs-toggle="collapse" href="#">        
+                                <span>SALES</span><i
+                                    class="bi bi-chevron-down ms-auto"></i>
+                            </a>
+                            <div id="tables-accordian1" class="nav-content collapse " data-bs-parent="#accordian">
+                                <div class="left10">
+                                        <p>C STORE SALES</p>
+                                        <p>FUEL SALES</p>
+                                        <p>TOTAL</p>            
+                                </div>
+                            </div>
+                         </td>
+                         <td>
+                            <a class="nav-link collapsed" data-bs-target="#tables-accordian1" data-bs-toggle="collapse" href="#">        
+                                <span>&nbsp;</span>
+                            </a>
+                            <div id="tables-accordian1" class="nav-content collapse " data-bs-parent="#accordian">
+                                <div class="">
+                                        <p>$301,784.58</p>
+                                        <p>$301,784.58</p>
+                                        <p><b>$301,784.58</b></p>                                                  
+                                </div>
+                            </div>
+                         </td>
+                         <td>
+                            <a class="nav-link collapsed" data-bs-target="#tables-accordian1" data-bs-toggle="collapse" href="#">        
+                                <span>&nbsp;</span>
+                            </a>
+                            <div id="tables-accordian1" class="nav-content collapse " data-bs-parent="#accordian">
+                                <div class="">
+                                    <p>$301,784.58</p>
+                                    <p>$301,784.58</p>
+                                    <p><b>$301,784.58</b></p>              
+                                </div>
+                            </div>
+                         </td>
+                        
+                      </tr>
+                    <!--Row 1 End-->
+
+                    <!--Row 2 Start-->
+                    <tr>
+                        <td>
+                          <a class="nav-link collapsed" data-bs-target="#tables-accordian2" data-bs-toggle="collapse" href="#">        
+                              <span>SALES 2</span><i
+                                  class="bi bi-chevron-down ms-auto"></i>
+                          </a>
+                          <div id="tables-accordian2" class="nav-content collapse " data-bs-parent="#accordian">
+                              <div class="left10">
+                                      <p>C STORE SALES</p>
+                                      <p>FUEL SALES</p>
+                                      <p>TOTAL</p>            
+                              </div>
+                          </div>
+                       </td>
+                       <td>
+                          <a class="nav-link collapsed" data-bs-target="#tables-accordian2" data-bs-toggle="collapse" href="#">        
+                              <span>&nbsp;</span>
+                          </a>
+                          <div id="tables-accordian2" class="nav-content collapse " data-bs-parent="#accordian">
+                              <div class="">
+                                      <p>$301,784.58</p>
+                                      <p>$301,784.58</p>
+                                      <p><b>$301,784.58</b></p>                                                  
+                              </div>
+                          </div>
+                       </td>
+                       <td>
+                          <a class="nav-link collapsed" data-bs-target="#tables-accordian2" data-bs-toggle="collapse" href="#">        
+                              <span>&nbsp;</span>
+                          </a>
+                          <div id="tables-accordian2" class="nav-content collapse " data-bs-parent="#accordian">
+                              <div class="">
+                                  <p>$301,784.58</p>
+                                  <p>$301,784.58</p>
+                                  <p><b>$301,784.58</b></p>              
+                              </div>
+                          </div>
+                       </td>
+                      
+                    </tr>
+                  <!--Row 2 End-->
+
+
+                  </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+ </section>
+
+<!-- profit-loss-account End --> 
+</div>

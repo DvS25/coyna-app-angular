@@ -1,0 +1,151 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>.pagetitle select.form-control {
+    height: auto !important;
+}</style>
+
+<div class="innerdash pagetitle" *ngIf="showPage == true">
+
+    <div class="row">
+        <div class="col-md-10 nopad d-flex0 align-items-center">
+            <h1>Banking Transaction</h1>
+        </div>
+        <div class="col-md-2">
+			
+        </div>
+    </div>
+    <div class="row"><br><br></div>
+    
+    <div class="row" [formGroup]="filterSearchForm">
+        <div class="col-md-3 nopad">
+            <label for="name" class="form-label">Company Name</label>
+            <select class="form-control" formControlName="companyId" (change)="getBanks($event.target)">
+				<option value="" selected disabled>Select Company</option>
+				<option [value]="item.companyId" *ngFor="let item of companyList">{{item.name}}</option>
+			</select>
+			<span *ngIf="filterSubmitted && f['companyId'].errors" >
+				<span *ngIf="f['companyId'].invalid" class="error-message">
+					<span style="font-size: 10px; color: red;" *ngIf="f['companyId'].errors.required">Company is required</span>
+				</span>
+			</span>
+        </div>
+        <div class="col-md-3 nopad">
+            <label for="name" class="form-label">Bank Name</label>
+            <select class="form-control" formControlName="bankId">
+				<option value="" disabled>Select Bank</option>
+				<option [value]="item.bankId" *ngFor="let item of bankList">{{item.bankName | uppercase}}</option>
+			</select>
+			<span *ngIf="filterSubmitted && f['bankId'].errors" >
+				<span *ngIf="f['bankId'].invalid" class="error-message">
+					<span style="font-size: 10px; color: red;" *ngIf="f['bankId'].errors.required">Bank is required</span>
+				</span>
+			</span>
+        </div>
+
+        <div class="col-md-3">
+            <label for="name" class="form-label">Entry Date</label>
+            <input type="date" class="form-control date" formControlName="transDate"/>
+			<span *ngIf="filterSubmitted && f['transDate'].errors" >
+				<span *ngIf="f['transDate'].invalid" class="error-message">
+					<span style="font-size: 10px; color: red;" *ngIf="f['transDate'].errors.required">Date is required</span>
+				</span>
+			</span>
+        </div>
+        <div class="col-md-3 d-flex0">
+            <br>
+            <button type="submit" class="btn btn-primary btn-save" (click)="filterSearch()">Search</button>
+        </div>
+    </div>
+
+
+</div><!-- End Page Title -->
+<div class="banking-transaction-screen" *ngIf="showPage == true">
+    <!-- trial-balance Start -->
+   
+    <section class="section dashboard">
+       <div class="row trial-balance-sc">
+           <div class="innerform" [formGroup]="bankingTransactionForm">
+             <div class="tablemaindiv mat-elevation-z8">
+                 <table class="maintable withborder commform" style="width:100%">  
+                    <thead>
+                       <tr>
+                           <th>Particulars</th>
+                           <th>Debit</th>
+                           <th>Credit</th>
+                           <th>Opening Balance</th>
+                           <th>Closing Balance</th>
+                           <th>Description</th>
+                           <th>Action</th>
+                        </tr>
+                    </thead>               
+                    <tbody formArrayName="bt_rows">
+                         <tr *ngFor="let bt_row of bt_rows.controls; let i = index" [formGroup]="bt_rows.controls[i]">
+                            <td>
+                                <select class="form-control" formControlName="va_particulars">
+									<option value="Cash_Deposit">Cash Deposit </option>
+									<option value="POS">POS</option>
+									<option value="FundTransfer">Fund Transfer</option>
+									<option value="BankCharges">Bank Charges</option>
+									<option value="OtherReceipts">Other Receipts</option>
+									<option value="Interestreceived">Interest received</option>
+									<option value="Payments">Payments</option>
+									<option value="InsterestonLoan">Insterest on Loan</option>
+									<option value="OtherTransaction">Other Transaction </option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="" formControlName="debitAmount" (focus)="selectOnFocus($event)" (change)="onValueChange($event, i,'va_debit')"
+								onkeypress="return event.charCode === 46 || event.charCode === 0 || event.charCode === 44 || (event.charCode >= 48 && event.charCode <= 57)"
+								/>
+                                <span *ngIf="bt_rows.controls[i].controls.debitAmount.touched && bt_rows.controls[i].controls.debitAmount.invalid" style="color: red; font-size: 10px;">* required</span>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="" formControlName="creditAmount" (focus)="selectOnFocus($event)" (change)="onValueChange($event, i,'va_credit')"
+								onkeypress="return event.charCode === 46 || event.charCode === 0 || event.charCode === 44 || (event.charCode >= 48 && event.charCode <= 57)"
+								/>
+                                <span *ngIf="bt_rows.controls[i].controls.creditAmount.touched && bt_rows.controls[i].controls.creditAmount.invalid" style="color: red; font-size: 10px;">* required</span>
+                            </td>
+                            <td>
+								<input type="text" class="form-control disabled" tabindex="-1" placeholder="" formControlName="openingAmount"/>
+							</td>
+                            <td>
+								<input type="text" class="form-control disabled" tabindex="-1" formControlName="closingAmount"/>
+							</td>
+                            <td>
+								<input type="text" class="form-control" placeholder="" formControlName="description"/>
+                                <div *ngIf="bt_rows.controls[i].controls.description.touched && bt_rows.controls[i].controls.description.invalid" style="color: red; font-size: 10px;">* required</div>
+							</td>
+                            <td *ngIf="i>0">
+                                <button (click)="deleteTransactionRow(i)" class="attachbtn" ><!--<img src="assets/img/delete.png">--><i class="fa fa-trash"></i></button>
+							</td>
+                         </tr>                        
+                    </tbody>
+                 </table>
+             </div>
+			 
+             <div class="col-md-12 mt-3">
+                <button type="submit" class="btn btn-primary" (click)="addNewRow()">Add Row<span class="barraow"></span></button>
+                <button type="submit" class="btn btn-primary btn-save btnarraow" style="float:right;" (click)="saveBankingTransactions()"><i class="fa fa-save"></i>Save</button>
+             </div>
+
+           </div>
+         </div>
+    </section>
+   
+   <!-- banking-transaction End --> 
+   </div>
+
+<section class="section dashboard" *ngIf="showPage == false">
+	<div class="row" style="align-items: center;">
+		<div class="col-md-12" style="padding:10px;">
+			<h1>Banking Transaction</h1>
+		</div>
+	</div>
+	<div class="row" style="height: 500px;">
+		<div class="col-md-12">
+			<div class="alert alert-dismissable alert-danger">
+				<strong>Oops!</strong> You dont have access to see this page.
+			</div>
+		</div>
+	</div>
+</section>

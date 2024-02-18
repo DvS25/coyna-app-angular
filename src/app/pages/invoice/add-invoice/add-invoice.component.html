@@ -1,0 +1,406 @@
+<div>
+
+  <div class="row">
+    <div class="invoice-left-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Customer</mat-label>
+        <select matNativeControl required [(ngModel)]="entityId">
+          <option *ngFor="let customer of customers" [value]="customer.customerId">
+            {{customer.name  | titlecase}}</option>
+        </select>
+        <!-- <mat-error *ngIf="customerForm.invalid">Terms is required</mat-error> -->
+      </mat-form-field>
+    </div>
+    <div class="invoice-right-field">
+      <div>
+        <mat-card class="balance-due-card" style="width: 40%; float: right; background: #EBF4F9; padding: 4px;">
+          <mat-card-content class="balance-due-content"><span
+              style="color:#7382A3;font-size: 10px; float: left;">Balance Due</span><span
+              style="color:#2399E0;font-size: small;float: right; font-weight: bolder;">$0.00</span></mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="invoice-left-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput required [(ngModel)]="email">
+        <!-- <mat-error *ngIf="coaForm.invalid">Account Number is required</mat-error> -->
+      </mat-form-field>
+    </div>
+    <div class="invoice-right-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Mailing Address</mat-label>
+        <input matInput required>
+        <!-- <mat-error *ngIf="coaForm.invalid">Account Name is required</mat-error> -->
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="invoice-left-field">
+      <div class="row">
+        <div class="invoice-left-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Terms</mat-label>
+            <select matNativeControl required [(ngModel)]="paymentInfo">
+              <option *ngFor="let paymentTerm of paymentTerms" [value]="paymentTerm">
+                {{paymentTerm  | titlecase}}</option>
+            </select>
+            <!-- <mat-error *ngIf="customerForm.invalid">Terms is required</mat-error> -->
+          </mat-form-field>
+        </div>
+        <div class="invoice-right-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Invoice No</mat-label>
+            <input matInput required [(ngModel)]="tnumber">
+            <!-- <mat-error *ngIf="coaForm.invalid">Account Name is required</mat-error> -->
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="invoice-right-field">
+      <div class="row">
+        <div class="invoice-left-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Invoice Date</mat-label>
+            <input matInput [matDatepicker]="picker" readonly [(ngModel)]="transactionDate">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <!-- <mat-error *ngIf="customerForm.invalid">Date is required</mat-error> -->
+          </mat-form-field>
+        </div>
+        <div class="invoice-right-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Due Date</mat-label>
+            <input matInput [matDatepicker]="dueDatePicker" readonly [(ngModel)]="dueDate">
+            <mat-datepicker-toggle matIconSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #dueDatePicker></mat-datepicker>
+            <!-- <mat-error *ngIf="customerForm.invalid">Date is required</mat-error> -->
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="invoice-header">
+    <mat-card class="customer-card">
+      <mat-card-content>
+        <div class="row">
+          <div class="left-field">
+            <p>Category Details</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div>
+
+    <table mat-table [dataSource]="categoryDetails" class="mat-elevation-z1">
+
+      <ng-container matColumnDef="no">
+        <th mat-header-cell *matHeaderCellDef>No</th>
+        <td mat-cell *matCellDef="let categoryDetail of categoryDetails; let i = index">
+          <mat-form-field class="category-detail-field" subscriptSizing="dynamic" [style.width.px]=80>
+            <input matInput type="number" placeholder="" [(ngModel)]="categoryDetails[i].no">
+          </mat-form-field>
+
+        </td>
+
+      </ng-container>
+
+      <ng-container matColumnDef="accountName">
+        <th mat-header-cell *matHeaderCellDef>Account Name</th>
+        <td mat-cell *matCellDef="let categoryDetail of categoryDetails; let i = index">
+          <!-- <mat-form-field class="category-detail-field" subscriptSizing="dynamic" [style.width.px]=150>                        
+            <input matInput placeholder="">
+        </mat-form-field> -->
+          <mat-form-field class="category-detail-field" subscriptSizing="dynamic" [style.width.px]=150>
+            <!-- <mat-label>Terms</mat-label> -->
+            <select matNativeControl required [(ngModel)]="categoryDetails[i].coaCompanyId">
+              <option *ngFor="let chartOfAccount of chartOfAccounts" [value]="chartOfAccount.id">
+                {{chartOfAccount.coaName  | titlecase}}</option>
+            </select>
+            <!-- <mat-error *ngIf="customerForm.invalid">Terms is required</mat-error> -->
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let categoryDetail of categoryDetails; let i = index">
+          <mat-form-field class="category-detail-field" subscriptSizing="dynamic" [style.width.px]=150>
+            <input matInput placeholder="" [(ngModel)]="categoryDetails[i].description">
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef>Amount</th>
+        <td mat-cell *matCellDef="let categoryDetail of categoryDetails; let i = index">
+          <mat-form-field class="category-detail-field" subscriptSizing="dynamic" [style.width.px]=150>
+            <input matInput placeholder="" [(ngModel)]="categoryDetails[i].amount"
+              readonly>{{items[i] ? items[i].qty*items[i].rate : 0}}
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="department">
+        <th mat-header-cell *matHeaderCellDef>Department</th>
+        <td mat-cell *matCellDef="let categoryDetail of categoryDetails; let i = index">
+          <mat-form-field class="category-detail-field" subscriptSizing="dynamic" [style.width.px]=150>
+            <select matNativeControl required [(ngModel)]="categoryDetails[i].departmentId">
+              <option *ngFor="let department of departments" [value]="department.departmentId">
+                {{department.name  | titlecase}}</option>
+            </select>
+            <!-- <mat-error *ngIf="customerForm.invalid">Terms is required</mat-error> -->
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let categoryDetail; let i = index">
+          <img src="assets/img/trash.svg" alt="trash" class="action-icon" (click)="deleteCategoryRow(i)">
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="clearAll">
+        <td mat-footer-cell *matFooterCellDef (click)="clearCategoryRow()">
+          Clear All
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="blankCell">
+        <td mat-footer-cell *matFooterCellDef>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="addLine">
+        <td mat-footer-cell *matFooterCellDef (click)="addCategoryRow()">
+          +Add line
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="categoryColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: categoryColumns;"></tr>
+
+
+      <!-- <tr mat-footer-row *matFooterRowDef="['footer1']" class="example-first-footer-row"></tr>
+      <tr mat-footer-row *matFooterRowDef="['footer2']" class="example-second-footer-row"></tr> -->
+      <tr mat-footer-row
+        *matFooterRowDef="['clearAll', 'blankCell', 'addLine', 'blankCell', 'blankCell', 'blankCell']; sticky: true">
+      </tr>
+    </table>
+
+  </div>
+
+  <div class="invoice-header" style="margin-top: 30px;">
+    <mat-card class="customer-card">
+      <mat-card-content>
+        <div class="row">
+          <div class="left-field">
+            <p>Item classification</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <table mat-table [dataSource]="items" class="mat-elevation-z1">
+
+    <ng-container matColumnDef="no">
+      <th mat-header-cell *matHeaderCellDef>No</th>
+      <td mat-cell *matCellDef="let item of items; let i = index">
+        <mat-form-field class="category-detail-field" subscriptSizing="dynamic" [style.width.px]=80>
+          <input matInput type="number" placeholder="" [(ngModel)]="items[i].no">
+        </mat-form-field>
+
+      </td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="product">
+      <th mat-header-cell *matHeaderCellDef>Product</th>
+      <td mat-cell *matCellDef="let item of items; let i = index" (click)="itemRowIndex(i)">
+        <!-- <mat-form-field class="category-detail-field" subscriptSizing="dynamic" [style.width.px]=150>                        
+            <input matInput placeholder="">
+        </mat-form-field> -->
+        <mat-form-field class="category-detail-field" subscriptSizing="dynamic" [style.width.px]=120>
+          <!-- <mat-label>Terms</mat-label> -->
+          <select matNativeControl required (change)="onItemSelect($event.target)" [(ngModel)]="items[i].product">
+            <option *ngFor="let itemList of itemsList" [value]="itemList.itemId">
+              {{itemList.name  | titlecase}}</option>
+          </select>
+          <!-- <mat-error *ngIf="customerForm.invalid">Terms is required</mat-error> -->
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let item of items; let i = index">
+        <mat-form-field class="category-detail-field" subscriptSizing="dynamic" [style.width.px]=100>
+          <input matInput placeholder="" [(ngModel)]="items[i].description">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="qty">
+      <th mat-header-cell *matHeaderCellDef>Qty</th>
+      <td mat-cell *matCellDef="let item of items; let i = index">
+        <mat-form-field class="category-detail-field" subscriptSizing="dynamic" [style.width.px]=70>
+          <input matInput type="number" placeholder="" [(ngModel)]="items[i].qty">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="rate">
+      <th mat-header-cell *matHeaderCellDef>Rate</th>
+      <td mat-cell *matCellDef="let item of items; let i = index">
+        <mat-form-field class="category-detail-field" subscriptSizing="dynamic" [style.width.px]=80>
+          <input matInput type="number" placeholder="" [(ngModel)]="items[i].rate">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>Amount</th>
+      <td mat-cell *matCellDef="let item of items; let i = index">
+        <mat-form-field class="category-detail-field" subscriptSizing="dynamic" [style.width.px]=150>
+          <input matInput placeholder="" readonly [(ngModel)]="items[i].amount">{{items[i].qty*items[i].rate}}
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="department">
+      <th mat-header-cell *matHeaderCellDef>Department</th>
+      <td mat-cell *matCellDef="let item of items; let i = index" (click)="itemRowIndex(i)">
+        <mat-form-field class="category-detail-field" subscriptSizing="dynamic" [style.width.px]=150>
+          <!-- <mat-label>Terms</mat-label> -->
+          <select matNativeControl required [(ngModel)]="items[i].department"
+            (change)="onDepartmentSelect($event.target)">
+            <option *ngFor="let department of departments" [value]="department.departmentId">
+              {{department.name  | titlecase}}</option>
+          </select>
+          <!-- <mat-error *ngIf="customerForm.invalid">Terms is required</mat-error> -->
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let item of items; let i = index">
+        <img src="assets/img/trash.svg" alt="trash" class="action-icon" (click)="deleteItemsRow(i)">
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="clearAll">
+      <td mat-footer-cell *matFooterCellDef (click)="clearItemsRow()">
+        Clear All
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="blankCell">
+      <td mat-footer-cell *matFooterCellDef>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="blankCell-amt">
+      <td mat-footer-cell *matFooterCellDef>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="addLine">
+      <td mat-footer-cell *matFooterCellDef (click)="addItemsRow()">
+        +Add line
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="total">
+      <td mat-footer-cell *matFooterCellDef>
+        Total
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalAmount">
+      <td mat-footer-cell *matFooterCellDef>
+        ${{getTotalAmount()}}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="itemColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: itemColumns;"></tr>
+    <tr mat-footer-row
+      *matFooterRowDef="['clearAll', 'blankCell', 'blankCell', 'blankCell', 'addLine', 'blankCell', 'blankCell', 'blankCell']; sticky: true">
+    </tr>
+    <tr mat-footer-row
+      *matFooterRowDef="['blankCell-amt', 'blankCell-amt', 'blankCell-amt', 'blankCell-amt', 'blankCell-amt', 'total', 'totalAmount', 'blankCell-amt']; sticky: true">
+    </tr>
+  </table>
+
+  <div class="row" style="margin-top: 30px;">
+    <div class="invoice-left-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Notes</mat-label>
+        <input matInput placeholder="Description" [(ngModel)]="description">
+        <!-- <mat-error *ngIf="coaForm.invalid">Account Number is required</mat-error> -->
+      </mat-form-field>
+    </div>
+    <div class="invoice-right-field">
+      <!-- <mat-form-field appearance="outline" >
+          <mat-label>Attachments</mat-label>
+          <input matInput placeholder="Maximum size: 20MB" readonly />
+          <img src="../../../../../assets/img/attachment.svg" alt="attachment"
+              style="width: 18px; height: 18px" />
+      </mat-form-field>  -->
+      <span class="hidden-file">
+        <input type="file" #fileInput ng2FileSelect [uploader]="uploader" multiple
+          (onFileSelected)="onFileSelected($event)" />
+      </span>
+      <mat-form-field class="w-100" subscriptSizing="dynamic">
+        <mat-label>Attachments</mat-label>
+        <span class="hidden-file" *ngIf="uploader.queue.length > 0">
+          <input matInput placeholder="Maximum size: 20MB" multiple readonly="true">
+        </span>
+        <app-icon matSuffix name="upload-link" (click)="fileInput.click()" class="me-3 fs-4 align-middle"></app-icon>
+        <span class="" *ngIf="uploader.queue.length == 0">
+          <input matInput placeholder="Maximum size: 20MB" multiple readonly="true">
+        </span>
+        <table style="border: none">
+          <tbody>
+            <tr *ngFor="let item of uploader.queue;let index = index">
+              <td [width]="250" class="fs-14 border-0 text-center">{{item.file.name}}
+                ({{ item?.file?.size/1024/1024 | number:'.2' }} MB)</td>
+              <td [width]="250" class="border-0" *ngIf="uploader.options.isHTML5">
+                <div class="">
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }">
+                      {{uploader.progress}}%</div>
+                  </div>
+                </div>
+              </td>
+              <td [width]="200" class="text-center border-0">
+                <app-icon matSuffix name="cloud-download" class="me-3 fs-4 align-middle"
+                  (click)="DownloadDocument(item.documentId,item.file.name)"></app-icon>
+                <app-icon matSuffix name="close" class="me-3 fs-4 align-middle"
+                  (click)="DeleteDocument(item.documentId,item)"></app-icon>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="save">
+    <button mat-flat-button class="save-button" (click)="saveInvoice()">
+      <span>Save</span>
+    </button>
+  </div>
+
+</div>

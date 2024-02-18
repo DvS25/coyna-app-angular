@@ -1,0 +1,61 @@
+table {
+    width: 100%;
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  .commform select.form-control { 
+  background-image: url(/assets/img/sarrow.png) !important;
+      background-repeat: no-repeat !important;
+      background-position: calc(100% - 15px) calc(1em + 5px), calc(100% - 15px) calc(1em + 5px), 100% 0 !important;
+      background-size: auto !important;
+  }
+  .w-30 {
+    width: 30%;
+  }
+  .b-box {
+    border: 1px solid #E9E9E9 !important;
+  }
+  .form-control.h-40 {
+    height: 40px !important;
+  }
+  .gsa td {
+    padding: 6px 10px !important;
+  }
+  .attachbtn {
+    background: transparent !important;
+    border: none !important;
+  }
+  .attachment tr, .attachment td {
+    text-align: center;
+  }
+  .mtb-20 {
+    margin: 20px 0 !important;
+  }
+  .align-right {
+    text-align: right;
+  }
+  .hide {
+    display: none;
+  }
+  .maintable .date {
+    height: 40px !important;
+  }
+  .align-center {
+    display: flex;
+    align-items: center;
+  }
+  
+  .form.commform.min-height input, select.form-control, textarea { 
+  padding: 5px 5px !important;
+  height: 40px !important;
+  font-size: 13px !important;
+  line-height: 20px !important;
+  }
+  form.commform label {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  
+  
